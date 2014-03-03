@@ -17,9 +17,6 @@ import javax.swing.JButton;
 
 public class SVGParseMain extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
@@ -107,6 +104,7 @@ public class SVGParseMain extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				System.out.print(debugTree.getCode());
 			}
 		});
 	}

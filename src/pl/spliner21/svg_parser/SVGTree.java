@@ -48,4 +48,9 @@ public class SVGTree {
 		
 	}
 	
+	String getCode()
+	{
+		return svghead.getCode();
+	}
+	
 }

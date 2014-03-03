@@ -4,35 +4,78 @@ import java.util.Vector;
 
 import org.w3c.dom.Element;
 
+/* class representing <path> tag in SVG file
+ * @author: Tomasz Szo³tysek
+ * @version: 1.0
+ */
 public class SVGPath extends SVGObject {
-	Vector<SVGPointEx> d;
+	Vector<SVGdElem> d;
 	String fill,stroke;
 	int stroke_width;
-	boolean closed = false;
 	
 	SVGPath(Element e)
 	{
 		super(e);
 
 		String pts = e.getAttribute("d");
-		
-		// TODO: Parser punktów do SVGPointEx
-		String[] ptslist = pts.split(" ");
-		for (int i = 0; i < ptslist.length; i+=3)
+		pts = pts.replace(',',' ');
+		pts= pts.replace("-", " -");
+		for(int i = 0; i< pts.length(); i++)
 		{
-			if(i+1 < ptslist.length)
+			if(Character.isLetter( pts.charAt(i))) 
 			{
-				char t = ptslist[i].charAt(0);
-				String pt = ptslist[i+1]+","+ptslist[i+2];
-				d.add(new SVGPointEx(pt,t));
+				pts = pts.subSequence(0, i) + " " + pts.charAt(i) + " " + pts.subSequence(i+1, pts.length());
+				//System.out.println(pts);
+				i += 2;
 			}
-			else if(ptslist[i].equalsIgnoreCase("z"))
-				closed = true;
 		}
+		pts= pts.replaceAll("\\s+", " ");
+		pts = pts.trim();
+		//System.out.println(pts);
 		
-		fill = e.getAttribute("fill");
-		stroke = e.getAttribute("stroke");
-		stroke_width = Integer.parseInt(e.getAttribute("stroke_width"));
-		style = e.getAttribute("style");
+		String[] ptslist = pts.split(" ");
+		d = new Vector<SVGdElem>();
+		for (int i = 0; i < ptslist.length; i++)
+		{
+			if(Character.isLetter(ptslist[i].charAt(0)))
+				d.add(new SVGCharElem(ptslist[i]));
+			else 
+			{
+				d.add(new SVGNumElem(ptslist[i]));
+			}
+		}
+		if(e.hasAttribute("fill"))
+			fill = e.getAttribute("fill");
+		else fill = "";
+		if(e.hasAttribute("stroke"))
+			stroke = e.getAttribute("stroke");
+		else stroke = "";
+		if(e.hasAttribute("stroke_width"))
+			stroke_width = Integer.parseInt(e.getAttribute("stroke_width"));
+		if(e.hasAttribute("style"))
+			style = e.getAttribute("style");
+	}
+
+	@Override
+	public String getCode() {
+		String output;
+		output = "<path id=\""+id+"\" d=\"";
+		for(SVGdElem p: d)
+			output += p.getCode()+ " ";
+		output = output.trim();
+		output+= "\"";
+		if(fill != "")
+			output+= " fill=\""+fill+"\"";
+		if(stroke != "")
+			output+= " stroke=\""+stroke+"\"";
+		if(stroke_width > 0)
+			output+= " fill=\""+stroke_width+"\"";
+		if(style != "")
+			output+= " style=\""+style+"\"";
+		if(display != "")
+			output+= " display=\""+display+"\"";
+		output+= " />";
+		
+		return output;
 	}
 }

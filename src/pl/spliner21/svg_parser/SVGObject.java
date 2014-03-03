@@ -3,20 +3,25 @@ package pl.spliner21.svg_parser;
 import org.w3c.dom.Element;
 
 
-public class SVGObject extends SVGDOMElem {
+/* abstract class representing tag in SVG file,
+ * element of DOM tree
+ * @author: Tomasz Szo³tysek
+ * @version: 1.0
+ */
+public abstract class SVGObject {
 	String id = "";
-	Boolean display = true;
+	String display;
 	String style;
 	
 	SVGObject(Element e) {
 		id = e.getAttribute("id");
-		if(e.getAttribute("display").equalsIgnoreCase("false"))
-			display = false;
+		if(e.hasAttribute("display"))
+			display = e.getAttribute("display");
+		else display = "";
+		if(e.hasAttribute("style"))
+			style = e.getAttribute("style");
+		else style = "";
 	}
 
-	@Override
-	public String getCode() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public abstract String getCode();
 }
