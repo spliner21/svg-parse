@@ -13,11 +13,12 @@ import org.w3c.dom.NodeList;
 public class SVGHead extends SVGObject {
 	// <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="250px" height="250px" x="10px" y="10px">
 	String xmlns = "http://www.w3.org/2000/svg";
-	String version;
-	String width,height,x,y;
-	String viewBox;
-	String enable_background;
-	String xml_space;
+	String baseProfile = "";
+	String version = "";
+	String width="",height="",x="",y="";
+	String viewBox="";
+	String enable_background="";
+	String xml_space="";
 	
 	
 	Vector<SVGObject> children = null;
@@ -26,31 +27,24 @@ public class SVGHead extends SVGObject {
 		super(e);
 		if(e.hasAttribute("xmlns"))
 			xmlns = e.getAttribute("xmlns");
-		else xmlns = "";
+		if(e.hasAttribute("baseProfile"))
+			baseProfile = e.getAttribute("baseProfile");
 		if(e.hasAttribute("version"))
 			version = e.getAttribute("version");
-		else version = "";
 		if(e.hasAttribute("width"))
 			width = e.getAttribute("width");
-		else width = "";
 		if(e.hasAttribute("height"))
 			height = e.getAttribute("height");
-		else height = "";
 		if(e.hasAttribute("x"))
 			x = e.getAttribute("x");
-		else x = "";
 		if(e.hasAttribute("y"))
 			y = e.getAttribute("y");
-		else y = "";
 		if(e.hasAttribute("viewBox"))
 			viewBox = e.getAttribute("viewBox");
-		else viewBox = "";
 		if(e.hasAttribute("enable-background"))
 			enable_background = e.getAttribute("enable-background");
-		else enable_background = "";
 		if(e.hasAttribute("xml:space"))
 			xml_space = e.getAttribute("xml:space");
-		else xml_space = "";
 		
 		if(e.hasChildNodes())
 		{
@@ -77,6 +71,10 @@ public class SVGHead extends SVGObject {
 					children.add(new SVGRectangle((Element)tmp));
 				else if(tmp.getNodeName() == "text")
 					children.add(new SVGText((Element)tmp));
+				else if(tmp.getNodeName() == "linearGradient")
+					children.add(new SVGLinearGradient((Element)tmp));
+				else if(tmp.getNodeName() == "radialGradient")
+					children.add(new SVGRadialGradient((Element)tmp));
 			}
 		}
 	}
@@ -90,7 +88,13 @@ public class SVGHead extends SVGObject {
 		output += "<svg xmlns=\""+xmlns+"\"";
 		if(version != "")
 			output+= " version=\""+version+"\"";
+		if(baseProfile != "")
+			output+= " baseProfile=\""+baseProfile+"\"";
 		output+= " width=\""+width+"\" height=\""+height+"\"";
+		if(opacity >= 0.0f)
+			output+= " opacity=\""+opacity+"\"";
+		if(transform != "")
+			output+= " transform=\""+transform+"\"";
 		if(x != "")
 			output+= " x=\""+x+"\"";
 		if(y != "")

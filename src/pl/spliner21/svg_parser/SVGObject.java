@@ -10,17 +10,21 @@ import org.w3c.dom.Element;
  */
 public abstract class SVGObject {
 	String id = "";
-	String display;
-	String style;
+	String display = "";
+	String style = "";
+	String transform = "";
+	Float opacity = -1.0f;
 	
 	SVGObject(Element e) {
 		id = e.getAttribute("id");
 		if(e.hasAttribute("display"))
 			display = e.getAttribute("display");
-		else display = "";
 		if(e.hasAttribute("style"))
 			style = e.getAttribute("style");
-		else style = "";
+		if(e.hasAttribute("transform"))
+			transform = e.getAttribute("transform");
+		if(e.hasAttribute("opacity"))
+			opacity = Float.parseFloat(e.getAttribute("opacity"));
 	}
 
 	public abstract String getCode();

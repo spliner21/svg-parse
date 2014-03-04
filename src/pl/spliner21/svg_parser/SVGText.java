@@ -7,48 +7,44 @@ import org.w3c.dom.Element;
  * @version: 1.0
  */
 public class SVGText extends SVGObject {
-	Float x,y;
-	String text;
-	String fill,stroke;
+	Float x = -1.0f,y = -1.0f;
+	String text = "";
+	String fill = "",stroke = "";
 	int stroke_width;
 	
 	SVGText(Element e)
 	{
 		super(e);
 
-		try {
-			if(e.hasAttribute("x"))
-				x = Float.parseFloat(e.getAttribute("x"));
-			else x = 0.0f;
-			if(e.hasAttribute("y"))
-				y = Float.parseFloat(e.getAttribute("y"));
-			else y = 0.0f;
-		} catch(NumberFormatException ex) {
-			System.out.println(e.getAttribute("x")+" "+e.getAttribute("y"));
-		}
+		if(e.hasAttribute("x"))
+			x = Float.parseFloat(e.getAttribute("x"));
+		if(e.hasAttribute("y"))
+			y = Float.parseFloat(e.getAttribute("y"));
 		text = e.getTextContent();
 		if(e.hasAttribute("fill"))
 			fill = e.getAttribute("fill");
-		else fill = "";
 		if(e.hasAttribute("stroke"))
 			stroke = e.getAttribute("stroke");
-		else stroke = "";
 		if(e.hasAttribute("stroke_width"))
 			stroke_width = Integer.parseInt(e.getAttribute("stroke_width"));
-		if(e.hasAttribute("style"))
-			style = e.getAttribute("style");
 	}
 
 	@Override
 	public String getCode() {
 		String output;
-		output = "<text id=\""+id+"\" x=\""+x+"\" y=\""+y+"\"";
-		if(x > 0.0f) 
+		output = "<text";
+		if(id != "")
+			output += " id=\""+id+"\"";
+		if(x >= 0.0f) 
 			output += " x=\""+x+"\"";
-		if(y > 0.0f) 
+		if(y >= 0.0f) 
 			output += " y=\""+y+"\"";
 		if(fill != "")
 			output+= " fill=\""+fill+"\"";
+		if(opacity >= 0.0f)
+			output+= " opacity=\""+opacity+"\"";
+		if(transform != "")
+			output+= " transform=\""+transform+"\"";
 		if(stroke != "")
 			output+= " stroke=\""+stroke+"\"";
 		if(stroke_width > 0)

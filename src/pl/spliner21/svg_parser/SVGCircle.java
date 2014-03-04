@@ -7,9 +7,9 @@ import org.w3c.dom.Element;
  * @version: 1.0
  */
 public class SVGCircle extends SVGObject {
-	Float cx,cy;
-	Float r;
-	String fill,stroke;
+	Float cx=-1.0f,cy=-1.0f;
+	Float r=-1.0f;
+	String fill="",stroke="";
 	int stroke_width;
 
 	SVGCircle(Element e)
@@ -18,36 +18,35 @@ public class SVGCircle extends SVGObject {
 		
 		if(e.hasAttribute("cx"))
 			cx = Float.parseFloat(e.getAttribute("cx"));
-		else cx = 0.0f;
 		if(e.hasAttribute("cy"))
 			cy = Float.parseFloat(e.getAttribute("cy"));
-		else cy = 0.0f;
 		if(e.hasAttribute("r"))
 			r = Float.parseFloat(e.getAttribute("r"));
-		else r = 0.0f;
 		
 		if(e.hasAttribute("fill"))
 			fill = e.getAttribute("fill");
-		else fill = "";
 		if(e.hasAttribute("stroke"))
 			stroke = e.getAttribute("stroke");
-		else stroke = "";
 		if(e.hasAttribute("stroke_width"))
 			stroke_width = Integer.parseInt(e.getAttribute("stroke_width"));
-		if(e.hasAttribute("style"))
-			style = e.getAttribute("style");
 	}
 
 	@Override
 	public String getCode() {
 		String output;
-		output = "<circle id=\""+id+"\" cx=\""+cx+"\" cy=\""+cy+"\" r=\""+r+"\"";
-		if(cx > 0.0f) 
-			output += " x=\""+cx+"\"";
-		if(cy > 0.0f) 
-			output += " y=\""+cy+"\"";
-		if(r > 0.0f) 
-			output += " rx=\""+r+"\"";
+		output = "<circle";
+		if(id != "")
+			output += " id=\""+id+"\"";
+		if(cx >= 0.0f) 
+			output += " cx=\""+cx+"\"";
+		if(cy >= 0.0f) 
+			output += " cy=\""+cy+"\"";
+		if(r >= 0.0f) 
+			output += " r=\""+r+"\"";
+		if(opacity >= 0.0f)
+			output+= " opacity=\""+opacity+"\"";
+		if(transform != "")
+			output+= " transform=\""+transform+"\"";
 		if(fill != "")
 			output+= " fill=\""+fill+"\"";
 		if(stroke != "")

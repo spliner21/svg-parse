@@ -10,7 +10,7 @@ import org.w3c.dom.Element;
  */
 public class SVGPath extends SVGObject {
 	Vector<SVGdElem> d;
-	String fill,stroke;
+	String fill = "",stroke = "";
 	int stroke_width;
 	
 	SVGPath(Element e)
@@ -46,24 +46,27 @@ public class SVGPath extends SVGObject {
 		}
 		if(e.hasAttribute("fill"))
 			fill = e.getAttribute("fill");
-		else fill = "";
 		if(e.hasAttribute("stroke"))
 			stroke = e.getAttribute("stroke");
-		else stroke = "";
 		if(e.hasAttribute("stroke_width"))
 			stroke_width = Integer.parseInt(e.getAttribute("stroke_width"));
-		if(e.hasAttribute("style"))
-			style = e.getAttribute("style");
 	}
 
 	@Override
 	public String getCode() {
 		String output;
-		output = "<path id=\""+id+"\" d=\"";
+		output = "<path";
+		if(id != "")
+			output += " id=\""+id+"\"";
+		output += " d=\"";
 		for(SVGdElem p: d)
 			output += p.getCode()+ " ";
 		output = output.trim();
 		output+= "\"";
+		if(opacity >= 0.0f)
+			output+= " opacity=\""+opacity+"\"";
+		if(transform != "")
+			output+= " transform=\""+transform+"\"";
 		if(fill != "")
 			output+= " fill=\""+fill+"\"";
 		if(stroke != "")

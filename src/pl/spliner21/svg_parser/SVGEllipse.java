@@ -7,9 +7,9 @@ import org.w3c.dom.Element;
  * @version: 1.0
  */
 public class SVGEllipse extends SVGObject {
-	Float cx,cy;
-	Float rx,ry;
-	String fill,stroke;
+	Float cx=-1.0f,cy=-1.0f;
+	Float rx=-1.0f,ry=-1.0f;
+	String fill="",stroke="";
 	int stroke_width;
 	
 	SVGEllipse(Element e)
@@ -18,41 +18,39 @@ public class SVGEllipse extends SVGObject {
 
 		if(e.hasAttribute("cx"))
 			cx = Float.parseFloat(e.getAttribute("cx"));
-		else cx = 0.0f;
 		if(e.hasAttribute("cy"))
 			cy = Float.parseFloat(e.getAttribute("cy"));
-		else cy = 0.0f;
 		if(e.hasAttribute("rx"))
 			rx = Float.parseFloat(e.getAttribute("rx"));
-		else rx = 0.0f;
 		if(e.hasAttribute("ry"))
 			ry = Float.parseFloat(e.getAttribute("ry"));
-		else ry = 0.0f;
 		
 		if(e.hasAttribute("fill"))
 			fill = e.getAttribute("fill");
-		else fill = "";
 		if(e.hasAttribute("stroke"))
 			stroke = e.getAttribute("stroke");
-		else stroke = "";
 		if(e.hasAttribute("stroke_width"))
 			stroke_width = Integer.parseInt(e.getAttribute("stroke_width"));
-		if(e.hasAttribute("style"))
-			style = e.getAttribute("style");
 	}
 
 	@Override
 	public String getCode() {
 		String output;
-		output = "<ellipse id=\""+id+"\"";
-		if(cx > 0.0f) 
-			output += " x=\""+cx+"\"";
-		if(cy > 0.0f) 
-			output += " y=\""+cy+"\"";
-		if(rx > 0.0f) 
+		output = "<ellipse";
+		if(id != "")
+			output += " id=\""+id+"\"";
+		if(cx >= 0.0f) 
+			output += " cx=\""+cx+"\"";
+		if(cy >= 0.0f) 
+			output += " cy=\""+cy+"\"";
+		if(rx >= 0.0f) 
 			output += " rx=\""+rx+"\"";
-		if(ry > 0.0f) 
+		if(ry >= 0.0f) 
 			output += " ry=\""+ry+"\"";
+		if(opacity >= 0.0f)
+			output+= " opacity=\""+opacity+"\"";
+		if(transform != "")
+			output+= " transform=\""+transform+"\"";
 		if(fill != "")
 			output+= " fill=\""+fill+"\"";
 		if(stroke != "")

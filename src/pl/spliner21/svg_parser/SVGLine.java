@@ -8,7 +8,7 @@ import org.w3c.dom.Element;
  */
 public class SVGLine extends SVGObject {
 	int x1,y1,x2,y2;
-	String stroke;
+	String stroke = "";
 	int stroke_width;
 	
 	SVGLine(Element e)
@@ -21,17 +21,21 @@ public class SVGLine extends SVGObject {
 		y2 = Integer.parseInt(e.getAttribute("y2"));
 		if(e.hasAttribute("stroke"))
 			stroke = e.getAttribute("stroke");
-		else stroke = "";
 		if(e.hasAttribute("stroke_width"))
 			stroke_width = Integer.parseInt(e.getAttribute("stroke_width"));
-		if(e.hasAttribute("style"))
-			style = e.getAttribute("style");
 	}
 
 	@Override
 	public String getCode() {
 		String output;
-		output = "<line id=\""+id+"\" x1=\""+x1+"\" y1=\""+y1+"\" x2=\""+x2+"\" y2=\""+y2+"\"";
+		output = "<line";
+		if(id != "")
+			output += " id=\""+id+"\"";
+		output += " x1=\""+x1+"\" y1=\""+y1+"\" x2=\""+x2+"\" y2=\""+y2+"\"";
+		if(opacity >= 0.0f)
+			output+= " opacity=\""+opacity+"\"";
+		if(transform != "")
+			output+= " transform=\""+transform+"\"";
 		if(stroke != "")
 			output+= " stroke=\""+stroke+"\"";
 		if(stroke_width > 0)

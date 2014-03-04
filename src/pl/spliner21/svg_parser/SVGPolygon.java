@@ -10,7 +10,7 @@ import org.w3c.dom.Element;
  */
 public class SVGPolygon extends SVGObject {
 	Vector<SVGPoint> points;
-	String fill,stroke;
+	String fill = "",stroke = "";
 	int stroke_width;
 	
 	SVGPolygon(Element e)
@@ -25,23 +25,26 @@ public class SVGPolygon extends SVGObject {
 
 		if(e.hasAttribute("fill"))
 			fill = e.getAttribute("fill");
-		else fill = "";
 		if(e.hasAttribute("stroke"))
 			stroke = e.getAttribute("stroke");
-		else stroke = "";
 		if(e.hasAttribute("stroke_width"))
 			stroke_width = Integer.parseInt(e.getAttribute("stroke_width"));
-		if(e.hasAttribute("style"))
-			style = e.getAttribute("style");
 	}
 
 	@Override
 	public String getCode() {
 		String output;
-		output = "<polygon id=\""+id+"\" points=\"";
+		output = "<polygon";
+		if(id != "")
+			output += " id=\""+id+"\"";
+		output += " points=\"";
 		for(SVGPoint p: points)
 			output += p.x+","+p.y+" ";	// w ostatnim nie powinno byæ spacji tylko "
 		output+= "\"";
+		if(opacity >= 0.0f)
+			output+= " opacity=\""+opacity+"\"";
+		if(transform != "")
+			output+= " transform=\""+transform+"\"";
 		if(fill != "")
 			output+= " fill=\""+fill+"\"";
 		if(stroke != "")

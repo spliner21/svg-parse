@@ -7,10 +7,10 @@ import org.w3c.dom.Element;
  * @version: 1.0
  */
 public class SVGRectangle extends SVGObject {
-	Float x,y;
-	Float rx,ry;
-	int width,height;
-	String fill,stroke;
+	Float x = -1.0f, y = -1.0f;
+	Float rx = -1.0f, ry = -1.0f;
+	int width = -1, height = -1;
+	String fill = "",stroke = "";
 	int stroke_width;
 	
 	SVGRectangle(Element e)
@@ -18,44 +18,43 @@ public class SVGRectangle extends SVGObject {
 		super(e);
 		if(e.hasAttribute("x"))
 			x = Float.parseFloat(e.getAttribute("x"));
-		else x = 0.0f;
 		if(e.hasAttribute("y"))
 			y = Float.parseFloat(e.getAttribute("y"));
-		else y = 0.0f;
 		if(e.hasAttribute("rx"))
 			rx = Float.parseFloat(e.getAttribute("rx"));
-		else rx = 0.0f;
 		if(e.hasAttribute("ry"))
 			ry = Float.parseFloat(e.getAttribute("ry"));
-		else ry = 0.0f;
 		
 		width = Integer.parseInt(e.getAttribute("width"));
 		height = Integer.parseInt(e.getAttribute("height"));
 		
 		if(e.hasAttribute("fill"))
 			fill = e.getAttribute("fill");
-		else fill = "";
 		if(e.hasAttribute("stroke"))
 			stroke = e.getAttribute("stroke");
-		else stroke = "";
 		if(e.hasAttribute("stroke_width"))
 			stroke_width = Integer.parseInt(e.getAttribute("stroke_width"));
-		if(e.hasAttribute("style"))
-			style = e.getAttribute("style");
 	}
 
 	@Override
 	public String getCode() {
 		String output;
-		output = "<rect id=\""+id+"\" width=\""+width+"\" height=\""+height+"\"";
-		if(x > 0.0f) 
+		output = "<rect";
+		if(id != "")
+			output += " id=\""+id+"\"";
+		output += " width=\""+width+"\" height=\""+height+"\"";
+		if(x >= 0.0f) 
 			output += " x=\""+x+"\"";
-		if(y > 0.0f) 
+		if(y >= 0.0f) 
 			output += " y=\""+y+"\"";
-		if(rx > 0.0f) 
+		if(rx >= 0.0f) 
 			output += " rx=\""+rx+"\"";
-		if(ry > 0.0f) 
+		if(ry >= 0.0f) 
 			output += " ry=\""+ry+"\"";
+		if(opacity >= 0.0f)
+			output+= " opacity=\""+opacity+"\"";
+		if(transform != "")
+			output+= " transform=\""+transform+"\"";
 		if(fill != "")
 			output+= " fill=\""+fill+"\"";
 		if(stroke != "")

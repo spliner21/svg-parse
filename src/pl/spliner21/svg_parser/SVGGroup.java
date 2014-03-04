@@ -44,6 +44,10 @@ public class SVGGroup extends SVGObject {
 					children.add(new SVGRectangle((Element)tmp));
 				else if(tmp.getNodeName() == "text")
 					children.add(new SVGText((Element)tmp));
+				else if(tmp.getNodeName() == "linearGradient")
+					children.add(new SVGLinearGradient((Element)tmp));
+				else if(tmp.getNodeName() == "radialGradient")
+					children.add(new SVGRadialGradient((Element)tmp));
 			}
 		}
 	}
@@ -51,7 +55,13 @@ public class SVGGroup extends SVGObject {
 	@Override
 	public String getCode() {
 		String output;
-		output = "<g id=\""+id+"\"";
+		output = "<g";
+		if(id != "")
+			output += " id=\""+id+"\"";
+		if(opacity >= 0.0f)
+			output+= " opacity=\""+opacity+"\"";
+		if(transform != "")
+			output+= " transform=\""+transform+"\"";
 		if(style != "")
 			output+= " style=\""+style+"\"";
 		if(display != "")
