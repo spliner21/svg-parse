@@ -6,12 +6,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-/*
-<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="102.3818" y1="438.6396" x2="102.3818" y2="377.1648" 
-gradientTransform="matrix(-0.8697 0.4935 0.4935 0.8697 264.0785 -9.4253)">
-	<stop  offset="0" style="stop-color:#E5802A"/>
-	<stop  offset="1" style="stop-color:#EBD300"/>
-</linearGradient>
+
+/* class representing <linearGradient> tag in SVG file
+ * @author: Tomasz Szo³tysek
+ * @version: 1.0
  */
 public class SVGLinearGradient extends SVGObject {
 	String gradientUnits = "";

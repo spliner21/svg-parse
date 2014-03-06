@@ -2,6 +2,10 @@ package pl.spliner21.svg_parser;
 
 import org.w3c.dom.Element;
 
+/* class representing <stop> tag in SVG's gradients
+ * @author: Tomasz Szo³tysek
+ * @version: 1.0
+ */
 public class SVGGradientStop extends SVGObject {
 	Float offset = 0.0f;
 	String style = "";

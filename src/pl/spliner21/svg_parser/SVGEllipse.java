@@ -10,7 +10,7 @@ public class SVGEllipse extends SVGObject {
 	Float cx=-1.0f,cy=-1.0f;
 	Float rx=-1.0f,ry=-1.0f;
 	String fill="",stroke="";
-	int stroke_width;
+	Float stroke_width = -1.0f;
 	
 	SVGEllipse(Element e)
 	{
@@ -29,8 +29,8 @@ public class SVGEllipse extends SVGObject {
 			fill = e.getAttribute("fill");
 		if(e.hasAttribute("stroke"))
 			stroke = e.getAttribute("stroke");
-		if(e.hasAttribute("stroke_width"))
-			stroke_width = Integer.parseInt(e.getAttribute("stroke_width"));
+		if(e.hasAttribute("stroke-width"))
+			stroke_width = Float.parseFloat(e.getAttribute("stroke-width"));
 	}
 
 	@Override
@@ -55,8 +55,8 @@ public class SVGEllipse extends SVGObject {
 			output+= " fill=\""+fill+"\"";
 		if(stroke != "")
 			output+= " stroke=\""+stroke+"\"";
-		if(stroke_width > 0)
-			output+= " fill=\""+stroke_width+"\"";
+		if(stroke_width >= 0.0f)
+			output+= " stroke-width=\""+stroke_width+"\"";
 		if(style != "")
 			output+= " style=\""+style+"\"";
 		if(display != "")

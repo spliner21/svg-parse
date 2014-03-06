@@ -9,7 +9,7 @@ import org.w3c.dom.Element;
 public class SVGLine extends SVGObject {
 	int x1,y1,x2,y2;
 	String stroke = "";
-	int stroke_width;
+	Float stroke_width = -1.0f;
 	
 	SVGLine(Element e)
 	{
@@ -21,8 +21,8 @@ public class SVGLine extends SVGObject {
 		y2 = Integer.parseInt(e.getAttribute("y2"));
 		if(e.hasAttribute("stroke"))
 			stroke = e.getAttribute("stroke");
-		if(e.hasAttribute("stroke_width"))
-			stroke_width = Integer.parseInt(e.getAttribute("stroke_width"));
+		if(e.hasAttribute("stroke-width"))
+			stroke_width = Float.parseFloat(e.getAttribute("stroke-width"));
 	}
 
 	@Override
@@ -38,8 +38,8 @@ public class SVGLine extends SVGObject {
 			output+= " transform=\""+transform+"\"";
 		if(stroke != "")
 			output+= " stroke=\""+stroke+"\"";
-		if(stroke_width > 0)
-			output+= " fill=\""+stroke_width+"\"";
+		if(stroke_width >= 0.0f)
+			output+= " stroke-width=\""+stroke_width+"\"";
 		if(style != "")
 			output+= " style=\""+style+"\"";
 		if(display != "")

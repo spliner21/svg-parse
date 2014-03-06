@@ -10,7 +10,7 @@ public class SVGText extends SVGObject {
 	Float x = -1.0f,y = -1.0f;
 	String text = "";
 	String fill = "",stroke = "";
-	int stroke_width;
+	Float stroke_width = -1.0f;
 	
 	SVGText(Element e)
 	{
@@ -25,8 +25,8 @@ public class SVGText extends SVGObject {
 			fill = e.getAttribute("fill");
 		if(e.hasAttribute("stroke"))
 			stroke = e.getAttribute("stroke");
-		if(e.hasAttribute("stroke_width"))
-			stroke_width = Integer.parseInt(e.getAttribute("stroke_width"));
+		if(e.hasAttribute("stroke-width"))
+			stroke_width = Float.parseFloat(e.getAttribute("stroke-width"));
 	}
 
 	@Override
@@ -47,8 +47,8 @@ public class SVGText extends SVGObject {
 			output+= " transform=\""+transform+"\"";
 		if(stroke != "")
 			output+= " stroke=\""+stroke+"\"";
-		if(stroke_width > 0)
-			output+= " fill=\""+stroke_width+"\"";
+		if(stroke_width >= 0.0f)
+			output+= " stroke-width=\""+stroke_width+"\"";
 		if(style != "")
 			output+= " style=\""+style+"\"";
 		if(display != "")

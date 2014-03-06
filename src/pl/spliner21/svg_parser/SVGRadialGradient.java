@@ -5,6 +5,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/* class representing <radialGradient> tag in SVG file
+ * @author: Tomasz Szo³tysek
+ * @version: 1.0
+ */
 public class SVGRadialGradient extends SVGObject {
 	String gradientUnits = "";
 	Float x1 = -1.0f, y1 = -1.0f, x2 = -1.0f, y2 = -1.0f;
@@ -43,10 +47,6 @@ public class SVGRadialGradient extends SVGObject {
 	
 	@Override
 	public String getCode() {
-		//String gradientUnits = "";
-		//Float x1 = 0.0f, y1 = 0.0f, x2 = 0.0f, y2 = 0.0f;
-		//String gradientTransform = "";
-		//Vector<SVGGradientStop> stops = null;
 		String output;
 		output = "<radialGradient";
 		if(id != "")
