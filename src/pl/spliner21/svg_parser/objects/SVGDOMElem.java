@@ -1,4 +1,4 @@
-package pl.spliner21.svg_parser;
+package pl.spliner21.svg_parser.objects;
 
 public abstract class SVGDOMElem {
 	

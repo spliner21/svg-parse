@@ -1,10 +1,13 @@
-package pl.spliner21.svg_parser;
+package pl.spliner21.svg_parser.objects;
 
 import java.util.Vector;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import pl.spliner21.svg_parser.gradients.SVGLinearGradient;
+import pl.spliner21.svg_parser.gradients.SVGRadialGradient;
 
 /* class representing main (<svg>) tag in SVG file
  * @author: Tomasz Szo³tysek
@@ -23,7 +26,7 @@ public class SVGHead extends SVGObject {
 	
 	Vector<SVGObject> children = null;
 	
-	SVGHead(Element e) {
+	public SVGHead(Element e) {
 		super(e);
 		if(e.hasAttribute("xmlns"))
 			xmlns = e.getAttribute("xmlns");

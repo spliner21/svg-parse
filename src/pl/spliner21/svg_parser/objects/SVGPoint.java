@@ -1,4 +1,4 @@
-package pl.spliner21.svg_parser;
+package pl.spliner21.svg_parser.objects;
 
 /* class representing point in <polyline> and <polygon> tag's points argument in SVG file
  * @author: Tomasz Szo³tysek

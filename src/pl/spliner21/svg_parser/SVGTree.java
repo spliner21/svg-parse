@@ -12,6 +12,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
+import pl.spliner21.svg_parser.objects.SVGHead;
+
 
 public class SVGTree {
 	Document doc = null;

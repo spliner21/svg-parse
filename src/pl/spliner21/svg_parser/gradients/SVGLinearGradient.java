@@ -1,10 +1,12 @@
-package pl.spliner21.svg_parser;
+package pl.spliner21.svg_parser.gradients;
 
 import java.util.Vector;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import pl.spliner21.svg_parser.objects.SVGObject;
 
 
 /* class representing <linearGradient> tag in SVG file
@@ -16,8 +18,33 @@ public class SVGLinearGradient extends SVGObject {
 	Float x1 = -1.0f, y1 = -1.0f, x2 = -1.0f, y2 = -1.0f;
 	String gradientTransform = "";
 	Vector<SVGGradientStop> stops = null;
-	
-	SVGLinearGradient(Element e) {
+
+	public SVGLinearGradient()
+	{
+		super();
+		gradientUnits = "userSpaceOnUse";
+		x1 = 0.0f;
+		y1 = 0.0f;
+		x2 = 1.0f;
+		y2 = 1.0f;
+		stops = new Vector<SVGGradientStop>();
+		stops.add(new SVGGradientStop());
+		stops.add(new SVGGradientStop(1.0f, "stop-color: #ffffff")); 
+	}
+
+	public SVGLinearGradient(String id, String style, float x1, float y1, float x2, float y2, String stop1_color, String stop2_color, 
+			String fill, String stroke, Float stroke_width, String transform, Float opacity, String display)
+	{
+		super(id,style,transform,opacity,display,fill,stroke,stroke_width);
+		this.x1 = x1;
+		this.y1 = y1;
+		this.x2 = x2;
+		this.y2 = y2;
+		stops = new Vector<SVGGradientStop>();
+		stops.add(new SVGGradientStop(0.0f, stop1_color)); 
+		stops.add(new SVGGradientStop(1.0f, stop2_color)); 
+	}
+	public SVGLinearGradient(Element e) {
 		super(e);
 
 		if(e.hasAttribute("gradientUnits"))
@@ -32,8 +59,6 @@ public class SVGLinearGradient extends SVGObject {
 			x2 = Float.parseFloat(e.getAttribute("x2"));
 		if(e.hasAttribute("y2"))
 			y2 = Float.parseFloat(e.getAttribute("y2"));
-		if(e.hasAttribute("style"))
-			style = e.getAttribute("style");
 		if(e.hasChildNodes())
 		{
 			stops = new Vector<SVGGradientStop>();

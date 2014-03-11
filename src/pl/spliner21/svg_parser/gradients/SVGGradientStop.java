@@ -1,6 +1,8 @@
-package pl.spliner21.svg_parser;
+package pl.spliner21.svg_parser.gradients;
 
 import org.w3c.dom.Element;
+
+import pl.spliner21.svg_parser.objects.SVGObject;
 
 /* class representing <stop> tag in SVG's gradients
  * @author: Tomasz Szo³tysek
@@ -8,7 +10,16 @@ import org.w3c.dom.Element;
  */
 public class SVGGradientStop extends SVGObject {
 	Float offset = 0.0f;
-	String style = "";
+	
+	public SVGGradientStop() {
+		offset = 0.0f;
+		style = "stop-color: #000000";
+	}
+
+	public SVGGradientStop(Float offset, String style) {
+		this.offset = offset;
+		this.style = style;
+	}
 	
 	SVGGradientStop(Element e) {
 		super(e);

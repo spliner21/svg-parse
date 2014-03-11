@@ -1,4 +1,4 @@
-package pl.spliner21.svg_parser;
+package pl.spliner21.svg_parser.objects;
 
 import java.util.Vector;
 
@@ -10,8 +10,57 @@ import org.w3c.dom.Element;
  */
 public class SVGPath extends SVGObject {
 	Vector<SVGdElem> d;
-	String fill = "",stroke = "";
-	Float stroke_width = -1.0f;
+
+	public SVGPath()
+	{
+		super();
+		String pts = "M 0 0 z";
+
+		String[] ptslist = pts.split(" ");
+		d = new Vector<SVGdElem>();
+		for (int i = 0; i < ptslist.length; i++)
+		{
+			if(Character.isLetter(ptslist[i].charAt(0)))
+				d.add(new SVGCharElem(ptslist[i]));
+			else 
+			{
+				d.add(new SVGNumElem(ptslist[i]));
+			}
+		}
+	}
+	
+	public SVGPath(String id, String style, String pts, 
+			String fill, String stroke, Float stroke_width, String transform, Float opacity, String display)
+	{
+		super(id,style,transform,opacity,display,fill,stroke,stroke_width);
+
+		pts = pts.replace(',',' ');
+		pts= pts.replace("-", " -");
+		for(int i = 0; i< pts.length(); i++)
+		{
+			if(Character.isLetter( pts.charAt(i))) 
+			{
+				pts = pts.subSequence(0, i) + " " + pts.charAt(i) + " " + pts.subSequence(i+1, pts.length());
+				//System.out.println(pts);
+				i += 2;
+			}
+		}
+		pts= pts.replaceAll("\\s+", " ");
+		pts = pts.trim();
+		//System.out.println(pts);
+		
+		String[] ptslist = pts.split(" ");
+		d = new Vector<SVGdElem>();
+		for (int i = 0; i < ptslist.length; i++)
+		{
+			if(Character.isLetter(ptslist[i].charAt(0)))
+				d.add(new SVGCharElem(ptslist[i]));
+			else 
+			{
+				d.add(new SVGNumElem(ptslist[i]));
+			}
+		}
+	}
 	
 	SVGPath(Element e)
 	{
@@ -44,14 +93,13 @@ public class SVGPath extends SVGObject {
 				d.add(new SVGNumElem(ptslist[i]));
 			}
 		}
-		if(e.hasAttribute("fill"))
-			fill = e.getAttribute("fill");
-		if(e.hasAttribute("stroke"))
-			stroke = e.getAttribute("stroke");
-		if(e.hasAttribute("stroke-width"))
-			stroke_width = Float.parseFloat(e.getAttribute("stroke-width"));
 	}
 
+
+	/*
+	 * Method which returns generated tags code
+	 * author: Tomasz Szo³tysek
+	 */
 	@Override
 	public String getCode() {
 		String output;

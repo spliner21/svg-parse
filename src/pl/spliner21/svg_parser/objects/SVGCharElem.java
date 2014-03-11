@@ -1,4 +1,4 @@
-package pl.spliner21.svg_parser;
+package pl.spliner21.svg_parser.objects;
 
 /* class representing char in <path> tag's d argument in SVG file
  * @author: Tomasz Szo³tysek

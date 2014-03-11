@@ -1,4 +1,4 @@
-package pl.spliner21.svg_parser;
+package pl.spliner21.svg_parser.objects;
 
 import org.w3c.dom.Element;
 
@@ -9,10 +9,26 @@ import org.w3c.dom.Element;
 public class SVGCircle extends SVGObject {
 	Float cx=-1.0f,cy=-1.0f;
 	Float r=-1.0f;
-	String fill="",stroke="";
-	Float stroke_width = -1.0f;
 
-	SVGCircle(Element e)
+	
+	public SVGCircle()
+	{
+		super();
+		cx = 1.0f;
+		cy = 1.0f;
+		r = 1.0f;
+	}
+
+	public SVGCircle(String id, String style, float cx, float cy, float r, 
+			String fill, String stroke, Float stroke_width, String transform, Float opacity, String display)
+	{
+		super(id,style,transform,opacity,display,fill,stroke,stroke_width);
+		this.cx = cx;
+		this.cy = cy;
+		this.r = r;
+	}
+	
+	public SVGCircle(Element e)
 	{
 		super(e);
 		
@@ -22,15 +38,44 @@ public class SVGCircle extends SVGObject {
 			cy = Float.parseFloat(e.getAttribute("cy"));
 		if(e.hasAttribute("r"))
 			r = Float.parseFloat(e.getAttribute("r"));
-		
-		if(e.hasAttribute("fill"))
-			fill = e.getAttribute("fill");
-		if(e.hasAttribute("stroke"))
-			stroke = e.getAttribute("stroke");
-		if(e.hasAttribute("stroke-width"))
-			stroke_width = Float.parseFloat(e.getAttribute("stroke-width"));
+	}
+	
+	/* Getters & Setters */
+	
+	public Float getCX()
+	{
+		return cx;
+	}
+	public Float getCY()
+	{
+		return cy;
+	}
+	public void setCX(Float cx)
+	{
+		this.cx = cx;
+	}
+	public void setCY(Float cy)
+	{
+		this.cy = cy;
+	}
+	public void setCenter(Float cx, Float cy)
+	{
+		this.cx = cx;
+		this.cy = cy;
+	}
+	public Float getRadius()
+	{
+		return r;
+	}
+	public void setRadius(Float r)
+	{
+		this.r = r;
 	}
 
+	/*
+	 * Method which returns generated tags code
+	 * author: Tomasz Szo³tysek
+	 */
 	@Override
 	public String getCode() {
 		String output;

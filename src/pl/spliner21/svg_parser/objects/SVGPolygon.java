@@ -1,18 +1,35 @@
-package pl.spliner21.svg_parser;
+package pl.spliner21.svg_parser.objects;
+
 import java.util.Vector;
 
 import org.w3c.dom.Element;
 
-/* class representing <polyline> tag in SVG file
+/* class representing <polygon> tag in SVG file
  * @author: Tomasz Szo³tysek
  * @version: 1.0
  */
-public class SVGPolyline extends SVGObject {
+public class SVGPolygon extends SVGObject {
 	Vector<SVGPoint> points;
-	String fill = "",stroke = "";
-	Float stroke_width = -1.0f;
+
+	public SVGPolygon()
+	{
+		super();
+		points.add(new SVGPoint("0,1"));
+		points.add(new SVGPoint("0.5,0"));
+		points.add(new SVGPoint("1,1"));
+	}
 	
-	SVGPolyline(Element e)
+	public SVGPolygon(String id, String style, String pts, 
+			String fill, String stroke, Float stroke_width, String transform, Float opacity, String display)
+	{
+		super(id,style,transform,opacity,display,fill,stroke,stroke_width);
+
+		String[] ptslist = pts.split(" ");
+		for (String s : ptslist) 
+			points.add(new SVGPoint(s));
+	}
+	
+	SVGPolygon(Element e)
 	{
 		super(e);
 		
@@ -21,19 +38,26 @@ public class SVGPolyline extends SVGObject {
 		String[] ptslist = pts.split(" ");
 		for (String s : ptslist) 
 			points.add(new SVGPoint(s));
-
-		if(e.hasAttribute("fill"))
-			fill = e.getAttribute("fill");
-		if(e.hasAttribute("stroke"))
-			stroke = e.getAttribute("stroke");
-		if(e.hasAttribute("stroke-width"))
-			stroke_width = Float.parseFloat(e.getAttribute("stroke-width"));
 	}
 
+
+	public Vector<SVGPoint> getPoints() {
+		return points;
+	}
+
+	public void setPoints(Vector<SVGPoint> points) {
+		this.points = points;
+	}
+
+
+	/*
+	 * Method which returns generated tags code
+	 * author: Tomasz Szo³tysek
+	 */
 	@Override
 	public String getCode() {
 		String output;
-		output = "<polyline";
+		output = "<polygon";
 		if(id != "")
 			output += " id=\""+id+"\"";
 		output += " points=\"";
@@ -58,5 +82,4 @@ public class SVGPolyline extends SVGObject {
 		
 		return output;
 	}
-
 }

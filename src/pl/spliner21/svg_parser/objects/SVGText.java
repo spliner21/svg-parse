@@ -1,4 +1,4 @@
-package pl.spliner21.svg_parser;
+package pl.spliner21.svg_parser.objects;
 
 import org.w3c.dom.Element;
 
@@ -9,8 +9,23 @@ import org.w3c.dom.Element;
 public class SVGText extends SVGObject {
 	Float x = -1.0f,y = -1.0f;
 	String text = "";
-	String fill = "",stroke = "";
-	Float stroke_width = -1.0f;
+
+	public SVGText()
+	{
+		super();
+		x = 0.0f;
+		y = 0.0f;
+		text = "Text";
+	}
+
+	public SVGText(String id, String style, float x, float y, String text, 
+			String fill, String stroke, Float stroke_width, String transform, Float opacity, String display)
+	{
+		super(id,style,transform,opacity,display,fill,stroke,stroke_width);
+		this.x = x;
+		this.y = y;
+		this.text = text;
+	}
 	
 	SVGText(Element e)
 	{
@@ -21,14 +36,36 @@ public class SVGText extends SVGObject {
 		if(e.hasAttribute("y"))
 			y = Float.parseFloat(e.getAttribute("y"));
 		text = e.getTextContent();
-		if(e.hasAttribute("fill"))
-			fill = e.getAttribute("fill");
-		if(e.hasAttribute("stroke"))
-			stroke = e.getAttribute("stroke");
-		if(e.hasAttribute("stroke-width"))
-			stroke_width = Float.parseFloat(e.getAttribute("stroke-width"));
 	}
 
+	public Float getX() {
+		return x;
+	}
+
+	public void setX(Float x) {
+		this.x = x;
+	}
+
+	public Float getY() {
+		return y;
+	}
+
+	public void setY(Float y) {
+		this.y = y;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	/*
+	 * Method which returns generated tags code
+	 * author: Tomasz Szo³tysek
+	 */
 	@Override
 	public String getCode() {
 		String output;
