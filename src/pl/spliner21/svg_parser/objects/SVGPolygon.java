@@ -4,13 +4,17 @@ import java.util.Vector;
 
 import org.w3c.dom.Element;
 
-/* class representing <polygon> tag in SVG file
- * @author: Tomasz Szo³tysek
- * @version: 1.0
+/** 
+ * Class representing <polygon> tag in SVG file
+ * @author spliner21
+ * @version 1.0
  */
 public class SVGPolygon extends SVGObject {
 	Vector<SVGPoint> points;
 
+	/**
+	 * Default constructor
+	 */
 	public SVGPolygon()
 	{
 		super();
@@ -18,7 +22,19 @@ public class SVGPolygon extends SVGObject {
 		points.add(new SVGPoint("0.5,0"));
 		points.add(new SVGPoint("1,1"));
 	}
-	
+
+	/**
+	 * Constructor by arguments
+	 * @param id tag's ID argument
+	 * @param style tag's style argument
+	 * @param pts String, that contains points in the way, the points-parameter accepts them
+	 * @param fill polygon's fill color
+	 * @param stroke polygon's stroke color
+	 * @param stroke_width polygon's stroke_width
+	 * @param transform polygon's transformation
+	 * @param opacity polygon's opacity (0.0f-1.0f)
+	 * @param display tag's display argument
+	 */
 	public SVGPolygon(String id, String style, String pts, 
 			String fill, String stroke, Float stroke_width, String transform, Float opacity, String display)
 	{
@@ -28,7 +44,12 @@ public class SVGPolygon extends SVGObject {
 		for (String s : ptslist) 
 			points.add(new SVGPoint(s));
 	}
-	
+
+
+	/**
+	 * Constructor by xml's DOM tag element
+	 * @param e xml's DOM tag element
+	 */
 	SVGPolygon(Element e)
 	{
 		super(e);
@@ -41,10 +62,18 @@ public class SVGPolygon extends SVGObject {
 	}
 
 
+	/**
+	 * Point's getter
+	 * @return vector of SVGPoint elements for this tag
+	 */
 	public Vector<SVGPoint> getPoints() {
 		return points;
 	}
 
+	/**
+	 * Point's setter
+	 * @param points vector of SVGPoint elements for this tag
+	 */
 	public void setPoints(Vector<SVGPoint> points) {
 		this.points = points;
 	}

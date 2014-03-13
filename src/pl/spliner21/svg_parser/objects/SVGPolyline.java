@@ -3,21 +3,36 @@ import java.util.Vector;
 
 import org.w3c.dom.Element;
 
-/* class representing <polyline> tag in SVG file
- * @author: Tomasz Szo³tysek
- * @version: 1.0
+/** 
+ * Class representing <polyline> tag in SVG file
+ * @author spliner21
+ * @version 1.0
  */
 public class SVGPolyline extends SVGObject {
 	Vector<SVGPoint> points;
 	
-
+	/**
+	 * Default constructor
+	 */
 	public SVGPolyline()
 	{
 		super();
 		points.add(new SVGPoint("0,0"));
 		points.add(new SVGPoint("1,1"));
 	}
-	
+
+	/**
+	 * Constructor by arguments
+	 * @param id tag's ID argument
+	 * @param style tag's style argument
+	 * @param pts String, that contains points in the way, the points-parameter accepts them
+	 * @param fill polyline's fill color
+	 * @param stroke polyline's stroke color
+	 * @param stroke_width polyline's stroke_width
+	 * @param transform polyline's transformation
+	 * @param opacity polyline's opacity (0.0f-1.0f)
+	 * @param display tag's display argument
+	 */
 	public SVGPolyline(String id, String style, String pts, 
 			String fill, String stroke, Float stroke_width, String transform, Float opacity, String display)
 	{
@@ -28,6 +43,11 @@ public class SVGPolyline extends SVGObject {
 			points.add(new SVGPoint(s));
 	}
 
+
+	/**
+	 * Constructor by xml's DOM tag element
+	 * @param e xml's DOM tag element
+	 */
 	SVGPolyline(Element e)
 	{
 		super(e);
@@ -40,10 +60,18 @@ public class SVGPolyline extends SVGObject {
 	}
 
 
+	/**
+	 * Point's getter
+	 * @return vector of SVGPoint elements for this tag
+	 */
 	public Vector<SVGPoint> getPoints() {
 		return points;
 	}
 
+	/**
+	 * Point's setter
+	 * @param points vector of SVGPoint elements for this tag
+	 */
 	public void setPoints(Vector<SVGPoint> points) {
 		this.points = points;
 	}

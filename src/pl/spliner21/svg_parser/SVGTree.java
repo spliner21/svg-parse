@@ -15,17 +15,34 @@ import org.xml.sax.SAXException;
 import pl.spliner21.svg_parser.objects.SVGHead;
 
 
+/**
+ * Main parser class. Constructs SVG DOM Tree.
+ * @author spliner21
+ * @version 1.0
+ */
 public class SVGTree {
 	Document doc = null;
 	
 	SVGHead svghead;
 	
+	/**
+	 * Constructor based on path to SVG file
+	 * @param path - string containing path to SVG file
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	SVGTree(String path)
 			throws FileNotFoundException, IOException
 	{
 		openSVGFile(path);
 	}
 	
+	/**
+	 * Method for opening SVG file and parsing it to DOM-objects structure
+	 * @param path - string containing path to SVG file
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	void openSVGFile(String path) 
 		throws FileNotFoundException, IOException
 	{
@@ -50,6 +67,10 @@ public class SVGTree {
 		
 	}
 	
+	/**
+	 * Method that generates SVG file's content from library's DOM structure
+	 * @return String containing SVG file's content
+	 */
 	String getCode()
 	{
 		return svghead.getCode();

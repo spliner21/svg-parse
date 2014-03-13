@@ -15,6 +15,11 @@ import javax.swing.UIManager;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+/**
+ * Library's "view". Created just for testing
+ * @author spliner21
+ *
+ */
 public class SVGParseMain extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -101,7 +106,6 @@ public class SVGParseMain extends JFrame {
 				try {
 					debugTree = new SVGTree(path);
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				System.out.print(debugTree.getCode());

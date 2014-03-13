@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="private" author="true" classpath="." destdir="E:\Archiwum\Code%20projects\Android\svg-parse\doc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="pl.spliner21.svg_parser.objects,pl.spliner21.svg_parser.gradients,pl.spliner21.svg_parser" source="1.7" sourcepath="src" splitindex="true" use="true" version="true"/>
+    </target>
+</project>

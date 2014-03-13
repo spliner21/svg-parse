@@ -9,14 +9,27 @@ import org.w3c.dom.NodeList;
 import pl.spliner21.svg_parser.gradients.SVGLinearGradient;
 import pl.spliner21.svg_parser.gradients.SVGRadialGradient;
 
-/* class representing <g> tag in SVG file
- * @author: Tomasz Szo³tysek
- * @version: 1.0
+/** 
+ * Class representing <g> tag in SVG file
+ * @author spliner21
+ * @version 1.0
  */
 public class SVGGroup extends SVGObject {
 	
 	Vector<SVGObject> children = null;
+
+	/**
+	 * Default constructor
+	 */
+	SVGGroup()
+	{
+		super();
+	}
 	
+	/**
+	 * Constructor by xml's DOM tag element
+	 * @param e xml's DOM tag element
+	 */
 	SVGGroup(Element e)
 	{
 		super(e);

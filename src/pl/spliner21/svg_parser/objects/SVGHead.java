@@ -9,12 +9,12 @@ import org.w3c.dom.NodeList;
 import pl.spliner21.svg_parser.gradients.SVGLinearGradient;
 import pl.spliner21.svg_parser.gradients.SVGRadialGradient;
 
-/* class representing main (<svg>) tag in SVG file
- * @author: Tomasz Szo³tysek
- * @version: 1.0
+/** 
+ * class representing main (<svg>) tag in SVG file
+ * @author Tomasz Szo³tysek
+ * @version 1.0
  */
 public class SVGHead extends SVGObject {
-	// <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="250px" height="250px" x="10px" y="10px">
 	String xmlns = "http://www.w3.org/2000/svg";
 	String baseProfile = "";
 	String version = "";
@@ -26,6 +26,51 @@ public class SVGHead extends SVGObject {
 	
 	Vector<SVGObject> children = null;
 	
+	/**
+	 * Default constructor
+	 */
+	public SVGHead() 
+	{
+		super();
+		version = "1.1";
+		baseProfile = "basic";
+		id = "";
+		x = "0px";
+		y = "0px";
+		width = "500px";
+		height = "400px";
+		viewBox = "0 0 500 400";
+		xml_space = "preserve";
+	}
+	
+	/**
+	 * Constructor by parameters
+	 * @param version SVG version
+	 * @param baseProfile SVG baseProfile
+	 * @param id SVG tag's ID
+	 * @param x SVG position's x coordinate
+	 * @param y SVG position's Y coordinate
+	 * @param width SVG image's width
+	 * @param height SVG image's height
+	 */
+	public SVGHead(String version, String baseProfile, String id, int x, int y, int width, int height) 
+	{
+		super();
+		this.version = version;
+		this.baseProfile = baseProfile;
+		this.id = id;
+		this.x = x+"px";
+		this.y = y+"px";
+		this.width = width+"px";
+		this.height = height+"px";
+		this.viewBox = x+" "+y+" "+width+" "+height;
+		xml_space = "preserve";
+	}
+
+	/**
+	 * Constructor by xml's DOM tag element
+	 * @param e xml's DOM tag element
+	 */
 	public SVGHead(Element e) {
 		super(e);
 		if(e.hasAttribute("xmlns"))

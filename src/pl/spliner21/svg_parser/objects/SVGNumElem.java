@@ -1,12 +1,17 @@
 package pl.spliner21.svg_parser.objects;
 
-/* class representing number in <path> tag's d argument in SVG file
- * @author: Tomasz Szo³tysek
- * @version: 1.0
+/** 
+ * Class representing number in <path> tag's d argument in SVG file
+ * @author spliner21
+ * @version 1.0
  */
 public class SVGNumElem extends SVGdElem {
 	Float value;
 
+	/**
+	 * Constructor by parameter
+	 * @param s number in String
+	 */
 	SVGNumElem(String s) {
 		value = Float.parseFloat(s);
 	}

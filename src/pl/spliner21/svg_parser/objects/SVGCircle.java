@@ -2,15 +2,19 @@ package pl.spliner21.svg_parser.objects;
 
 import org.w3c.dom.Element;
 
-/* class representing <circle> tag in SVG file
- * @author: Tomasz Szo³tysek
- * @version: 1.0
+/** 
+ * class representing <circle> tag in SVG file
+ * @author spliner21
+ * @version 1.0
  */
 public class SVGCircle extends SVGObject {
 	Float cx=-1.0f,cy=-1.0f;
 	Float r=-1.0f;
 
 	
+	/**
+	 * Default constructor
+	 */
 	public SVGCircle()
 	{
 		super();
@@ -19,6 +23,20 @@ public class SVGCircle extends SVGObject {
 		r = 1.0f;
 	}
 
+	/**
+	 * Constructor by arguments
+	 * @param id tag's ID argument
+	 * @param style tag's style argument
+	 * @param cx circle's center x coordinate
+	 * @param cy circle's center y coordinate
+	 * @param r circle's radius
+	 * @param fill circle's fill color
+	 * @param stroke circle's stroke color
+	 * @param stroke_width circle's stroke_width
+	 * @param transform circle's transformation
+	 * @param opacity circle's opacity (0.0f-1.0f)
+	 * @param display tag's display argument
+	 */
 	public SVGCircle(String id, String style, float cx, float cy, float r, 
 			String fill, String stroke, Float stroke_width, String transform, Float opacity, String display)
 	{
@@ -28,6 +46,10 @@ public class SVGCircle extends SVGObject {
 		this.r = r;
 	}
 	
+	/**
+	 * Constructor by xml's DOM tag element
+	 * @param e xml's DOM tag element
+	 */
 	public SVGCircle(Element e)
 	{
 		super(e);
@@ -42,40 +64,66 @@ public class SVGCircle extends SVGObject {
 	
 	/* Getters & Setters */
 	
+	/**
+	 * CX's getter
+	 * @return circle's center X coordinate
+	 */
 	public Float getCX()
 	{
 		return cx;
 	}
+	/**
+	 * CY's getter
+	 * @return circle's center Y coordinate
+	 */
 	public Float getCY()
 	{
 		return cy;
 	}
+	/**
+	 * CX's setter
+	 * @param cx circle's center X coordinate
+	 */
 	public void setCX(Float cx)
 	{
 		this.cx = cx;
 	}
+	/**
+	 * CY's setter
+	 * @param cy circle's center Y coordinate
+	 */
 	public void setCY(Float cy)
 	{
 		this.cy = cy;
 	}
+	/**
+	 * Circle's center setter
+	 * @param cx circle's center X coordinate	 
+	 * @param cy circle's center Y coordinate
+	 */
 	public void setCenter(Float cx, Float cy)
 	{
 		this.cx = cx;
 		this.cy = cy;
 	}
+	
+	/**
+	 * Circle's radius getter
+	 * @return circle's radius
+	 */
 	public Float getRadius()
 	{
 		return r;
 	}
+	/**
+	 * Circle's radius setter
+	 * @param r circle's radius
+	 */
 	public void setRadius(Float r)
 	{
 		this.r = r;
 	}
 
-	/*
-	 * Method which returns generated tags code
-	 * author: Tomasz Szo³tysek
-	 */
 	@Override
 	public String getCode() {
 		String output;

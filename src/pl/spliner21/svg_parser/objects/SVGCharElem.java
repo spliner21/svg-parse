@@ -1,12 +1,17 @@
 package pl.spliner21.svg_parser.objects;
 
-/* class representing char in <path> tag's d argument in SVG file
- * @author: Tomasz Szo³tysek
- * @version: 1.0
+/** 
+ * Class representing char in <path> tag's d argument in SVG file
+ * @author spliner21
+ * @version 1.0
  */
 public class SVGCharElem extends SVGdElem {
 	char type;
 
+	/**
+	 * Constructor by parameter
+	 * @param s character in String
+	 */
 	SVGCharElem(String s) {
 		type = s.charAt(0);
 	}

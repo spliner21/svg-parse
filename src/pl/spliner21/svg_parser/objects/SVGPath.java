@@ -4,13 +4,17 @@ import java.util.Vector;
 
 import org.w3c.dom.Element;
 
-/* class representing <path> tag in SVG file
- * @author: Tomasz Szo³tysek
- * @version: 1.0
+/** 
+ * Class representing <path> tag in SVG file
+ * @author spliner21
+ * @version 1.0
  */
 public class SVGPath extends SVGObject {
 	Vector<SVGdElem> d;
 
+	/**
+	 * Default constructor
+	 */
 	public SVGPath()
 	{
 		super();
@@ -28,7 +32,19 @@ public class SVGPath extends SVGObject {
 			}
 		}
 	}
-	
+
+	/**
+	 * Constructor by arguments
+	 * @param id tag's ID argument
+	 * @param style tag's style argument
+	 * @param pts String, that contains points in the way, the d-parameter accepts them
+	 * @param fill path's fill color
+	 * @param stroke path's stroke color
+	 * @param stroke_width path's stroke_width
+	 * @param transform path's transformation
+	 * @param opacity path's opacity (0.0f-1.0f)
+	 * @param display tag's display argument
+	 */
 	public SVGPath(String id, String style, String pts, 
 			String fill, String stroke, Float stroke_width, String transform, Float opacity, String display)
 	{
@@ -41,13 +57,11 @@ public class SVGPath extends SVGObject {
 			if(Character.isLetter( pts.charAt(i))) 
 			{
 				pts = pts.subSequence(0, i) + " " + pts.charAt(i) + " " + pts.subSequence(i+1, pts.length());
-				//System.out.println(pts);
 				i += 2;
 			}
 		}
 		pts= pts.replaceAll("\\s+", " ");
 		pts = pts.trim();
-		//System.out.println(pts);
 		
 		String[] ptslist = pts.split(" ");
 		d = new Vector<SVGdElem>();
@@ -61,7 +75,11 @@ public class SVGPath extends SVGObject {
 			}
 		}
 	}
-	
+
+	/**
+	 * Constructor by xml's DOM tag element
+	 * @param e xml's DOM tag element
+	 */
 	SVGPath(Element e)
 	{
 		super(e);
@@ -98,7 +116,6 @@ public class SVGPath extends SVGObject {
 
 	/*
 	 * Method which returns generated tags code
-	 * author: Tomasz Szo³tysek
 	 */
 	@Override
 	public String getCode() {

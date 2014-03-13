@@ -9,9 +9,10 @@ import org.w3c.dom.NodeList;
 import pl.spliner21.svg_parser.objects.SVGObject;
 
 
-/* class representing <linearGradient> tag in SVG file
- * @author: Tomasz Szo³tysek
- * @version: 1.0
+/**
+ * Class representing <linearGradient> tag in SVG file
+ * @author spliner21
+ * @version 1.0
  */
 public class SVGLinearGradient extends SVGObject {
 	String gradientUnits = "";
@@ -19,6 +20,9 @@ public class SVGLinearGradient extends SVGObject {
 	String gradientTransform = "";
 	Vector<SVGGradientStop> stops = null;
 
+	/**
+	 * Default constructor
+	 */
 	public SVGLinearGradient()
 	{
 		super();
@@ -32,10 +36,24 @@ public class SVGLinearGradient extends SVGObject {
 		stops.add(new SVGGradientStop(1.0f, "stop-color: #ffffff")); 
 	}
 
+	/**
+	 * Constructor by parameters
+	 * @param id tag's ID
+	 * @param style tag's style parameter
+	 * @param x1 Gradient's line X1 coordinate
+	 * @param y1 Gradient's line Y1 coordinate
+	 * @param x2 Gradient's line X2 coordinate
+	 * @param y2 Gradient's line Y2 coordinate
+	 * @param stop1_color Gradient's first stop color
+	 * @param stop2_color Gradient's second stop color
+	 * @param transform gradient's transformation
+	 * @param opacity gradient's opacity
+	 * @param display tag's display parameter
+	 */
 	public SVGLinearGradient(String id, String style, float x1, float y1, float x2, float y2, String stop1_color, String stop2_color, 
-			String fill, String stroke, Float stroke_width, String transform, Float opacity, String display)
+			String transform, Float opacity, String display)
 	{
-		super(id,style,transform,opacity,display,fill,stroke,stroke_width);
+		super(id,style,transform,opacity,display,"","",-1.0f);
 		this.x1 = x1;
 		this.y1 = y1;
 		this.x2 = x2;
@@ -44,6 +62,12 @@ public class SVGLinearGradient extends SVGObject {
 		stops.add(new SVGGradientStop(0.0f, stop1_color)); 
 		stops.add(new SVGGradientStop(1.0f, stop2_color)); 
 	}
+	
+	
+	/**
+	 * Constructor by xml's DOM tag element
+	 * @param e xml's DOM tag element
+	 */
 	public SVGLinearGradient(Element e) {
 		super(e);
 
@@ -74,10 +98,6 @@ public class SVGLinearGradient extends SVGObject {
 	
 	@Override
 	public String getCode() {
-		//String gradientUnits = "";
-		//Float x1 = 0.0f, y1 = 0.0f, x2 = 0.0f, y2 = 0.0f;
-		//String gradientTransform = "";
-		//Vector<SVGGradientStop> stops = null;
 		String output;
 		output = "<linearGradient";
 		if(id != "")
