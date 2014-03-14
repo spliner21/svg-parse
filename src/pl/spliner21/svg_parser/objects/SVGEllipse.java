@@ -170,6 +170,90 @@ public class SVGEllipse extends SVGObject {
 		this.ry = ry;
 	}
 
+
+	/**
+	 * Scale by factor
+	 * @param factor scaling factor (1.0f does nothing => 100% scale)
+	 */
+	public void scale(Float factor)
+	{
+		rx*=Math.abs(factor);
+		ry*=Math.abs(factor);
+	}
+
+
+	/**
+	 * Scale by factors
+	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
+	 * @param factorx scaling Y factor (1.0f does nothing => 100% scale)
+	 */
+	public void scale(Float factorx, Float factory)
+	{
+		rx*=Math.abs(factorx);
+		ry*=Math.abs(factory);
+	}
+	
+	/**
+	 * Scale by factor with scale's center
+	 * @param factor scaling factor (1.0f does nothing => 100% scale)
+	 * @param cex scaling center X coordinate
+	 * @param cey scaling center Y coordinate
+	 */
+	public void scale(Float factor, Float cex, Float cey)
+	{
+		rx *= Math.abs(factor);
+		ry *= Math.abs(factor);
+		cx = (cx-cex)*factor+cex;
+		cy = (cy-cey)*factor+cey;
+	}
+	/**
+	 * Scale by factor with scale's center
+	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
+	 * @param factorx scaling Y factor (1.0f does nothing => 100% scale)
+	 * @param cex scaling center X coordinate
+	 * @param cey scaling center Y coordinate
+	 */
+	public void scale(Float factorx, Float factory, Float cex, Float cey)
+	{
+		rx *= Math.abs(factorx);
+		ry *= Math.abs(factory);
+		cx = (cx-cex)*factorx+cex;
+		cy = (cy-cey)*factory+cey;
+	}
+
+	/**
+	 * Rotate the ellipse around its center point by an angle
+	 * @param angle rotation angle, in radians
+	 */
+	public void rotate(Float angle)
+	{
+		transform += "rotate("+Math.toDegrees(angle)+");"; // TODO: check if has rotate already
+	}
+	
+	/**
+	 * Rotate the ellipse around (cex,cey) point by an angle
+	 * @param angle rotation angle, in radians
+	 * @param cex rotation point's X coordinate
+	 * @param cey rotation point's Y coordinate
+	 */
+	public void rotate(Float angle, Float cex, Float cey)
+	{
+		cx -= cex;
+		cy -= cey;
+
+		Float sinus = (float) Math.sin(angle);
+		Float cosinus = (float) Math.cos(angle);
+		
+		cx = cx * cosinus - cy * sinus;
+		cy = cx * sinus + cy * cosinus;
+		
+		cx += cex;
+		cy += cey;
+		
+		transform += "rotate("+Math.toDegrees(angle)+");"; // TODO: check if has rotate already
+	}
+	
+	
 	@Override
 	public String getCode() {
 		String output;

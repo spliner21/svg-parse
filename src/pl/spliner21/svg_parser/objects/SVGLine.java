@@ -8,7 +8,7 @@ import org.w3c.dom.Element;
  * @version 1.0
  */
 public class SVGLine extends SVGObject {
-	int x1,y1,x2,y2;
+	Float x1,y1,x2,y2;
 
 	/**
 	 * Default constructor
@@ -16,10 +16,10 @@ public class SVGLine extends SVGObject {
 	public SVGLine()
 	{
 		super();
-		x1 = 0;
-		y1 = 0;
-		x2 = 1;
-		y2 = 1;
+		x1 = 0.0f;
+		y1 = 0.0f;
+		x2 = 1.0f;
+		y2 = 1.0f;
 		stroke = "#0000ff";
 		stroke_width = 1.0f;
 	}
@@ -38,7 +38,7 @@ public class SVGLine extends SVGObject {
 	 * @param opacity line's opacity (0.0f-1.0f)
 	 * @param display tag's display parameter
 	 */
-	public SVGLine(String id, String style, int x1, int y1, int x2, int y2, 
+	public SVGLine(String id, String style, Float x1, Float y1, Float x2, Float y2, 
 			String stroke, Float stroke_width, String transform, Float opacity, String display)
 	{
 		super(id,style,transform,opacity,display,"",stroke,stroke_width);
@@ -56,10 +56,10 @@ public class SVGLine extends SVGObject {
 	{
 		super(e);
 		
-		x1 = Integer.parseInt(e.getAttribute("x1"));
-		y1 = Integer.parseInt(e.getAttribute("y1"));
-		x2 = Integer.parseInt(e.getAttribute("x2"));
-		y2 = Integer.parseInt(e.getAttribute("y2"));
+		x1 = Float.parseFloat(e.getAttribute("x1"));
+		y1 = Float.parseFloat(e.getAttribute("y1"));
+		x2 = Float.parseFloat(e.getAttribute("x2"));
+		y2 = Float.parseFloat(e.getAttribute("y2"));
 	}
 
 	/* Getters & Setters */
@@ -67,61 +67,56 @@ public class SVGLine extends SVGObject {
 	 * Line's first point's X coordinate getter
 	 * @return Line's first point's X coordinate
 	 */
-	public int getX1() {
+	public Float getX1() {
 		return x1;
 	}
-
 	/**
 	 * Line's first point's X coordinate setter
 	 * @param x1 Line's first point's X coordinate
 	 */
-	public void setX1(int x1) {
+	public void setX1(Float x1) {
 		this.x1 = x1;
 	}
 	/**
 	 * Line's first point's Y coordinate getter
 	 * @return Line's first point's Y coordinate
 	 */
-	public int getY1() {
+	public Float getY1() {
 		return y1;
 	}
-
 	/**
 	 * Line's first point's Y coordinate setter
 	 * @param y1 Line's first point's Y coordinate
 	 */
-	public void setY1(int y1) {
+	public void setY1(Float y1) {
 		this.y1 = y1;
 	}
-
 	/**
 	 * Line's second point's X coordinate getter
 	 * @return Line's second point's X coordinate
 	 */
-	public int getX2() {
+	public Float getX2() {
 		return x2;
 	}
-
 	/**
 	 * Line's second point's X coordinate setter
 	 * @param x2 Line's second point's X coordinate
 	 */
-	public void setX2(int x2) {
+	public void setX2(Float x2) {
 		this.x2 = x2;
 	}
 	/**
 	 * Line's second point's Y coordinate getter
 	 * @return Line's second point's Y coordinate
 	 */
-	public int getY2() {
+	public Float getY2() {
 		return y2;
 	}
-
 	/**
 	 * Line's second point's Y coordinate setter
 	 * @param y2 Line's second point's Y coordinate
 	 */
-	public void setY2(int y2) {
+	public void setY2(Float y2) {
 		this.y2 = y2;
 	}
 	
@@ -132,12 +127,141 @@ public class SVGLine extends SVGObject {
 	 * @param x2 Line's second point's X coordinate
 	 * @param y2 Line's second point's Y coordinate
 	 */
-	public void setPoints(int x1, int y1, int x2, int y2)
+	public void setPoints(Float x1, Float y1, Float x2, Float y2)
 	{
 		this.x1 = x1;
 		this.y1 = y1;
 		this.x2 = x2;
 		this.y2 = y2;
+	}
+	
+
+	/**
+	 * Scale by factor
+	 * @param factor scaling factor (1.0f does nothing => 100% scale)
+	 */
+	public void scale(Float factor)
+	{
+		Float cex,cey;
+		if(x2 > x1)
+			cex = x2-x1;
+		else cex = x1-x2;
+		if(y2 > y1)
+			cey = y2-y1;
+		else cey = y1-y2;
+		x1 = (x1-cex)*factor+cex;
+		y1 = (y1-cey)*factor+cey;
+		x2 = (x2-cex)*factor+cex;
+		y2 = (y2-cey)*factor+cey;
+	}
+
+
+	/**
+	 * Scale by factors
+	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
+	 * @param factorx scaling Y factor (1.0f does nothing => 100% scale)
+	 */
+	public void scale(Float factorx, Float factory)
+	{
+		Float cex,cey;
+		if(x2 > x1)
+			cex = x2-x1;
+		else cex = x1-x2;
+		if(y2 > y1)
+			cey = y2-y1;
+		else cey = y1-y2;
+		x1 = (x1-cex)*factorx+cex;
+		y1 = (y1-cey)*factory+cey;
+		x2 = (x2-cex)*factorx+cex;
+		y2 = (y2-cey)*factory+cey;
+	}
+	
+	/**
+	 * Scale by factor with scale's center
+	 * @param factor scaling factor (1.0f does nothing => 100% scale)
+	 * @param cex scaling center X coordinate
+	 * @param cey scaling center Y coordinate
+	 */
+	public void scale(Float factor, Float cex, Float cey)
+	{
+		x1 = (x1-cex)*factor+cex;
+		y1 = (y1-cey)*factor+cey;
+		x2 = (x2-cex)*factor+cex;
+		y2 = (y2-cey)*factor+cey;
+	}
+	/**
+	 * Scale by factor with scale's center
+	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
+	 * @param factorx scaling Y factor (1.0f does nothing => 100% scale)
+	 * @param cex scaling center X coordinate
+	 * @param cey scaling center Y coordinate
+	 */
+	public void scale(Float factorx, Float factory, Float cex, Float cey)
+	{
+		x1 = (x1-cex)*factorx+cex;
+		y1 = (y1-cey)*factory+cey;
+		x2 = (x2-cex)*factorx+cex;
+		y2 = (y2-cey)*factory+cey;
+	}
+
+	/**
+	 * Rotate the line around its center point by an angle
+	 * @param angle rotation angle, in radians
+	 */
+	public void rotate(Float angle)
+	{
+		Float cex,cey;
+		if(x2 > x1)
+			cex = x2-x1;
+		else cex = x1-x2;
+		if(y2 > y1)
+			cey = y2-y1;
+		else cey = y1-y2;
+		
+		x1 -= cex;
+		y1 -= cey;
+		x2 -= cex;
+		y2 -= cey;
+
+		Float sinus = (float) Math.sin(angle);
+		Float cosinus = (float) Math.cos(angle);
+
+		x1 = x1 * cosinus - y1 * sinus;
+		y1 = x1 * sinus + y1 * cosinus;
+		x2 = x2 * cosinus - y2 * sinus;
+		y2 = x2 * sinus + y2 * cosinus;
+
+		x1 += cex;
+		y1 += cey;
+		x2 += cex;
+		y2 += cey;
+	}
+	
+	/**
+	 * Rotate the line around (cex,cey) point by an angle
+	 * @param angle rotation angle, in radians
+	 * @param cex rotation point's X coordinate
+	 * @param cey rotation point's Y coordinate
+	 */
+	public void rotate(Float angle, Float cex, Float cey)
+	{
+		x1 -= cex;
+		y1 -= cey;
+		x2 -= cex;
+		y2 -= cey;
+
+		Float sinus = (float) Math.sin(angle);
+		Float cosinus = (float) Math.cos(angle);
+
+		x1 = x1 * cosinus - y1 * sinus;
+		y1 = x1 * sinus + y1 * cosinus;
+		x2 = x2 * cosinus - y2 * sinus;
+		y2 = x2 * sinus + y2 * cosinus;
+
+		x1 += cex;
+		y1 += cey;
+		x2 += cex;
+		y2 += cey;
 	}
 	
 	@Override

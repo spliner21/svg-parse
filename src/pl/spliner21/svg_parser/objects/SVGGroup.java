@@ -68,6 +68,7 @@ public class SVGGroup extends SVGObject {
 		}
 	}
 
+	
 	@Override
 	public String getCode() {
 		String output;

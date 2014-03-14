@@ -108,6 +108,41 @@ public class SVGText extends SVGObject {
 		this.text = text;
 	}
 
+	// TODO: text scaling ...
+
+	/**
+	 * Rotate the text around its center point by an angle
+	 * @param angle rotation angle, in radians
+	 */
+	public void rotate(Float angle)
+	{
+		transform += "rotate("+Math.toDegrees(angle)+");"; // TODO: check if has rotate already
+	}
+	
+	/**
+	 * Rotate the rectangle around (cex,cey) point by an angle
+	 * @param angle rotation angle, in radians
+	 * @param cex rotation point's X coordinate
+	 * @param cey rotation point's Y coordinate
+	 */
+	public void rotate(Float angle, Float cex, Float cey)
+	{
+		x -= cex;
+		y -= cey;
+
+		Float sinus = (float) Math.sin(angle);
+		Float cosinus = (float) Math.cos(angle);
+
+		x = x * cosinus - y * sinus;
+		y = x * sinus + y * cosinus;
+
+		x += cex;
+		y += cey;
+		
+		transform += "rotate("+Math.toDegrees(angle)+");"; // TODO: check if has rotate already
+	}
+	
+	
 	/*
 	 * Method which returns generated tags code
 	 * author: Tomasz Szo³tysek

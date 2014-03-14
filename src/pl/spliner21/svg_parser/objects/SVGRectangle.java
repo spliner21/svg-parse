@@ -84,7 +84,6 @@ public class SVGRectangle extends SVGObject {
 	public Float getX() {
 		return x;
 	}
-
 	/**
 	 * Rectangle's X setter
 	 * @param x new rectangle's X coordinate
@@ -92,7 +91,6 @@ public class SVGRectangle extends SVGObject {
 	public void setX(Float x) {
 		this.x = x;
 	}
-
 	/**
 	 * Rectangle's Y getter
 	 * @return rectangle's Y coordinate
@@ -100,7 +98,6 @@ public class SVGRectangle extends SVGObject {
 	public Float getY() {
 		return y;
 	}
-
 	/**
 	 * Rectangle's Y setter
 	 * @param y new rectangle's Y coordinate
@@ -108,7 +105,6 @@ public class SVGRectangle extends SVGObject {
 	public void setY(Float y) {
 		this.y = y;
 	}
-
 	/**
 	 * Rectangle's RX getter
 	 * @return rectangle's corner X radius
@@ -116,7 +112,6 @@ public class SVGRectangle extends SVGObject {
 	public Float getRx() {
 		return rx;
 	}
-
 	/**
 	 * Rectangle's RX setter
 	 * @param rx new rectangle's corner X radius
@@ -124,7 +119,6 @@ public class SVGRectangle extends SVGObject {
 	public void setRx(Float rx) {
 		this.rx = rx;
 	}
-
 	/**
 	 * Rectangle's RY getter
 	 * @return rectangle's corner Y radius
@@ -132,7 +126,6 @@ public class SVGRectangle extends SVGObject {
 	public Float getRy() {
 		return ry;
 	}
-
 	/**
 	 * Rectangle's RY setter
 	 * @param ry new rectangle's corner Y radius
@@ -140,7 +133,6 @@ public class SVGRectangle extends SVGObject {
 	public void setRy(Float ry) {
 		this.ry = ry;
 	}
-
 	/**
 	 * Rectangle's width getter
 	 * @return rectangle's width
@@ -148,7 +140,6 @@ public class SVGRectangle extends SVGObject {
 	public int getWidth() {
 		return width;
 	}
-
 	/**
 	 * Rectangle's width setter
 	 * @param width new rectangle's width
@@ -156,7 +147,6 @@ public class SVGRectangle extends SVGObject {
 	public void setWidth(int width) {
 		this.width = width;
 	}
-
 	/**
 	 * Rectangle's height getter
 	 * @return rectangle's height
@@ -164,7 +154,6 @@ public class SVGRectangle extends SVGObject {
 	public int getHeight() {
 		return height;
 	}
-
 	/**
 	 * Rectangle's height setter
 	 * @param height new rectangle's height
@@ -174,6 +163,93 @@ public class SVGRectangle extends SVGObject {
 	}
 	
 
+	/**
+	 * Scale by factor
+	 * @param factor scaling factor (1.0f does nothing => 100% scale)
+	 */
+	public void scale(Float factor)
+	{
+		x -= width*(factor-1.0f)/2;
+		y -= height*(factor-1.0f)/2;
+		width *= factor;
+		height *= factor;
+	}
+
+
+	/**
+	 * Scale by factors
+	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
+	 * @param factorx scaling Y factor (1.0f does nothing => 100% scale)
+	 */
+	public void scale(Float factorx, Float factory)
+	{
+		x -= width*(factorx-1.0f)/2;
+		y -= height*(factory-1.0f)/2;
+		width *= factorx;
+		height *= factory;
+	}
+	
+	/**
+	 * Scale by factor with scale's center
+	 * @param factor scaling factor (1.0f does nothing => 100% scale)
+	 * @param cex scaling center X coordinate
+	 * @param cey scaling center Y coordinate
+	 */
+	public void scale(Float factor, Float cex, Float cey)
+	{
+		x = (x-cex)*factor+cex;
+		y = (y-cey)*factor+cey;
+		width *= factor;
+		height *= factor;
+	}
+	/**
+	 * Scale by factor with scale's center
+	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
+	 * @param factorx scaling Y factor (1.0f does nothing => 100% scale)
+	 * @param cex scaling center X coordinate
+	 * @param cey scaling center Y coordinate
+	 */
+	public void scale(Float factorx, Float factory, Float cex, Float cey)
+	{
+		x = (x-cex)*factorx+cex;
+		y = (y-cey)*factory+cey;
+		width *= factorx;
+		height *= factory;
+	}
+
+	/**
+	 * Rotate the rectangle around its center point by an angle
+	 * @param angle rotation angle, in radians
+	 */
+	public void rotate(Float angle)
+	{
+		transform += "rotate("+Math.toDegrees(angle)+");"; // TODO: check if has rotate already
+	}
+	
+	/**
+	 * Rotate the rectangle around (cex,cey) point by an angle
+	 * @param angle rotation angle, in radians
+	 * @param cex rotation point's X coordinate
+	 * @param cey rotation point's Y coordinate
+	 */
+	public void rotate(Float angle, Float cex, Float cey)
+	{
+		x -= cex;
+		y -= cey;
+
+		Float sinus = (float) Math.sin(angle);
+		Float cosinus = (float) Math.cos(angle);
+
+		x = x * cosinus - y * sinus;
+		y = x * sinus + y * cosinus;
+
+		x += cex;
+		y += cey;
+		
+		transform += "rotate("+Math.toDegrees(angle)+");"; // TODO: check if has rotate already
+	}
+	
+	
 	/*
 	 * Method which returns generated tags code
 	 * author: Tomasz Szo³tysek
