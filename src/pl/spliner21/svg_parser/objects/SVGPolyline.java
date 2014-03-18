@@ -77,6 +77,105 @@ public class SVGPolyline extends SVGObject {
 	}
 
 
+	
+	/**
+	 * Find polyline's center
+	 * @return polyline's center coordinates
+	 */
+	public SVGPoint findCenter()
+	{
+		float cxmin = Float.MAX_VALUE,cxmax = 0;
+		float cymin = Float.MAX_VALUE,cymax = 0;
+		float cx,cy;
+		
+		for(SVGPoint p: points)
+		{
+			if(p.x < cxmin)
+				cxmin = p.x;
+			if(p.x > cxmax)
+				cxmax = p.x;
+			if(p.y < cymin)
+				cymin = p.y;
+			if(p.y > cymax)
+				cymax = p.y;
+		}
+		
+		cx = cxmin + (cxmax - cxmin) / 2;
+		cy = cymin + (cymax - cymin) / 2;
+		
+		return new SVGPoint(cx,cy);
+	}
+	
+	/**
+	 * Scale by factor
+	 * @param factor scaling factor (1.0f does nothing => 100% scale)
+	 */
+	public void scale(Float factor)
+	{
+		SVGPoint c = findCenter();
+		for(SVGPoint p: points)
+			p.scale(factor, c.x, c.y);
+	}
+
+
+	/**
+	 * Scale by factors
+	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
+	 * @param factorx scaling Y factor (1.0f does nothing => 100% scale)
+	 */
+	public void scale(Float factorx, Float factory)
+	{
+		SVGPoint c = findCenter();
+		for(SVGPoint p: points)
+			p.scale(factorx, factory, c.x, c.y);
+	}
+	
+	/**
+	 * Scale by factor with scale's center
+	 * @param factor scaling factor (1.0f does nothing => 100% scale)
+	 * @param cex scaling center X coordinate
+	 * @param cey scaling center Y coordinate
+	 */
+	public void scale(Float factor, Float cex, Float cey)
+	{
+		for(SVGPoint p: points)
+			p.scale(factor, cex, cey);
+	}
+	/**
+	 * Scale by factor with scale's center
+	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
+	 * @param factorx scaling Y factor (1.0f does nothing => 100% scale)
+	 * @param cex scaling center X coordinate
+	 * @param cey scaling center Y coordinate
+	 */
+	public void scale(Float factorx, Float factory, Float cex, Float cey)
+	{
+		for(SVGPoint p: points)
+			p.scale(factorx, factory, cex, cey);
+	}
+	/**
+	 * Rotate point by angle around center
+	 * @param angle rotation angle, in radians
+	 */
+	public void rotate(float angle)
+	{
+		SVGPoint c = findCenter();
+		for(SVGPoint p: points)
+			p.rotate(angle, c.x, c.y);
+	}
+	/**
+	 * Rotate point by angle around point cx,cy.
+	 * @param angle rotation angle, in radians
+	 * @param cx rotation point's X coordinate
+	 * @param cy rotation point's Y coordinate
+	 */
+	public void rotate(float angle, float cx, float cy)
+	{
+		for(SVGPoint p: points)
+			p.rotate(angle, cx, cy);
+	}
+	
+	
 	/*
 	 * Method which returns generated tags code
 	 * author: Tomasz Szo³tysek
