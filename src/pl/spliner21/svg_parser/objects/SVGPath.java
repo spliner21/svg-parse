@@ -237,7 +237,7 @@ public class SVGPath extends SVGObject {
 	 */
 	public void rotate(Float angle)
 	{
-		// TODO: Find out how to rotate this thing correctly...
+		transform.rotate(Math.toDegrees(angle));
 	}
 	
 	/**
@@ -248,7 +248,7 @@ public class SVGPath extends SVGObject {
 	 */
 	public void rotate(Float angle, Float cex, Float cey)
 	{
-		// TODO: Find out how to rotate this thing correctly...
+		transform.rotate(Math.toDegrees(angle),cex,cey);
 	}
 	
 	

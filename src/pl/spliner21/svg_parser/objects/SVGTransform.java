@@ -9,13 +9,13 @@ import java.util.Vector;
  * @version 1.0
  */
 public class SVGTransform {
-	Point2D transformTranslate = null;
-	Point2D transformScale = null;
-	Float transformRotate = 0.0f;
-	Point2D transformRotateCenter = null;
-	Float transformSkewX = 0.0f;
-	Float transformSkewY = 0.0f;
-	Vector<Float> transformMatrix = null;
+	Point2D translate = null;
+	Point2D scale = null;
+	Float rotate = 0.0f;
+	Point2D rotationCenter = null;
+	Float skewX = 0.0f;
+	Float skewY = 0.0f;
+	Vector<Float> matrix = null;
 
 	/**
 	 * Constructor using content of a transform parameter
@@ -37,7 +37,7 @@ public class SVGTransform {
 				s = s.replace(')',' ');
 				s = s.trim();
 				String[] elements = s.split(" ");
-				transformTranslate.setLocation(Double.parseDouble(elements[0]), Double.parseDouble(elements[1]));
+				translate = new Point2D.Double(Double.parseDouble(elements[0]), Double.parseDouble(elements[1]));
 			}
 			else if(s.startsWith("scale"))
 			{
@@ -45,7 +45,7 @@ public class SVGTransform {
 				s = s.replace(')',' ');
 				s = s.trim();
 				String[] elements = s.split(" ");
-				transformScale.setLocation(Double.parseDouble(elements[0]), Double.parseDouble(elements[1]));
+				scale = new Point2D.Double(Double.parseDouble(elements[0]), Double.parseDouble(elements[1]));
 			}
 			else if(s.startsWith("rotate"))
 			{
@@ -53,23 +53,23 @@ public class SVGTransform {
 				s = s.replace(')',' ');
 				s = s.trim();
 				String[] elements = s.split(" ");
-				transformRotate = Float.parseFloat(elements[0]);
+				rotate = Float.parseFloat(elements[0]);
 				if(elements.length > 1)
-					transformRotateCenter.setLocation(Double.parseDouble(elements[1]), Double.parseDouble(elements[2]));
+					rotationCenter = new Point2D.Double(Double.parseDouble(elements[1]), Double.parseDouble(elements[2]));
 			}
 			else if(s.startsWith("skewx"))
 			{
 				s = s.replaceFirst("skewx(", "");
 				s = s.replace(')',' ');
 				s = s.trim();
-				transformSkewX = Float.parseFloat(s);
+				skewX = Float.parseFloat(s);
 			}
 			else if(s.startsWith("skewY=y"))
 			{
 				s = s.replaceFirst("skewy(", "");
 				s = s.replace(')',' ');
 				s = s.trim();
-				transformSkewY = Float.parseFloat(s);
+				skewY = Float.parseFloat(s);
 			}
 			else if(s.startsWith("matrix"))
 			{
@@ -77,28 +77,71 @@ public class SVGTransform {
 				s = s.replace(')',' ');
 				s = s.trim();
 				String[] elements = s.split(" ");
-				transformMatrix = new Vector<Float>();
+				matrix = new Vector<Float>();
 				for(String e: elements)
-					transformMatrix.add(Float.parseFloat(e));
+					matrix.add(Float.parseFloat(e));
 			}
 		}
 	}
+
+	/**
+	 * Scale by factor
+	 * @param factor scaling factor (1.0f does nothing => 100% scale)
+	 */
+	public void scale(Float factor)
+	{
+		scale.setLocation(scale.getX()+factor, scale.getY()+factor);
+	}
+
+
+	/**
+	 * Scale by factors
+	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
+	 * @param factory scaling Y factor (1.0f does nothing => 100% scale)
+	 */
+	public void scale(Float factorx, Float factory)
+	{
+		scale.setLocation(scale.getX()+factorx, scale.getY()+factory);
+	}
 	
 	/**
-	 * Rotate around angle
+	 * Rotate by angle
 	 * @param angle rotation angle (in degrees)
 	 */
 	public void rotate(Float angle)
 	{
-		transformRotate += angle;
+		rotate += angle;
 	}
 	/**
-	 * Rotate around angle (Double version)
+	 * Rotate by angle (Double version)
 	 * @param angle rotation angle (in degrees)
 	 */
 	public void rotate(Double angle)
 	{
-		transformRotate += angle.floatValue();
+		rotate += angle.floatValue();
+	}
+	
+	/**
+	 * Rotate by angle around (cex,cey)
+	 * @param angle rotation angle (in degrees)
+	 * @param cex points X coordinate
+	 * @param cey points Y coordinate
+	 */
+	public void rotate(Float angle, Float cex, Float cey)
+	{
+		rotate += angle;
+		rotationCenter = new Point2D.Float(cex, cey); // TODO: it changes old center - if used Twice may occur problem
+	}
+	/**
+	 * Rotate by angle around (cex,cey) (Double version)
+	 * @param angle rotation angle (in degrees)
+	 * @param cex points X coordinate
+	 * @param cey points Y coordinate
+	 */
+	public void rotate(Double angle, Float cex, Float cey)
+	{
+		rotate += angle.floatValue();
+		rotationCenter = new Point2D.Float(cex, cey); // TODO: it changes old center - if used Twice may occur problem
 	}
 	
 	/**
@@ -109,25 +152,25 @@ public class SVGTransform {
 	{
 		String output = "";
 
-		if(transformTranslate != null)
-			output += "translate("+transformTranslate.getX()+" "+transformTranslate.getY()+"); ";
-		if(transformScale != null)
-			output += "scale("+transformScale.getX()+" "+transformScale.getY()+"); ";
-		if(transformRotate != 0.0f)
+		if(translate != null)
+			output += "translate("+translate.getX()+" "+translate.getY()+"); ";
+		if(scale != null)
+			output += "scale("+scale.getX()+" "+scale.getY()+"); ";
+		if(rotate != 0.0f)
 		{
-			output += "rotate("+transformRotate;
-			if(transformRotateCenter != null)
-				output += " "+transformRotateCenter.getX()+" "+transformRotateCenter.getY();
+			output += "rotate("+rotate;
+			if(rotationCenter != null)
+				output += " "+rotationCenter.getX()+" "+rotationCenter.getY();
 			output += "); ";
 		}
-		if(transformSkewX != 0.0f)
-			output += "skewX("+transformSkewX+"); ";
-		if(transformSkewY != 0.0f)
-			output += "skewY("+transformSkewY+"); ";
-		if(transformMatrix != null)
+		if(skewX != 0.0f)
+			output += "skewX("+skewX+"); ";
+		if(skewY != 0.0f)
+			output += "skewY("+skewY+"); ";
+		if(matrix != null)
 		{
 			output += "matrix(";
-			for(Float f:transformMatrix)
+			for(Float f:matrix)
 				output += f+" ";
 			output += "); ";
 		}

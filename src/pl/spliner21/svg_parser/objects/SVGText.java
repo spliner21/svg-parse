@@ -108,7 +108,52 @@ public class SVGText extends SVGObject {
 		this.text = text;
 	}
 
-	// TODO: text scaling ...
+
+	/**
+	 * Scale by factor
+	 * @param factor scaling factor (1.0f does nothing => 100% scale)
+	 */
+	public void scale(Float factor)
+	{
+		transform.scale(factor);
+	}
+
+
+	/**
+	 * Scale by factors
+	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
+	 * @param factory scaling Y factor (1.0f does nothing => 100% scale)
+	 */
+	public void scale(Float factorx, Float factory)
+	{
+		transform.scale(factorx, factory);
+	}
+	
+	/**
+	 * Scale by factor with scale's center
+	 * @param factor scaling factor (1.0f does nothing => 100% scale)
+	 * @param cex scaling center X coordinate
+	 * @param cey scaling center Y coordinate
+	 */
+	public void scale(Float factor, Float cex, Float cey)
+	{
+		x = (x-cex)*factor+cex;
+		y = (y-cey)*factor+cey;
+		transform.scale(factor);
+	}
+	/**
+	 * Scale by factor with scale's center
+	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
+	 * @param factory scaling Y factor (1.0f does nothing => 100% scale)
+	 * @param cex scaling center X coordinate
+	 * @param cey scaling center Y coordinate
+	 */
+	public void scale(Float factorx, Float factory, Float cex, Float cey)
+	{
+		x = (x-cex)*factorx+cex;
+		y = (y-cey)*factory+cey;
+		transform.scale(factorx,factory);
+	}
 
 	/**
 	 * Rotate the text around its center point by an angle
