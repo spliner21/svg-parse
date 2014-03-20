@@ -77,7 +77,7 @@ public class SVGGroup extends SVGObject {
 			output += " id=\""+id+"\"";
 		if(opacity >= 0.0f)
 			output+= " opacity=\""+opacity+"\"";
-		if(transform != "")
+		if(transform != null)
 			output+= " transform=\""+transform+"\"";
 		if(style != "")
 			output+= " style=\""+style+"\"";

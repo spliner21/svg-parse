@@ -44,7 +44,7 @@ public class SVGPoint {
 	/**
 	 * Scale by factors (assume center is in 0,0)
 	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
-	 * @param factorx scaling Y factor (1.0f does nothing => 100% scale)
+	 * @param factory scaling Y factor (1.0f does nothing => 100% scale)
 	 */
 	public void scale(Float factorx, Float factory)
 	{
@@ -66,7 +66,7 @@ public class SVGPoint {
 	/**
 	 * Scale by factor with scale's center
 	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
-	 * @param factorx scaling Y factor (1.0f does nothing => 100% scale)
+	 * @param factory scaling Y factor (1.0f does nothing => 100% scale)
 	 * @param cex scaling center X coordinate
 	 * @param cey scaling center Y coordinate
 	 */

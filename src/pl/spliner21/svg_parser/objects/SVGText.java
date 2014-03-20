@@ -116,7 +116,7 @@ public class SVGText extends SVGObject {
 	 */
 	public void rotate(Float angle)
 	{
-		transform += "rotate("+Math.toDegrees(angle)+");"; // TODO: check if has rotate already
+		transform.rotate(Math.toDegrees(angle));
 	}
 	
 	/**
@@ -138,8 +138,8 @@ public class SVGText extends SVGObject {
 
 		x += cex;
 		y += cey;
-		
-		transform += "rotate("+Math.toDegrees(angle)+");"; // TODO: check if has rotate already
+
+		transform.rotate(Math.toDegrees(angle));
 	}
 	
 	
@@ -161,7 +161,7 @@ public class SVGText extends SVGObject {
 			output+= " fill=\""+fill+"\"";
 		if(opacity >= 0.0f)
 			output+= " opacity=\""+opacity+"\"";
-		if(transform != "")
+		if(transform != null)
 			output+= " transform=\""+transform+"\"";
 		if(stroke != "")
 			output+= " stroke=\""+stroke+"\"";

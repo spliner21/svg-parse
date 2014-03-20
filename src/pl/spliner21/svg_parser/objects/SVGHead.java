@@ -141,7 +141,7 @@ public class SVGHead extends SVGObject {
 		output+= " width=\""+width+"\" height=\""+height+"\"";
 		if(opacity >= 0.0f)
 			output+= " opacity=\""+opacity+"\"";
-		if(transform != "")
+		if(transform != null)
 			output+= " transform=\""+transform+"\"";
 		if(x != "")
 			output+= " x=\""+x+"\"";

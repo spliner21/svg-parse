@@ -1,5 +1,6 @@
 package pl.spliner21.svg_parser.objects;
 
+
 import org.w3c.dom.Element;
 
 
@@ -13,11 +14,11 @@ public abstract class SVGObject {
 	protected String id = "";
 	String display = "";
 	protected String style = "";
-	String transform = "";
 	Float opacity = -1.0f;
 	String fill="",stroke="";
 	Float stroke_width = -1.0f;
 
+	SVGTransform transform = null;
 	/**
 	 * Default constructor ( super() )
 	 */
@@ -46,7 +47,9 @@ public abstract class SVGObject {
 	{
 		this.id = id;
 		this.style = style;
-		this.transform = transform;
+		
+		this.transform = new SVGTransform(transform);
+		
 		this.opacity = opacity;
 		this.display = display;
 		this.fill = fill;
@@ -65,7 +68,7 @@ public abstract class SVGObject {
 		if(e.hasAttribute("style"))
 			style = e.getAttribute("style");
 		if(e.hasAttribute("transform"))
-			transform = e.getAttribute("transform");
+			transform = new SVGTransform(e.getAttribute("transform"));
 		if(e.hasAttribute("opacity"))
 			opacity = Float.parseFloat(e.getAttribute("opacity"));
 		if(e.hasAttribute("fill"))
@@ -76,6 +79,8 @@ public abstract class SVGObject {
 			stroke_width = Float.parseFloat(e.getAttribute("stroke-width"));
 	}
 
+	
+	
 	/**
 	 * ID's getter
 	 * @return tag's ID
@@ -133,7 +138,7 @@ public abstract class SVGObject {
 	 */
 	public String getTransform()
 	{
-		return transform;
+		return transform.getCode();
 	}
 	/**
 	 * Tag's transform setter
@@ -141,7 +146,7 @@ public abstract class SVGObject {
 	 */
 	public void setTransform(String transform)
 	{
-		this.transform = transform;
+		this.transform = new SVGTransform(transform);
 	}
 	
 	/**

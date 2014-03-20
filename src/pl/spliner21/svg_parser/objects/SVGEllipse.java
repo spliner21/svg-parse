@@ -185,7 +185,7 @@ public class SVGEllipse extends SVGObject {
 	/**
 	 * Scale by factors
 	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
-	 * @param factorx scaling Y factor (1.0f does nothing => 100% scale)
+	 * @param factory scaling Y factor (1.0f does nothing => 100% scale)
 	 */
 	public void scale(Float factorx, Float factory)
 	{
@@ -209,7 +209,7 @@ public class SVGEllipse extends SVGObject {
 	/**
 	 * Scale by factor with scale's center
 	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
-	 * @param factorx scaling Y factor (1.0f does nothing => 100% scale)
+	 * @param factory scaling Y factor (1.0f does nothing => 100% scale)
 	 * @param cex scaling center X coordinate
 	 * @param cey scaling center Y coordinate
 	 */
@@ -227,7 +227,7 @@ public class SVGEllipse extends SVGObject {
 	 */
 	public void rotate(Float angle)
 	{
-		transform += "rotate("+Math.toDegrees(angle)+");"; // TODO: check if has rotate already
+		transform.rotate(Math.toDegrees(angle));
 	}
 	
 	/**
@@ -250,7 +250,7 @@ public class SVGEllipse extends SVGObject {
 		cx += cex;
 		cy += cey;
 		
-		transform += "rotate("+Math.toDegrees(angle)+");"; // TODO: check if has rotate already
+		transform.rotate(Math.toDegrees(angle));
 	}
 	
 	
@@ -270,7 +270,7 @@ public class SVGEllipse extends SVGObject {
 			output += " ry=\""+ry+"\"";
 		if(opacity >= 0.0f)
 			output+= " opacity=\""+opacity+"\"";
-		if(transform != "")
+		if(transform != null)
 			output+= " transform=\""+transform+"\"";
 		if(fill != "")
 			output+= " fill=\""+fill+"\"";

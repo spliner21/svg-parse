@@ -122,7 +122,7 @@ public class SVGPolygon extends SVGObject {
 	/**
 	 * Scale by factors
 	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
-	 * @param factorx scaling Y factor (1.0f does nothing => 100% scale)
+	 * @param factory scaling Y factor (1.0f does nothing => 100% scale)
 	 */
 	public void scale(Float factorx, Float factory)
 	{
@@ -145,7 +145,7 @@ public class SVGPolygon extends SVGObject {
 	/**
 	 * Scale by factor with scale's center
 	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
-	 * @param factorx scaling Y factor (1.0f does nothing => 100% scale)
+	 * @param factory scaling Y factor (1.0f does nothing => 100% scale)
 	 * @param cex scaling center X coordinate
 	 * @param cey scaling center Y coordinate
 	 */
@@ -194,7 +194,7 @@ public class SVGPolygon extends SVGObject {
 		output+= "\"";
 		if(opacity >= 0.0f)
 			output+= " opacity=\""+opacity+"\"";
-		if(transform != "")
+		if(transform != null)
 			output+= " transform=\""+transform+"\"";
 		if(fill != "")
 			output+= " fill=\""+fill+"\"";

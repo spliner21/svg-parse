@@ -181,7 +181,7 @@ public class SVGCircle extends SVGObject {
 			output += " r=\""+r+"\"";
 		if(opacity >= 0.0f)
 			output+= " opacity=\""+opacity+"\"";
-		if(transform != "")
+		if(transform != null)
 			output+= " transform=\""+transform+"\"";
 		if(fill != "")
 			output+= " fill=\""+fill+"\"";
