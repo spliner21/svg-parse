@@ -23,56 +23,60 @@ public class SVGTransform {
 	 */
 	SVGTransform(String transform)
 	{
+		transform = transform.toLowerCase();
+		transform = transform.replace(',',' ');
+		transform = transform.replaceAll("\\s+", " ");
+		transform = transform.trim();
 		String[] transformList = transform.split(";");
 		for(String s: transformList)
 		{
-			s.trim();
+			s = s.trim();
 			if(s.startsWith("translate"))
 			{
-				s.replaceFirst("translate(", "");
-				s.replace(')',' ');
-				s.trim();
-				String[] elements = s.split(" |,");
+				s = s.replaceFirst("translate(", "");
+				s = s.replace(')',' ');
+				s = s.trim();
+				String[] elements = s.split(" ");
 				transformTranslate.setLocation(Double.parseDouble(elements[0]), Double.parseDouble(elements[1]));
 			}
 			else if(s.startsWith("scale"))
 			{
-				s.replaceFirst("scale(", "");
-				s.replace(')',' ');
-				s.trim();
-				String[] elements = s.split(" |,");
+				s = s.replaceFirst("scale(", "");
+				s = s.replace(')',' ');
+				s = s.trim();
+				String[] elements = s.split(" ");
 				transformScale.setLocation(Double.parseDouble(elements[0]), Double.parseDouble(elements[1]));
 			}
 			else if(s.startsWith("rotate"))
 			{
-				s.replaceFirst("rotate(", "");
-				s.replace(')',' ');
-				s.trim();
-				String[] elements = s.split(" |,");
+				s = s.replaceFirst("rotate(", "");
+				s = s.replace(')',' ');
+				s = s.trim();
+				String[] elements = s.split(" ");
 				transformRotate = Float.parseFloat(elements[0]);
 				if(elements.length > 1)
 					transformRotateCenter.setLocation(Double.parseDouble(elements[1]), Double.parseDouble(elements[2]));
 			}
-			else if(s.startsWith("skewX"))
+			else if(s.startsWith("skewx"))
 			{
-				s.replaceFirst("skewX(", "");
-				s.replace(')',' ');
-				s.trim();
+				s = s.replaceFirst("skewx(", "");
+				s = s.replace(')',' ');
+				s = s.trim();
 				transformSkewX = Float.parseFloat(s);
 			}
-			else if(s.startsWith("skewY"))
+			else if(s.startsWith("skewY=y"))
 			{
-				s.replaceFirst("skewY(", "");
-				s.replace(')',' ');
-				s.trim();
+				s = s.replaceFirst("skewy(", "");
+				s = s.replace(')',' ');
+				s = s.trim();
 				transformSkewY = Float.parseFloat(s);
 			}
 			else if(s.startsWith("matrix"))
 			{
-				s.replaceFirst("matrix(", "");
-				s.replace(')',' ');
-				s.trim();
-				String[] elements = s.split(" |,");
+				s = s.replaceFirst("matrix(", "");
+				s = s.replace(')',' ');
+				s = s.trim();
+				String[] elements = s.split(" ");
 				transformMatrix = new Vector<Float>();
 				for(String e: elements)
 					transformMatrix.add(Float.parseFloat(e));
