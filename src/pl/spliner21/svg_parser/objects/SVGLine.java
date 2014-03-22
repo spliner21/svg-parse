@@ -134,12 +134,8 @@ public class SVGLine extends SVGObject {
 		this.x2 = x2;
 		this.y2 = y2;
 	}
-	
 
-	/**
-	 * Scale by factor
-	 * @param factor scaling factor (1.0f does nothing => 100% scale)
-	 */
+	@Override
 	public void scale(Float factor)
 	{
 		Float cex,cey;
@@ -155,12 +151,7 @@ public class SVGLine extends SVGObject {
 		y2 = (y2-cey)*factor+cey;
 	}
 
-
-	/**
-	 * Scale by factors
-	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
-	 * @param factory scaling Y factor (1.0f does nothing => 100% scale)
-	 */
+	@Override
 	public void scale(Float factorx, Float factory)
 	{
 		Float cex,cey;
@@ -175,13 +166,8 @@ public class SVGLine extends SVGObject {
 		x2 = (x2-cex)*factorx+cex;
 		y2 = (y2-cey)*factory+cey;
 	}
-	
-	/**
-	 * Scale by factor with scale's center
-	 * @param factor scaling factor (1.0f does nothing => 100% scale)
-	 * @param cex scaling center X coordinate
-	 * @param cey scaling center Y coordinate
-	 */
+
+	@Override
 	public void scale(Float factor, Float cex, Float cey)
 	{
 		x1 = (x1-cex)*factor+cex;
@@ -189,13 +175,8 @@ public class SVGLine extends SVGObject {
 		x2 = (x2-cex)*factor+cex;
 		y2 = (y2-cey)*factor+cey;
 	}
-	/**
-	 * Scale by factor with scale's center
-	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
-	 * @param factory scaling Y factor (1.0f does nothing => 100% scale)
-	 * @param cex scaling center X coordinate
-	 * @param cey scaling center Y coordinate
-	 */
+
+	@Override
 	public void scale(Float factorx, Float factory, Float cex, Float cey)
 	{
 		x1 = (x1-cex)*factorx+cex;
@@ -204,10 +185,7 @@ public class SVGLine extends SVGObject {
 		y2 = (y2-cey)*factory+cey;
 	}
 
-	/**
-	 * Rotate the line around its center point by an angle
-	 * @param angle rotation angle, in radians
-	 */
+	@Override
 	public void rotate(Float angle)
 	{
 		Float cex,cey;
@@ -223,8 +201,8 @@ public class SVGLine extends SVGObject {
 		x2 -= cex;
 		y2 -= cey;
 
-		Float sinus = (float) Math.sin(angle);
-		Float cosinus = (float) Math.cos(angle);
+		Float sinus = (float) Math.sin(Math.toRadians(angle));
+		Float cosinus = (float) Math.cos(Math.toRadians(angle));
 
 		x1 = x1 * cosinus - y1 * sinus;
 		y1 = x1 * sinus + y1 * cosinus;
@@ -236,13 +214,8 @@ public class SVGLine extends SVGObject {
 		x2 += cex;
 		y2 += cey;
 	}
-	
-	/**
-	 * Rotate the line around (cex,cey) point by an angle
-	 * @param angle rotation angle, in radians
-	 * @param cex rotation point's X coordinate
-	 * @param cey rotation point's Y coordinate
-	 */
+
+	@Override
 	public void rotate(Float angle, Float cex, Float cey)
 	{
 		x1 -= cex;
@@ -250,8 +223,8 @@ public class SVGLine extends SVGObject {
 		x2 -= cex;
 		y2 -= cey;
 
-		Float sinus = (float) Math.sin(angle);
-		Float cosinus = (float) Math.cos(angle);
+		Float sinus = (float) Math.sin(Math.toRadians(angle));
+		Float cosinus = (float) Math.cos(Math.toRadians(angle));
 
 		x1 = x1 * cosinus - y1 * sinus;
 		y1 = x1 * sinus + y1 * cosinus;

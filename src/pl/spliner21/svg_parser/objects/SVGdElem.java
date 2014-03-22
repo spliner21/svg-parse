@@ -88,7 +88,7 @@ public class SVGdElem {
 	 */
 	public void scale(Float factor, Float cex, Float cey)
 	{
-		switch(type)
+		/* switch(type)
 		{
 		case 'H':
 		case 'h':
@@ -113,7 +113,8 @@ public class SVGdElem {
 				ptsList.set(i+1, (ptsList.elementAt(i+1)-cey)*factor + cey);
 			}
 			break;
-		}
+		} */ 
+		// TODO; It won't work correctly this way (small letter elements are relatively defined)
 	}
 	/**
 	 * Scale by factor with scale's center
@@ -124,7 +125,7 @@ public class SVGdElem {
 	 */
 	public void scale(Float factorx, Float factory, Float cex, Float cey)
 	{
-		switch(type)
+		/*switch(type)
 		{
 		case 'H':
 		case 'h':
@@ -149,7 +150,8 @@ public class SVGdElem {
 				ptsList.set(i+1, (ptsList.elementAt(i+1)-cey)*factory + cey);
 			}
 			break;
-		}
+		}*/ 
+		// TODO; It won't work correctly this way (small letter elements are relatively defined)
 	}
 	
 	

@@ -108,46 +108,27 @@ public class SVGText extends SVGObject {
 		this.text = text;
 	}
 
-
-	/**
-	 * Scale by factor
-	 * @param factor scaling factor (1.0f does nothing => 100% scale)
-	 */
+	@Override
 	public void scale(Float factor)
 	{
 		transform.scale(factor);
 	}
 
-
-	/**
-	 * Scale by factors
-	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
-	 * @param factory scaling Y factor (1.0f does nothing => 100% scale)
-	 */
+	@Override
 	public void scale(Float factorx, Float factory)
 	{
 		transform.scale(factorx, factory);
 	}
-	
-	/**
-	 * Scale by factor with scale's center
-	 * @param factor scaling factor (1.0f does nothing => 100% scale)
-	 * @param cex scaling center X coordinate
-	 * @param cey scaling center Y coordinate
-	 */
+
+	@Override
 	public void scale(Float factor, Float cex, Float cey)
 	{
 		x = (x-cex)*factor+cex;
 		y = (y-cey)*factor+cey;
 		transform.scale(factor);
 	}
-	/**
-	 * Scale by factor with scale's center
-	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
-	 * @param factory scaling Y factor (1.0f does nothing => 100% scale)
-	 * @param cex scaling center X coordinate
-	 * @param cey scaling center Y coordinate
-	 */
+	
+	@Override
 	public void scale(Float factorx, Float factory, Float cex, Float cey)
 	{
 		x = (x-cex)*factorx+cex;
@@ -155,28 +136,20 @@ public class SVGText extends SVGObject {
 		transform.scale(factorx,factory);
 	}
 
-	/**
-	 * Rotate the text around its center point by an angle
-	 * @param angle rotation angle, in radians
-	 */
+	@Override
 	public void rotate(Float angle)
 	{
-		transform.rotate(Math.toDegrees(angle));
+		transform.rotate(angle);
 	}
-	
-	/**
-	 * Rotate the rectangle around (cex,cey) point by an angle
-	 * @param angle rotation angle, in radians
-	 * @param cex rotation point's X coordinate
-	 * @param cey rotation point's Y coordinate
-	 */
+
+	@Override
 	public void rotate(Float angle, Float cex, Float cey)
 	{
 		x -= cex;
 		y -= cey;
 
-		Float sinus = (float) Math.sin(angle);
-		Float cosinus = (float) Math.cos(angle);
+		Float sinus = (float) Math.sin(Math.toRadians(angle));
+		Float cosinus = (float) Math.cos(Math.toRadians(angle));
 
 		x = x * cosinus - y * sinus;
 		y = x * sinus + y * cosinus;
@@ -184,7 +157,7 @@ public class SVGText extends SVGObject {
 		x += cex;
 		y += cey;
 
-		transform.rotate(Math.toDegrees(angle));
+		transform.rotate(angle);
 	}
 	
 	

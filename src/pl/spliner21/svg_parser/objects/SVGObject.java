@@ -214,6 +214,49 @@ public abstract class SVGObject {
 	{
 		this.stroke_width = stroke_width;
 	}
+
+	/**
+	 * Scale by factor
+	 * @param factor scaling X factor (1.0f does nothing => 100% scale)
+	 */
+	public abstract void scale(Float factor);
+	
+	/**
+	 * Scale by factors
+	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
+	 * @param factory scaling Y factor (1.0f does nothing => 100% scale)
+	 */
+	public abstract void scale(Float factorx, Float factory);
+	
+	/**
+	 * Scale by factor with scale's center
+	 * @param factor scaling factor (1.0f does nothing => 100% scale)
+	 * @param cex scaling center X coordinate
+	 * @param cey scaling center Y coordinate
+	 */
+	public abstract void scale(Float factor, Float cex, Float cey);
+	
+	/**
+	 * Scale by factors with scale's center
+	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
+	 * @param factory scaling Y factor (1.0f does nothing => 100% scale)
+	 * @param cex scaling center X coordinate
+	 * @param cey scaling center Y coordinate
+	 */
+	public abstract void scale(Float factorx, Float factory, Float cex, Float cey);
+
+	/**
+	 * Rotate object by angle around point cx,cy.
+	 * @param angle rotation angle
+	 */
+	public abstract void rotate(Float angle);
+	/**
+	 * Rotate object by angle around point cx,cy.
+	 * @param angle rotation angle
+	 * @param cx rotation point's X coordinate
+	 * @param cy rotation point's Y coordinate
+	 */
+	public abstract void rotate(Float angle, Float cex, Float cey);
 	
 	/**
 	 * Method that generates tag's SVG code part for this element.

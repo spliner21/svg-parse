@@ -152,9 +152,9 @@ public class SVGTransform {
 	{
 		String output = "";
 
-		if(translate != null)
+		if(translate != null && (translate.getX() != 0.0f || translate.getY() != 0.0f))
 			output += "translate("+translate.getX()+" "+translate.getY()+"); ";
-		if(scale != null)
+		if(scale != null && (scale.getX() != 1.0f || scale.getY() != 1.0f))
 			output += "scale("+scale.getX()+" "+scale.getY()+"); ";
 		if(rotate != 0.0f)
 		{

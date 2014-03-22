@@ -177,78 +177,49 @@ public class SVGPath extends SVGObject {
 		}
 	}
 
-	/**
-	 * Scale by factor
-	 * @param factor scaling factor (1.0f does nothing => 100% scale)
-	 */
+	@Override
 	public void scale(Float factor)
 	{
-		for(SVGdElem e: d)
-		{
-			e.scale(factor);
-		}
+		transform.scale(factor);
 	}
 
-
-	/**
-	 * Scale by factors
-	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
-	 * @param factory scaling Y factor (1.0f does nothing => 100% scale)
-	 */
+	@Override
 	public void scale(Float factorx, Float factory)
 	{
-		for(SVGdElem e: d)
-		{
-			e.scale(factorx,factory);
-		}
-	}
-	
-	/**
-	 * Scale by factor with scale's center
-	 * @param factor scaling factor (1.0f does nothing => 100% scale)
-	 * @param cex scaling center X coordinate
-	 * @param cey scaling center Y coordinate
-	 */
-	public void scale(Float factor, Float cex, Float cey)
-	{
-		for(SVGdElem e: d)
-		{
-			e.scale(factor,cex,cey);
-		}
-	}
-	/**
-	 * Scale by factor with scale's center
-	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
-	 * @param factory scaling Y factor (1.0f does nothing => 100% scale)
-	 * @param cex scaling center X coordinate
-	 * @param cey scaling center Y coordinate
-	 */
-	public void scale(Float factorx, Float factory, Float cex, Float cey)
-	{
-		for(SVGdElem e: d)
-		{
-			e.scale(factorx,factory,cex,cey);
-		}
+		transform.scale(factorx,factory);
 	}
 
-	/**
-	 * Rotate the path around its center point by an angle
-	 * @param angle rotation angle, in radians
-	 */
+	@Override
+	public void scale(Float factor, Float cex, Float cey)
+	{
+		transform.scale(factor);
+		/* for(SVGdElem e: d)
+		{
+			e.scale(factor,cex,cey);
+		} */
+		// TODO: It won't work in the way it's implemented in SVGdElem
+	}
+
+	@Override
+	public void scale(Float factorx, Float factory, Float cex, Float cey)
+	{
+		transform.scale(factorx,factory);
+		/* for(SVGdElem e: d)
+		{
+			e.scale(factorx,factory,cex,cey);
+		} */
+	}
+
+	@Override
 	public void rotate(Float angle)
 	{
-		transform.rotate(Math.toDegrees(angle));
+		transform.rotate(angle);
 	}
-	
-	/**
-	 * Rotate the path around (cex,cey) point by an angle
-	 * @param angle rotation angle, in radians
-	 * @param cex rotation point's X coordinate
-	 * @param cey rotation point's Y coordinate
-	 */
+
+	@Override
 	public void rotate(Float angle, Float cex, Float cey)
 	{
-		transform.rotate(Math.toDegrees(angle),cex,cey);
+		transform.rotate(angle,cex,cey);
 	}
 	
 	

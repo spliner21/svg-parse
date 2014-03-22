@@ -45,7 +45,7 @@ public class SVGGroup extends SVGObject {
 				if(tmp.getNodeName() == "g")
 					children.add(new SVGGroup((Element)tmp));
 				else if(tmp.getNodeName() == "circle")
-					children.add(new SVGCircle((Element)tmp));
+					children.add(new SVGEllipse((Element)tmp));
 				else if(tmp.getNodeName() == "ellipse")
 					children.add(new SVGEllipse((Element)tmp));
 				else if(tmp.getNodeName() == "line")
@@ -67,7 +67,65 @@ public class SVGGroup extends SVGObject {
 			}
 		}
 	}
+	
+	@Override
+	public void scale(Float factor) {
+		for(SVGObject o: children)
+			o.scale(factor);
+		
+	}
 
+	@Override
+	public void scale(Float factorx, Float factory) {
+		for(SVGObject o: children)
+			o.scale(factorx, factory);
+	}
+
+	@Override
+	public void scale(Float factor, Float cex, Float cey) {
+		for(SVGObject o: children)
+			o.scale(factor, cex, cey);		
+	}
+
+	@Override
+	public void scale(Float factorx, Float factory, Float cex, Float cey) {
+		for(SVGObject o: children)
+			o.scale(factorx, factory, cex, cey);
+	}
+
+	@Override
+	public void rotate(Float angle) {
+		for(SVGObject o: children)
+			o.rotate(angle);		
+	}
+
+	@Override
+	public void rotate(Float angle, Float cex, Float cey) {
+		for(SVGObject o: children)
+			o.rotate(angle, cex, cey);	
+	}
+	
+	/**
+	 * Search in a tree for an object with certain ID
+	 * @param ID Required object's ID
+	 * @return Object with certain ID or null if failed
+	 */
+	public SVGObject getObjectByID(String ID)
+	{
+		SVGObject result;
+		for(SVGObject o: children)
+		{
+			if(o.getID().equals(ID))
+				return o;
+			else if(o.getClass() == SVGGroup.class)
+			{
+				result = ((SVGGroup)o).getObjectByID(ID);
+				if(result != null)
+					return result;
+			}
+		}
+		return null;
+	}
 	
 	@Override
 	public String getCode() {

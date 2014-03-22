@@ -77,19 +77,19 @@ public class SVGPoint {
 	}
 	/**
 	 * Rotate point by angle around point 0,0.
-	 * @param angle rotation angle, in radians
+	 * @param angle rotation angle
 	 */
 	public void rotate(float angle)
 	{
-		Float sinus = (float) Math.sin(angle);
-		Float cosinus = (float) Math.cos(angle);
+		Float sinus = (float) Math.sin(Math.toRadians(angle));
+		Float cosinus = (float) Math.cos(Math.toRadians(angle));
 
 		x = x * cosinus - y * sinus;
 		y = x * sinus + y * cosinus;
 	}
 	/**
 	 * Rotate point by angle around point cx,cy.
-	 * @param angle rotation angle, in radians
+	 * @param angle rotation angle
 	 * @param cx rotation point's X coordinate
 	 * @param cy rotation point's Y coordinate
 	 */
@@ -98,8 +98,8 @@ public class SVGPoint {
 		x -= cx;
 		y -= cy;
 
-		Float sinus = (float) Math.sin(angle);
-		Float cosinus = (float) Math.cos(angle);
+		Float sinus = (float) Math.sin(Math.toRadians(angle));
+		Float cosinus = (float) Math.cos(Math.toRadians(angle));
 
 		x = x * cosinus - y * sinus;
 		y = x * sinus + y * cosinus;
