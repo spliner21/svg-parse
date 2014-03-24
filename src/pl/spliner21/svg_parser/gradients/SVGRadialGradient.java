@@ -122,4 +122,40 @@ public class SVGRadialGradient extends SVGObject {
 		return output;
 	}
 
+	@Override
+	public void scale(Float factor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void scale(Float factorx, Float factory) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void scale(Float factor, Float cex, Float cey) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void scale(Float factorx, Float factory, Float cex, Float cey) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void rotate(Float angle) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void rotate(Float angle, Float cex, Float cey) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -1,5 +1,6 @@
 package pl.spliner21.svg_parser.objects;
 
+import java.awt.geom.Point2D;
 import java.util.Vector;
 
 import org.w3c.dom.Element;
@@ -10,7 +11,7 @@ import org.w3c.dom.Element;
  * @version 1.0
  */
 public class SVGPath extends SVGObject {
-	Vector<SVGdElem> d;
+	Vector<SVGPathData> d;
 
 	/**
 	 * Default constructor
@@ -18,12 +19,12 @@ public class SVGPath extends SVGObject {
 	public SVGPath()
 	{
 		super();
-		d = new Vector<SVGdElem>();
+		d = new Vector<SVGPathData>();
 		Vector<Float> points = new Vector<Float>();
 		points.add(0.0f);
 		points.add(0.0f);
-		d.add(new SVGdElem('M',points));
-		d.add(new SVGdElem('z',null));
+		d.add(new SVGPathData('M',points));
+		d.add(new SVGPathData('z',null));
 	}
 
 	/**
@@ -57,7 +58,7 @@ public class SVGPath extends SVGObject {
 		pts = pts.trim();
 		
 		String[] ptslist = pts.split(" ");
-		d = new Vector<SVGdElem>();
+		d = new Vector<SVGPathData>();
 		for (int i = 0; i< ptslist.length; i++)
 		{
 			if(Character.isLetter(ptslist[i].charAt(0)))
@@ -68,7 +69,7 @@ public class SVGPath extends SVGObject {
 				{
 					points.add(Float.parseFloat(ptslist[i]));
 				}
-				d.add(new SVGdElem(type,points));
+				d.add(new SVGPathData(type,points));
 			}
 		}
 	}
@@ -98,7 +99,7 @@ public class SVGPath extends SVGObject {
 		//System.out.println(pts);
 		
 		String[] ptslist = pts.split(" ");
-		d = new Vector<SVGdElem>();
+		d = new Vector<SVGPathData>();
 		for (int i = 0; i< ptslist.length; i++)
 		{
 			if(Character.isLetter(ptslist[i].charAt(0)))
@@ -109,7 +110,7 @@ public class SVGPath extends SVGObject {
 				{
 					points.add(Float.parseFloat(ptslist[i]));
 				}
-				d.add(new SVGdElem(type,points));
+				d.add(new SVGPathData(type,points));
 			}
 		}
 	}
@@ -119,7 +120,7 @@ public class SVGPath extends SVGObject {
 	 * Path's data getter
 	 * @return path's data
 	 */
-	public Vector<SVGdElem> getD() {
+	public Vector<SVGPathData> getD() {
 		return d;
 	}
 
@@ -127,7 +128,7 @@ public class SVGPath extends SVGObject {
 	 * Path's data setter
 	 * @param d path's data
 	 */
-	public void setD(Vector<SVGdElem> d) {
+	public void setD(Vector<SVGPathData> d) {
 		this.d = d;
 	}
 
@@ -137,7 +138,7 @@ public class SVGPath extends SVGObject {
 	 */
 	public String getStringD() {
 		String output = "";
-		for(SVGdElem p: d)
+		for(SVGPathData p: d)
 			output += p.getCode()+ " ";
 		return output;
 	}
@@ -161,7 +162,7 @@ public class SVGPath extends SVGObject {
 		pts = pts.trim();
 		
 		String[] ptslist = pts.split(" ");
-		d = new Vector<SVGdElem>();
+		d = new Vector<SVGPathData>();
 		for (int i = 0; i< ptslist.length; i++)
 		{
 			if(Character.isLetter(ptslist[i].charAt(0)))
@@ -172,7 +173,7 @@ public class SVGPath extends SVGObject {
 				{
 					points.add(Float.parseFloat(ptslist[i]));
 				}
-				d.add(new SVGdElem(type,points));
+				d.add(new SVGPathData(type,points));
 			}
 		}
 	}
@@ -192,22 +193,25 @@ public class SVGPath extends SVGObject {
 	@Override
 	public void scale(Float factor, Float cex, Float cey)
 	{
-		transform.scale(factor);
-		/* for(SVGdElem e: d)
+		Point2D last = new Point2D.Float();
+		last.setLocation(0.f, 0.f);
+		
+		for(SVGPathData p: d)
 		{
-			e.scale(factor,cex,cey);
-		} */
-		// TODO: It won't work in the way it's implemented in SVGdElem
+			last = p.scale(factor, cex, cey, (float)last.getX(), (float)last.getY());
+		}
 	}
 
 	@Override
 	public void scale(Float factorx, Float factory, Float cex, Float cey)
 	{
-		transform.scale(factorx,factory);
-		/* for(SVGdElem e: d)
+		Point2D last = new Point2D.Float();
+		last.setLocation(0.f, 0.f);
+		
+		for(SVGPathData p: d)
 		{
-			e.scale(factorx,factory,cex,cey);
-		} */
+			last = p.scale(factorx, factory, cex, cey, (float)last.getX(), (float)last.getY());
+		}
 	}
 
 	@Override
@@ -233,7 +237,7 @@ public class SVGPath extends SVGObject {
 		if(id != "")
 			output += " id=\""+id+"\"";
 		output += " d=\"";
-		for(SVGdElem p: d)
+		for(SVGPathData p: d)
 			output += p.getCode()+ " ";
 		output = output.trim();
 		output+= "\"";

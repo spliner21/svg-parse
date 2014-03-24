@@ -2,15 +2,14 @@ package pl.spliner21.svg_parser.gradients;
 
 import org.w3c.dom.Element;
 
-import pl.spliner21.svg_parser.objects.SVGObject;
-
 /** 
  * Class representing <stop> tag in SVG's gradients
  * @author Tomasz Szo³tysek
  * @version 1.0
  */
-public class SVGGradientStop extends SVGObject {
+public class SVGGradientStop {
 	Float offset = 0.0f;
+	String style = "";
 	
 	/**
 	 * Default constructor
@@ -35,24 +34,19 @@ public class SVGGradientStop extends SVGObject {
 	 * @param e XML's DOM <stop> element.
 	 */
 	SVGGradientStop(Element e) {
-		super(e);
 		if(e.hasAttribute("offset"))
 			offset = Float.parseFloat(e.getAttribute("offset"));
 		if(e.hasAttribute("style"))
 			style = e.getAttribute("style");
 	}
-	
-	@Override
+
+	/**
+	 * Method that generates tag's SVG code part for this element.
+	 * @return String, that contains generated piece of code for this tag.
+	 */
 	public String getCode() {
 		String output;
-		output = "<stop";
-		if(id != "")
-			output += " id=\""+id+"\"";
-		output+= " offset=\""+offset+"\"";
-		if(style != "")
-			output+= " style=\""+style+"\"";
-		output+= " />";
-		
+		output = "<stop offset=\""+offset+"\" style=\""+style+"\" />";
 		return output;
 	}
 	
