@@ -10,8 +10,6 @@ import org.w3c.dom.Element;
 public class SVGEllipse extends SVGObject {
 	Float cx=-1.0f,cy=-1.0f;
 	Float rx=-1.0f,ry=-1.0f;
-	String fill="",stroke="";
-	Float stroke_width = -1.0f;
 
 	/**
 	 * Default constructor
@@ -66,7 +64,10 @@ public class SVGEllipse extends SVGObject {
 		if(e.hasAttribute("cy"))
 			cy = Float.parseFloat(e.getAttribute("cy"));
 		if(e.hasAttribute("r"))
+		{
 			rx = Float.parseFloat(e.getAttribute("r"));
+			ry = Float.parseFloat(e.getAttribute("r"));
+		}
 		else if(e.hasAttribute("rx"))
 		{
 			rx = Float.parseFloat(e.getAttribute("rx"));
@@ -234,7 +235,7 @@ public class SVGEllipse extends SVGObject {
 	@Override
 	public String getCode() {
 		String output;
-		if(rx != ry)
+		if(!rx.equals(ry))
 		{
 			output = "<ellipse";
 			if(id != "")

@@ -27,30 +27,27 @@ public class SVGTransform {
 		transform = transform.replace(',',' ');
 		transform = transform.replaceAll("\\s+", " ");
 		transform = transform.trim();
-		String[] transformList = transform.split(";");
+		String[] transformList = transform.split("\\)");
 		for(String s: transformList)
 		{
 			s = s.trim();
 			if(s.startsWith("translate"))
 			{
-				s = s.replaceFirst("translate(", "");
-				s = s.replace(')',' ');
+				s = s.replaceFirst("translate\\(", "");
 				s = s.trim();
 				String[] elements = s.split(" ");
 				translate = new Point2D.Double(Double.parseDouble(elements[0]), Double.parseDouble(elements[1]));
 			}
 			else if(s.startsWith("scale"))
 			{
-				s = s.replaceFirst("scale(", "");
-				s = s.replace(')',' ');
+				s = s.replaceFirst("scale\\(", "");
 				s = s.trim();
 				String[] elements = s.split(" ");
 				scale = new Point2D.Double(Double.parseDouble(elements[0]), Double.parseDouble(elements[1]));
 			}
 			else if(s.startsWith("rotate"))
 			{
-				s = s.replaceFirst("rotate(", "");
-				s = s.replace(')',' ');
+				s = s.replaceFirst("rotate\\(", "");
 				s = s.trim();
 				String[] elements = s.split(" ");
 				rotate = Float.parseFloat(elements[0]);
@@ -59,22 +56,19 @@ public class SVGTransform {
 			}
 			else if(s.startsWith("skewx"))
 			{
-				s = s.replaceFirst("skewx(", "");
-				s = s.replace(')',' ');
+				s = s.replaceFirst("skewx\\(", "");
 				s = s.trim();
 				skewX = Float.parseFloat(s);
 			}
-			else if(s.startsWith("skewY=y"))
+			else if(s.startsWith("skewy"))
 			{
-				s = s.replaceFirst("skewy(", "");
-				s = s.replace(')',' ');
+				s = s.replaceFirst("skewy\\(", "");
 				s = s.trim();
 				skewY = Float.parseFloat(s);
 			}
 			else if(s.startsWith("matrix"))
 			{
-				s = s.replaceFirst("matrix(", "");
-				s = s.replace(')',' ');
+				s = s.replaceFirst("matrix\\(", "");
 				s = s.trim();
 				String[] elements = s.split(" ");
 				matrix = new Vector<Float>();
@@ -153,26 +147,26 @@ public class SVGTransform {
 		String output = "";
 
 		if(translate != null && (translate.getX() != 0.0f || translate.getY() != 0.0f))
-			output += "translate("+translate.getX()+" "+translate.getY()+"); ";
+			output += "translate("+translate.getX()+" "+translate.getY()+") ";
 		if(scale != null && (scale.getX() != 1.0f || scale.getY() != 1.0f))
-			output += "scale("+scale.getX()+" "+scale.getY()+"); ";
+			output += "scale("+scale.getX()+" "+scale.getY()+") ";
 		if(rotate != 0.0f)
 		{
 			output += "rotate("+rotate;
 			if(rotationCenter != null)
 				output += " "+rotationCenter.getX()+" "+rotationCenter.getY();
-			output += "); ";
+			output += ") ";
 		}
 		if(skewX != 0.0f)
-			output += "skewX("+skewX+"); ";
+			output += "skewX("+skewX+") ";
 		if(skewY != 0.0f)
-			output += "skewY("+skewY+"); ";
+			output += "skewY("+skewY+") ";
 		if(matrix != null)
 		{
 			output += "matrix(";
 			for(Float f:matrix)
 				output += f+" ";
-			output += "); ";
+			output += ") ";
 		}
 		
 		return output;

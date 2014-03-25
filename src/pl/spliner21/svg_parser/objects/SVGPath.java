@@ -96,7 +96,7 @@ public class SVGPath extends SVGObject {
 		}
 		pts= pts.replaceAll("\\s+", " ");
 		pts = pts.trim();
-		//System.out.println(pts);
+		// System.out.println(pts);
 		
 		String[] ptslist = pts.split(" ");
 		d = new Vector<SVGPathData>();
@@ -106,10 +106,11 @@ public class SVGPath extends SVGObject {
 			{
 				char type = ptslist[i].charAt(0);
 				Vector<Float> points = new Vector<Float>();
-				while(!Character.isLetter(ptslist[++i].charAt(0)))
+				while(++i < ptslist.length && !Character.isLetter(ptslist[i].charAt(0)))
 				{
 					points.add(Float.parseFloat(ptslist[i]));
 				}
+				--i;
 				d.add(new SVGPathData(type,points));
 			}
 		}

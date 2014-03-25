@@ -10,7 +10,7 @@ import org.w3c.dom.Element;
 public class SVGRectangle extends SVGObject {
 	Float x = -1.0f, y = -1.0f;
 	Float rx = -1.0f, ry = -1.0f;
-	int width = -1, height = -1;
+	Float width = -1.0f, height = -1.0f;
 
 	/**
 	 * Default constructor
@@ -22,8 +22,8 @@ public class SVGRectangle extends SVGObject {
 		y = 0.0f;
 		rx = 0.0f;
 		ry = 0.0f;
-		width = 1;
-		height = 1;
+		width = 1.0f;
+		height = 1.0f;
 	}
 
 	/**
@@ -43,7 +43,7 @@ public class SVGRectangle extends SVGObject {
 	 * @param opacity rectangle's opacity (0.0f-1.0f)
 	 * @param display tag's display argument
 	 */
-	public SVGRectangle(String id, String style, float x, float y, float rx, float ry, int width, int height, 
+	public SVGRectangle(String id, String style, Float x, Float y, Float rx, Float ry, Float width, Float height, 
 			String fill, String stroke, Float stroke_width, String transform, Float opacity, String display)
 	{
 		super(id,style,transform,opacity,display,fill,stroke,stroke_width);
@@ -72,8 +72,8 @@ public class SVGRectangle extends SVGObject {
 		if(e.hasAttribute("ry"))
 			ry = Float.parseFloat(e.getAttribute("ry"));
 		
-		width = Integer.parseInt(e.getAttribute("width"));
-		height = Integer.parseInt(e.getAttribute("height"));
+		width = Float.parseFloat(e.getAttribute("width"));
+		height = Float.parseFloat(e.getAttribute("height"));
 	}
 
 
@@ -137,28 +137,28 @@ public class SVGRectangle extends SVGObject {
 	 * Rectangle's width getter
 	 * @return rectangle's width
 	 */
-	public int getWidth() {
+	public Float getWidth() {
 		return width;
 	}
 	/**
 	 * Rectangle's width setter
 	 * @param width new rectangle's width
 	 */
-	public void setWidth(int width) {
+	public void setWidth(Float width) {
 		this.width = width;
 	}
 	/**
 	 * Rectangle's height getter
 	 * @return rectangle's height
 	 */
-	public int getHeight() {
+	public Float getHeight() {
 		return height;
 	}
 	/**
 	 * Rectangle's height setter
 	 * @param height new rectangle's height
 	 */
-	public void setHeight(int height) {
+	public void setHeight(Float height) {
 		this.height = height;
 	}
 

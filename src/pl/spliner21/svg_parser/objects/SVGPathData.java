@@ -32,55 +32,7 @@ public class SVGPathData {
 		this.type = type;
 		this.ptsList = ptsList;
 	}
-	
-	/**
-	 * Scale points by factor
-	 * @param factor scaling factor
-	 */
-	public void scale(float factor)
-	{
-		for(Float p: ptsList)
-		{
-			p *= factor;
-		}
-	}
-
-	/**
-	 * Scale points by factors
-	 * @param factorx scaling factor X
-	 * @param factory scaling factor Y
-	 */
-	public void scale(float factorx, float factory)
-	{
-		switch(type)
-		{
-		case 'H':
-		case 'h':
-			for(Float p: ptsList)
-			{
-				p *= factorx;
-			}
-			break;
-		case 'V':
-		case 'v':
-			for(Float p: ptsList)
-			{
-				p *= factory;
-			}
-			break;
-		case 'z':
-			break;
-		default:
-			for(int i=0; i < ptsList.size(); i+=2)
-			{
-				ptsList.set(i, ptsList.elementAt(i)*factorx);
-				ptsList.set(i+1, ptsList.elementAt(i+1)*factory);
-			}
-			break;
-		}
-	}
-
-	
+		
 	/**
 	 * Scale by factor with scale's center
 	 * @param factor scaling factor (1.0f does nothing => 100% scale)
@@ -94,6 +46,16 @@ public class SVGPathData {
 		Point2D ret = new Point2D.Float();
 		switch(type)
 		{
+		case 'A':
+			ret.setLocation(ptsList.elementAt(ptsList.size()-2),ptsList.elementAt(ptsList.size()-1));
+			for(int i=0; i < ptsList.size(); i+=7)
+			{
+				ptsList.set(i, ptsList.elementAt(i)*factor);
+				ptsList.set(i+1, ptsList.elementAt(i+1)*factor);
+				ptsList.set(i+5, (ptsList.elementAt(i+5)-cex)*factor + cex);
+				ptsList.set(i+6, (ptsList.elementAt(i+6)-cey)*factor + cey);
+			}
+			break;
 		case 'H':
 			ret.setLocation(ptsList.elementAt(ptsList.size()-1),ly);
 			for(Float p: ptsList)
@@ -123,7 +85,35 @@ public class SVGPathData {
 				p = (ly+p-cey)*factor+cey-ly;
 			}
 			break;
+		case 'q':
+		case 's':
+			ret.setLocation(ptsList.elementAt(ptsList.size()-2),ptsList.elementAt(ptsList.size()-1));
+			for(int i=0; i < ptsList.size(); i+=4)
+			{
+				ptsList.set(i, ptsList.elementAt(i)*factor);
+				ptsList.set(i+1, ptsList.elementAt(i+1)*factor);
+				ptsList.set(i+2, (ptsList.elementAt(i+2)-cex+lx)*factor + cex-lx);
+				ptsList.set(i+3, (ptsList.elementAt(i+3)-cey+ly)*factor + cey-ly);
+			}
+			break;
+		case 'c':
+			ret.setLocation(ptsList.elementAt(ptsList.size()-2),ptsList.elementAt(ptsList.size()-1));
+			for(int i=0; i < ptsList.size(); i+=6)
+			{
+				ptsList.set(i, ptsList.elementAt(i)*factor);
+				ptsList.set(i+1, ptsList.elementAt(i+1)*factor);
+				ptsList.set(i+2, ptsList.elementAt(i)*factor);
+				ptsList.set(i+3, ptsList.elementAt(i+1)*factor);
+				ptsList.set(i+4, (ptsList.elementAt(i+2)-cex+lx)*factor + cex-lx);
+				ptsList.set(i+5, (ptsList.elementAt(i+3)-cey+ly)*factor + cey-ly);
+			}
+			break;
 		case 'M':
+		case 'L':
+		case 'T':
+		case 'C':
+		case 'Q':
+		case 'S':
 			ret.setLocation(ptsList.elementAt(ptsList.size()-2),ptsList.elementAt(ptsList.size()-1));
 			for(int i=0; i < ptsList.size(); i+=2)
 			{
@@ -132,6 +122,8 @@ public class SVGPathData {
 			}
 			break;
 		case 'm':
+		case 'l':
+		case 't':
 			ret.setLocation(ptsList.elementAt(ptsList.size()-2)+lx,ptsList.elementAt(ptsList.size()-1)+ly);
 			int x = 0;
 			if(lx == 0.f && ly == 0.f)
@@ -167,6 +159,16 @@ public class SVGPathData {
 		Point2D ret = new Point2D.Float();
 		switch(type)
 		{
+		case 'A':
+			ret.setLocation(ptsList.elementAt(ptsList.size()-2),ptsList.elementAt(ptsList.size()-1));
+			for(int i=0; i < ptsList.size(); i+=7)
+			{
+				ptsList.set(i, ptsList.elementAt(i)*factorx);
+				ptsList.set(i+1, ptsList.elementAt(i+1)*factory);
+				ptsList.set(i+5, (ptsList.elementAt(i+5)-cex)*factorx + cex);
+				ptsList.set(i+6, (ptsList.elementAt(i+6)-cey)*factory + cey);
+			}
+			break;
 		case 'H':
 			ret.setLocation(ptsList.elementAt(ptsList.size()-1),ly);
 			for(Float p: ptsList)
@@ -196,7 +198,35 @@ public class SVGPathData {
 				p = (ly+p-cey)*factory+cey-ly;
 			}
 			break;
+		case 'q':
+		case 's':
+			ret.setLocation(ptsList.elementAt(ptsList.size()-2),ptsList.elementAt(ptsList.size()-1));
+			for(int i=0; i < ptsList.size(); i+=4)
+			{
+				ptsList.set(i, ptsList.elementAt(i)*factorx);
+				ptsList.set(i+1, ptsList.elementAt(i+1)*factory);
+				ptsList.set(i+2, (ptsList.elementAt(i+2)-cex+lx)*factorx + cex-lx);
+				ptsList.set(i+3, (ptsList.elementAt(i+3)-cey+ly)*factory + cey-ly);
+			}
+			break;
+		case 'c':
+			ret.setLocation(ptsList.elementAt(ptsList.size()-2),ptsList.elementAt(ptsList.size()-1));
+			for(int i=0; i < ptsList.size(); i+=6)
+			{
+				ptsList.set(i, ptsList.elementAt(i)*factorx);
+				ptsList.set(i+1, ptsList.elementAt(i+1)*factory);
+				ptsList.set(i+2, ptsList.elementAt(i)*factorx);
+				ptsList.set(i+3, ptsList.elementAt(i+1)*factory);
+				ptsList.set(i+4, (ptsList.elementAt(i+2)-cex+lx)*factorx + cex-lx);
+				ptsList.set(i+5, (ptsList.elementAt(i+3)-cey+ly)*factory + cey-ly);
+			}
+			break;
 		case 'M':
+		case 'L':
+		case 'T':
+		case 'C':
+		case 'Q':
+		case 'S':
 			ret.setLocation(ptsList.elementAt(ptsList.size()-2),ptsList.elementAt(ptsList.size()-1));
 			for(int i=0; i < ptsList.size(); i+=2)
 			{
@@ -205,6 +235,8 @@ public class SVGPathData {
 			}
 			break;
 		case 'm':
+		case 'l':
+		case 't':
 			ret.setLocation(ptsList.elementAt(ptsList.size()-2)+lx,ptsList.elementAt(ptsList.size()-1)+ly);
 			int x = 0;
 			if(lx == 0.f && ly == 0.f)
