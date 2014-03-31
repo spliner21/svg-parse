@@ -73,7 +73,11 @@ public class SVGPath extends SVGObject {
 			}
 		}
 	}
-
+	@Override
+	public void translate(Float tx, Float ty)
+	{
+		// TODO: implement translation of a path
+	}
 	/**
 	 * Constructor by xml's DOM tag element
 	 * @param e xml's DOM tag element

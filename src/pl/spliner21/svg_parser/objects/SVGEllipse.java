@@ -216,14 +216,14 @@ public class SVGEllipse extends SVGObject {
 	@Override
 	public void rotate(Float angle, Float cex, Float cey)
 	{
-		cx -= cex;
-		cy -= cey;
+		Float bcx = cx - cex;
+		Float bcy = cy - cey;
 
 		Float sinus = (float) Math.sin(Math.toRadians(angle));
 		Float cosinus = (float) Math.cos(Math.toRadians(angle));
 		
-		cx = cx * cosinus - cy * sinus;
-		cy = cx * sinus + cy * cosinus;
+		cx = bcx * cosinus - bcy * sinus;
+		cy = bcx * sinus + bcy * cosinus;
 		
 		cx += cex;
 		cy += cey;
@@ -231,6 +231,20 @@ public class SVGEllipse extends SVGObject {
 		transform.rotate(angle);
 	}
 	
+	@Override
+	public void translate(Float tx, Float ty)
+	{
+		cx += tx;
+		cy += ty;
+	}
+	
+	public boolean isCircle()
+	{
+		if(rx.equals(ry))
+			return true;
+		else
+			return false;
+	}
 	
 	@Override
 	public String getCode() {

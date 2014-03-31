@@ -186,6 +186,12 @@ public class SVGHead extends SVGObject {
 		}
 		return null;
 	}
+
+	@Override
+	public void translate(Float tx, Float ty) {
+		for(SVGObject o: children)
+			o.translate(tx, ty);	
+	}
 	
 	@Override
 	public String getCode() {

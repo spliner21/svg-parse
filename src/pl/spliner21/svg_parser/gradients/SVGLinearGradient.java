@@ -160,4 +160,10 @@ public class SVGLinearGradient extends SVGObject {
 		
 	}
 
+	@Override
+	public void translate(Float tx, Float ty) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

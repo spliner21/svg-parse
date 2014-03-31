@@ -108,6 +108,11 @@ public class SVGPoint {
 		y += cy;
 	}
 	
+	public void translate(Float tx, Float ty)
+	{
+		x += tx;
+		y += ty;
+	}
 	
 	String getCode()
 	{

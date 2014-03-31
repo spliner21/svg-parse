@@ -139,12 +139,8 @@ public class SVGLine extends SVGObject {
 	public void scale(Float factor)
 	{
 		Float cex,cey;
-		if(x2 > x1)
-			cex = x2-x1;
-		else cex = x1-x2;
-		if(y2 > y1)
-			cey = y2-y1;
-		else cey = y1-y2;
+		cex = (x1 + x2) / 2.0f;
+		cey = (y1 + y2) / 2.0f;
 		x1 = (x1-cex)*factor+cex;
 		y1 = (y1-cey)*factor+cey;
 		x2 = (x2-cex)*factor+cex;
@@ -155,12 +151,8 @@ public class SVGLine extends SVGObject {
 	public void scale(Float factorx, Float factory)
 	{
 		Float cex,cey;
-		if(x2 > x1)
-			cex = x2-x1;
-		else cex = x1-x2;
-		if(y2 > y1)
-			cey = y2-y1;
-		else cey = y1-y2;
+		cex = (x1 + x2) / 2.0f;
+		cey = (y1 + y2) / 2.0f;
 		x1 = (x1-cex)*factorx+cex;
 		y1 = (y1-cey)*factory+cey;
 		x2 = (x2-cex)*factorx+cex;
@@ -189,25 +181,22 @@ public class SVGLine extends SVGObject {
 	public void rotate(Float angle)
 	{
 		Float cex,cey;
-		if(x2 > x1)
-			cex = x2-x1;
-		else cex = x1-x2;
-		if(y2 > y1)
-			cey = y2-y1;
-		else cey = y1-y2;
-		
-		x1 -= cex;
-		y1 -= cey;
-		x2 -= cex;
-		y2 -= cey;
+		cex = (x1 + x2) / 2.0f;
+		cey = (y1 + y2) / 2.0f;
+
+		Float bx1,by1,bx2,by2;
+		bx1 = x1 - cex;
+		by1 = y1 - cey;
+		bx2 = x2 - cex;
+		by2 = y2 - cey;
 
 		Float sinus = (float) Math.sin(Math.toRadians(angle));
 		Float cosinus = (float) Math.cos(Math.toRadians(angle));
 
-		x1 = x1 * cosinus - y1 * sinus;
-		y1 = x1 * sinus + y1 * cosinus;
-		x2 = x2 * cosinus - y2 * sinus;
-		y2 = x2 * sinus + y2 * cosinus;
+		x1 = bx1 * cosinus - by1 * sinus;
+		y1 = bx1 * sinus + by1 * cosinus;
+		x2 = bx2 * cosinus - by2 * sinus;
+		y2 = bx2 * sinus + by2 * cosinus;
 
 		x1 += cex;
 		y1 += cey;
@@ -218,23 +207,33 @@ public class SVGLine extends SVGObject {
 	@Override
 	public void rotate(Float angle, Float cex, Float cey)
 	{
-		x1 -= cex;
-		y1 -= cey;
-		x2 -= cex;
-		y2 -= cey;
+		Float bx1,by1,bx2,by2;
+		bx1 = x1 - cex;
+		by1 = y1 - cey;
+		bx2 = x2 - cex;
+		by2 = y2 - cey;
 
 		Float sinus = (float) Math.sin(Math.toRadians(angle));
 		Float cosinus = (float) Math.cos(Math.toRadians(angle));
 
-		x1 = x1 * cosinus - y1 * sinus;
-		y1 = x1 * sinus + y1 * cosinus;
-		x2 = x2 * cosinus - y2 * sinus;
-		y2 = x2 * sinus + y2 * cosinus;
+		x1 = bx1 * cosinus - by1 * sinus;
+		y1 = bx1 * sinus + by1 * cosinus;
+		x2 = bx2 * cosinus - by2 * sinus;
+		y2 = bx2 * sinus + by2 * cosinus;
 
 		x1 += cex;
 		y1 += cey;
 		x2 += cex;
 		y2 += cey;
+	}
+	
+	@Override
+	public void translate(Float tx, Float ty)
+	{
+		x1 += tx;
+		y1 += ty;
+		x2 += tx;
+		y2 += ty;
 	}
 	
 	@Override

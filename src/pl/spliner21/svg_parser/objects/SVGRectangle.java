@@ -222,6 +222,12 @@ public class SVGRectangle extends SVGObject {
 		transform.rotate(angle);
 	}
 	
+	@Override
+	public void translate(Float tx, Float ty)
+	{
+		x += tx;
+		y += ty;
+	}
 	
 	/*
 	 * Method which returns generated tags code

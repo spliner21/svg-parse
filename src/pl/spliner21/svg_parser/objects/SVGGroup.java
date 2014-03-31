@@ -104,6 +104,12 @@ public class SVGGroup extends SVGObject {
 		for(SVGObject o: children)
 			o.rotate(angle, cex, cey);	
 	}
+
+	@Override
+	public void translate(Float tx, Float ty) {
+		for(SVGObject o: children)
+			o.translate(tx, ty);	
+	}
 	
 	/**
 	 * Search in a tree for an object with certain ID

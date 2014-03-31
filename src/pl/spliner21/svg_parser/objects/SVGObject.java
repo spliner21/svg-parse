@@ -259,6 +259,13 @@ public abstract class SVGObject {
 	public abstract void rotate(Float angle, Float cex, Float cey);
 	
 	/**
+	 * Translate object by distance
+	 * @param tx translation distance in X axis
+	 * @param ty translation distance in Y axis
+	 */
+	public abstract void translate(Float tx, Float ty);
+	
+	/**
 	 * Method that generates tag's SVG code part for this element.
 	 * @return String, that contains generated piece of code for this tag and it's children (if any).
 	 */

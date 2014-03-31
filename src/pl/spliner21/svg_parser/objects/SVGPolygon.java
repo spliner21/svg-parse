@@ -156,7 +156,12 @@ public class SVGPolygon extends SVGObject {
 			p.rotate(angle, cex, cey);
 	}
 	
-	
+	@Override
+	public void translate(Float tx, Float ty)
+	{
+		for(SVGPoint p: points)
+			p.translate(tx, ty);
+	}
 
 	/*
 	 * Method which returns generated tags code
