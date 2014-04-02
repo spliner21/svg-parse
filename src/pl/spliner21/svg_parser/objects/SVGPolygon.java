@@ -18,6 +18,7 @@ public class SVGPolygon extends SVGObject {
 	public SVGPolygon()
 	{
 		super();
+		points = new Vector<SVGPoint>();
 		points.add(new SVGPoint("0,1"));
 		points.add(new SVGPoint("0.5,0"));
 		points.add(new SVGPoint("1,1"));
@@ -41,6 +42,7 @@ public class SVGPolygon extends SVGObject {
 		super(id,style,transform,opacity,display,fill,stroke,stroke_width);
 
 		String[] ptslist = pts.split(" ");
+		points = new Vector<SVGPoint>();
 		for (String s : ptslist) 
 			points.add(new SVGPoint(s));
 	}
@@ -57,6 +59,7 @@ public class SVGPolygon extends SVGObject {
 		String pts = e.getAttribute("points");
 		
 		String[] ptslist = pts.split(" ");
+		points = new Vector<SVGPoint>();
 		for (String s : ptslist) 
 			points.add(new SVGPoint(s));
 	}

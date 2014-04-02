@@ -17,6 +17,7 @@ public class SVGPolyline extends SVGObject {
 	public SVGPolyline()
 	{
 		super();
+		points = new Vector<SVGPoint>();
 		points.add(new SVGPoint("0,0"));
 		points.add(new SVGPoint("1,1"));
 	}
@@ -39,6 +40,7 @@ public class SVGPolyline extends SVGObject {
 		super(id,style,transform,opacity,display,fill,stroke,stroke_width);
 
 		String[] ptslist = pts.split(" ");
+		points = new Vector<SVGPoint>();
 		for (String s : ptslist) 
 			points.add(new SVGPoint(s));
 	}
@@ -55,6 +57,7 @@ public class SVGPolyline extends SVGObject {
 		String pts = e.getAttribute("points");
 		
 		String[] ptslist = pts.split(" ");
+		points = new Vector<SVGPoint>();
 		for (String s : ptslist) 
 			points.add(new SVGPoint(s));
 	}

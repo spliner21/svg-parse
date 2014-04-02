@@ -13,7 +13,7 @@ public class SVGPoint {
 	 * Constructor by parameter
 	 * @param s String with point ("<X>,<Y>")
 	 */
-	SVGPoint(String s)
+	public SVGPoint(String s)
 	{
 		String[] sp = s.split(",");
 		x = Float.parseFloat(sp[0]);
@@ -24,7 +24,7 @@ public class SVGPoint {
 	 * @param sx point's X coordinate
 	 * @param sy point's Y coordinate
 	 */
-	SVGPoint(float sx, float sy)
+	public SVGPoint(float sx, float sy)
 	{
 		x = sx;
 		y = sy;
@@ -83,9 +83,10 @@ public class SVGPoint {
 	{
 		Float sinus = (float) Math.sin(Math.toRadians(angle));
 		Float cosinus = (float) Math.cos(Math.toRadians(angle));
-
-		x = x * cosinus - y * sinus;
-		y = x * sinus + y * cosinus;
+		Float ox = x, oy = y;
+		
+		x = ox * cosinus - oy * sinus;
+		y = ox * sinus + oy * cosinus;
 	}
 	/**
 	 * Rotate point by angle around point cx,cy.
@@ -95,14 +96,12 @@ public class SVGPoint {
 	 */
 	public void rotate(float angle, float cx, float cy)
 	{
-		x -= cx;
-		y -= cy;
-
+		Float ox = x - cx, oy = y - cy;
 		Float sinus = (float) Math.sin(Math.toRadians(angle));
 		Float cosinus = (float) Math.cos(Math.toRadians(angle));
 
-		x = x * cosinus - y * sinus;
-		y = x * sinus + y * cosinus;
+		x = ox * cosinus - oy * sinus;
+		y = ox * sinus + oy * cosinus;
 		
 		x += cx;
 		y += cy;
@@ -114,7 +113,7 @@ public class SVGPoint {
 		y += ty;
 	}
 	
-	String getCode()
+	public String getCode()
 	{
 		return x+","+y;
 	}

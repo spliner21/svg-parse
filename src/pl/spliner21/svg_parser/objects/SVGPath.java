@@ -65,19 +65,16 @@ public class SVGPath extends SVGObject {
 			{
 				char type = ptslist[i].charAt(0);
 				Vector<Float> points = new Vector<Float>();
-				while(!Character.isLetter(ptslist[++i].charAt(0)))
+				while(++i < ptslist.length && !Character.isLetter(ptslist[i].charAt(0)))
 				{
 					points.add(Float.parseFloat(ptslist[i]));
 				}
+				--i;
 				d.add(new SVGPathData(type,points));
 			}
 		}
 	}
-	@Override
-	public void translate(Float tx, Float ty)
-	{
-		// TODO: implement translation of a path
-	}
+	
 	/**
 	 * Constructor by xml's DOM tag element
 	 * @param e xml's DOM tag element
@@ -199,7 +196,7 @@ public class SVGPath extends SVGObject {
 	public void scale(Float factor, Float cex, Float cey)
 	{
 		Point2D last = new Point2D.Float();
-		last.setLocation(0.f, 0.f);
+		last.setLocation(Float.MIN_VALUE, Float.MIN_VALUE);
 		
 		for(SVGPathData p: d)
 		{
@@ -211,7 +208,7 @@ public class SVGPath extends SVGObject {
 	public void scale(Float factorx, Float factory, Float cex, Float cey)
 	{
 		Point2D last = new Point2D.Float();
-		last.setLocation(0.f, 0.f);
+		last.setLocation(Float.MIN_VALUE, Float.MIN_VALUE);
 		
 		for(SVGPathData p: d)
 		{
@@ -230,7 +227,15 @@ public class SVGPath extends SVGObject {
 	{
 		transform.rotate(angle,cex,cey);
 	}
-	
+
+	@Override
+	public void translate(Float tx, Float ty)
+	{
+		for(SVGPathData p: d)
+		{
+			p.translate(tx,ty);
+		}
+	}
 	
 	/*
 	 * Method which returns generated tags code
