@@ -18,7 +18,8 @@ public class SVGHead extends SVGObject {
 	String xmlns = "http://www.w3.org/2000/svg";
 	String baseProfile = "";
 	String version = "";
-	String width="",height="",x="",y="";
+	float width,height;
+	String x="",y="";
 	String viewBox="";
 	String enable_background="";
 	String xml_space="";
@@ -37,8 +38,8 @@ public class SVGHead extends SVGObject {
 		id = "";
 		x = "0px";
 		y = "0px";
-		width = "500px";
-		height = "400px";
+		width = 500;
+		height = 400;
 		viewBox = "0 0 500 400";
 		xml_space = "preserve";
 	}
@@ -61,8 +62,8 @@ public class SVGHead extends SVGObject {
 		this.id = id;
 		this.x = x+"px";
 		this.y = y+"px";
-		this.width = width+"px";
-		this.height = height+"px";
+		this.width = width;
+		this.height = height;
 		this.viewBox = x+" "+y+" "+width+" "+height;
 		xml_space = "preserve";
 	}
@@ -80,9 +81,9 @@ public class SVGHead extends SVGObject {
 		if(e.hasAttribute("version"))
 			version = e.getAttribute("version");
 		if(e.hasAttribute("width"))
-			width = e.getAttribute("width");
+			width = Float.parseFloat(e.getAttribute("width"));
 		if(e.hasAttribute("height"))
-			height = e.getAttribute("height");
+			height = Float.parseFloat(e.getAttribute("height"));
 		if(e.hasAttribute("x"))
 			x = e.getAttribute("x");
 		if(e.hasAttribute("y"))
@@ -129,38 +130,38 @@ public class SVGHead extends SVGObject {
 
 
 	@Override
-	public void scale(Float factor) {
+	public void scale(float factor) {
 		for(SVGObject o: children)
 			o.scale(factor);
 		
 	}
 
 	@Override
-	public void scale(Float factorx, Float factory) {
+	public void scale(float factorx, float factory) {
 		for(SVGObject o: children)
 			o.scale(factorx, factory);
 	}
 
 	@Override
-	public void scale(Float factor, Float cex, Float cey) {
+	public void scale(float factor, float cex, float cey) {
 		for(SVGObject o: children)
 			o.scale(factor, cex, cey);		
 	}
 
 	@Override
-	public void scale(Float factorx, Float factory, Float cex, Float cey) {
+	public void scale(float factorx, float factory, float cex, float cey) {
 		for(SVGObject o: children)
 			o.scale(factorx, factory, cex, cey);
 	}
 
 	@Override
-	public void rotate(Float angle) {
+	public void rotate(float angle) {
 		for(SVGObject o: children)
-			o.rotate(angle);		
+			o.rotate(angle,width/4,height/4);		
 	}
 
 	@Override
-	public void rotate(Float angle, Float cex, Float cey) {
+	public void rotate(float angle, float cex, float cey) {
 		for(SVGObject o: children)
 			o.rotate(angle, cex, cey);	
 	}
@@ -188,7 +189,7 @@ public class SVGHead extends SVGObject {
 	}
 
 	@Override
-	public void translate(Float tx, Float ty) {
+	public void translate(float tx, float ty) {
 		for(SVGObject o: children)
 			o.translate(tx, ty);	
 	}

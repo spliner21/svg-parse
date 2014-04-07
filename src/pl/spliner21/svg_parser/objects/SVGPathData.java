@@ -41,10 +41,10 @@ public class SVGPathData {
 	 * @param lx last absolute point's X coordinate
 	 * @param ly last absolute point's Y coordinate
 	 */
-	public Point2D scale(Float factor, Float cex, Float cey, Float lx, Float ly)
+	public Point2D scale(float factor, float cex, float cey, float lx, float ly)
 	{
 		Point2D ret = new Point2D.Float();
-		Float lax, lay; // lx and ly after scaling.
+		float lax, lay; // lx and ly after scaling.
 		lax = (lx - cex)* factor + cex;
 		lay = (ly - cey)* factor + cey;
 		switch(type)
@@ -61,28 +61,28 @@ public class SVGPathData {
 			break;
 		case 'H':
 			ret.setLocation(ptsList.elementAt(ptsList.size()-1),ly);
-			for(Float p: ptsList)
+			for(float p: ptsList)
 			{
 				p = (p-cex)*factor+cex;
 			}
 			break;
 		case 'h':
 			ret.setLocation(ptsList.elementAt(ptsList.size()-1)+lx,ly);
-			for(Float p: ptsList)
+			for(float p: ptsList)
 			{
 				p = (lx+p-cex)*factor+cex-lax;
 			}
 			break;
 		case 'V':
 			ret.setLocation(lx,ptsList.elementAt(ptsList.size()-1));
-			for(Float p: ptsList)
+			for(float p: ptsList)
 			{
 				p = (p-cey)*factor+cey;
 			}
 			break;
 		case 'v':
 			ret.setLocation(lx,ptsList.elementAt(ptsList.size()-1)+ly);
-			for(Float p: ptsList)
+			for(float p: ptsList)
 			{
 				p = (ly+p-cey)*factor+cey-lay;
 			}
@@ -158,10 +158,10 @@ public class SVGPathData {
 	 * @param lx last absolute point's X coordinate
 	 * @param ly last absolute point's Y coordinate
 	 */
-	public Point2D scale(Float factorx, Float factory, Float cex, Float cey, Float lx, Float ly)
+	public Point2D scale(float factorx, float factory, float cex, float cey, float lx, float ly)
 	{
 		Point2D ret = new Point2D.Float();
-		Float lax, lay; // lx and ly after scaling.
+		float lax, lay; // lx and ly after scaling.
 		lax = (lx - cex)* factorx + cex;
 		lay = (ly - cey)* factory + cey;
 		switch(type)
@@ -178,28 +178,28 @@ public class SVGPathData {
 			break;
 		case 'H':
 			ret.setLocation(ptsList.elementAt(ptsList.size()-1),ly);
-			for(Float p: ptsList)
+			for(float p: ptsList)
 			{
 				p = (p-cex)*factorx+cex;
 			}
 			break;
 		case 'h':
 			ret.setLocation(ptsList.elementAt(ptsList.size()-1)+lx,ly);
-			for(Float p: ptsList)
+			for(float p: ptsList)
 			{
 				p = (lx+p-cex)*factorx+cex-lax;
 			}
 			break;
 		case 'V':
 			ret.setLocation(lx,ptsList.elementAt(ptsList.size()-1));
-			for(Float p: ptsList)
+			for(float p: ptsList)
 			{
 				p = (p-cey)*factory+cey;
 			}
 			break;
 		case 'v':
 			ret.setLocation(lx,ptsList.elementAt(ptsList.size()-1)+ly);
-			for(Float p: ptsList)
+			for(float p: ptsList)
 			{
 				p = (ly+p-cey)*factory+cey-lay;
 			}
@@ -273,7 +273,7 @@ public class SVGPathData {
 	 * @param tx translation distance in X axis
 	 * @param ty translation distance in y axis
 	 */
-	public void translate(Float tx, Float ty)
+	public void translate(float tx, float ty)
 	{
 		switch(type)
 		{
@@ -285,15 +285,15 @@ public class SVGPathData {
 			}
 			break;
 		case 'H':
-			for(Float p: ptsList)
+			for(float p: ptsList)
 			{
-				p += tx;
+				p = p + tx;
 			}
 			break;
 		case 'V':
-			for(Float p: ptsList)
+			for(float p: ptsList)
 			{
-				p += ty;
+				p = p + ty;
 			}
 			break;
 		case 'Q':
@@ -332,9 +332,9 @@ public class SVGPathData {
 	 */
 	String getCode(){
 		String r = Character.toString(type);
-		for(Float f: ptsList)
+		for(float f: ptsList)
 		{
-			r += " "+f.toString();
+			r += " "+f;
 		}
 		return r;
 	}

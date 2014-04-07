@@ -40,7 +40,7 @@ public class SVGPath extends SVGObject {
 	 * @param display tag's display argument
 	 */
 	public SVGPath(String id, String style, String pts, 
-			String fill, String stroke, Float stroke_width, String transform, Float opacity, String display)
+			String fill, String stroke, float stroke_width, String transform, float opacity, String display)
 	{
 		super(id,style,transform,opacity,display,fill,stroke,stroke_width);
 
@@ -181,19 +181,19 @@ public class SVGPath extends SVGObject {
 	}
 
 	@Override
-	public void scale(Float factor)
+	public void scale(float factor)
 	{
 		transform.scale(factor);
 	}
 
 	@Override
-	public void scale(Float factorx, Float factory)
+	public void scale(float factorx, float factory)
 	{
 		transform.scale(factorx,factory);
 	}
 
 	@Override
-	public void scale(Float factor, Float cex, Float cey)
+	public void scale(float factor, float cex, float cey)
 	{
 		Point2D last = new Point2D.Float();
 		last.setLocation(Float.MIN_VALUE, Float.MIN_VALUE);
@@ -205,7 +205,7 @@ public class SVGPath extends SVGObject {
 	}
 
 	@Override
-	public void scale(Float factorx, Float factory, Float cex, Float cey)
+	public void scale(float factorx, float factory, float cex, float cey)
 	{
 		Point2D last = new Point2D.Float();
 		last.setLocation(Float.MIN_VALUE, Float.MIN_VALUE);
@@ -217,19 +217,19 @@ public class SVGPath extends SVGObject {
 	}
 
 	@Override
-	public void rotate(Float angle)
+	public void rotate(float angle)
 	{
 		transform.rotate(angle);
 	}
 
 	@Override
-	public void rotate(Float angle, Float cex, Float cey)
+	public void rotate(float angle, float cex, float cey)
 	{
 		transform.rotate(angle,cex,cey);
 	}
 
 	@Override
-	public void translate(Float tx, Float ty)
+	public void translate(float tx, float ty)
 	{
 		for(SVGPathData p: d)
 		{

@@ -8,7 +8,7 @@ import org.w3c.dom.Element;
  * @version 1.0
  */
 public class SVGGradientStop {
-	Float offset = 0.0f;
+	float offset = 0.0f;
 	String style = "";
 	
 	/**
@@ -24,7 +24,7 @@ public class SVGGradientStop {
 	 * @param offset Gradient's stop offset (0.0 - 1.0)
 	 * @param style Gradient's stop style ("stop-color: #COLOR")
 	 */
-	public SVGGradientStop(Float offset, String style) {
+	public SVGGradientStop(float offset, String style) {
 		this.offset = offset;
 		this.style = style;
 	}

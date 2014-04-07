@@ -8,7 +8,7 @@ import org.w3c.dom.Element;
  * @version 1.0
  */
 public class SVGLine extends SVGObject {
-	Float x1,y1,x2,y2;
+	float x1,y1,x2,y2;
 
 	/**
 	 * Default constructor
@@ -38,8 +38,8 @@ public class SVGLine extends SVGObject {
 	 * @param opacity line's opacity (0.0f-1.0f)
 	 * @param display tag's display parameter
 	 */
-	public SVGLine(String id, String style, Float x1, Float y1, Float x2, Float y2, 
-			String stroke, Float stroke_width, String transform, Float opacity, String display)
+	public SVGLine(String id, String style, float x1, float y1, float x2, float y2, 
+			String stroke, float stroke_width, String transform, float opacity, String display)
 	{
 		super(id,style,transform,opacity,display,"",stroke,stroke_width);
 		this.x1 = x1;
@@ -67,56 +67,56 @@ public class SVGLine extends SVGObject {
 	 * Line's first point's X coordinate getter
 	 * @return Line's first point's X coordinate
 	 */
-	public Float getX1() {
+	public float getX1() {
 		return x1;
 	}
 	/**
 	 * Line's first point's X coordinate setter
 	 * @param x1 Line's first point's X coordinate
 	 */
-	public void setX1(Float x1) {
+	public void setX1(float x1) {
 		this.x1 = x1;
 	}
 	/**
 	 * Line's first point's Y coordinate getter
 	 * @return Line's first point's Y coordinate
 	 */
-	public Float getY1() {
+	public float getY1() {
 		return y1;
 	}
 	/**
 	 * Line's first point's Y coordinate setter
 	 * @param y1 Line's first point's Y coordinate
 	 */
-	public void setY1(Float y1) {
+	public void setY1(float y1) {
 		this.y1 = y1;
 	}
 	/**
 	 * Line's second point's X coordinate getter
 	 * @return Line's second point's X coordinate
 	 */
-	public Float getX2() {
+	public float getX2() {
 		return x2;
 	}
 	/**
 	 * Line's second point's X coordinate setter
 	 * @param x2 Line's second point's X coordinate
 	 */
-	public void setX2(Float x2) {
+	public void setX2(float x2) {
 		this.x2 = x2;
 	}
 	/**
 	 * Line's second point's Y coordinate getter
 	 * @return Line's second point's Y coordinate
 	 */
-	public Float getY2() {
+	public float getY2() {
 		return y2;
 	}
 	/**
 	 * Line's second point's Y coordinate setter
 	 * @param y2 Line's second point's Y coordinate
 	 */
-	public void setY2(Float y2) {
+	public void setY2(float y2) {
 		this.y2 = y2;
 	}
 	
@@ -127,7 +127,7 @@ public class SVGLine extends SVGObject {
 	 * @param x2 Line's second point's X coordinate
 	 * @param y2 Line's second point's Y coordinate
 	 */
-	public void setPoints(Float x1, Float y1, Float x2, Float y2)
+	public void setPoints(float x1, float y1, float x2, float y2)
 	{
 		this.x1 = x1;
 		this.y1 = y1;
@@ -136,9 +136,9 @@ public class SVGLine extends SVGObject {
 	}
 
 	@Override
-	public void scale(Float factor)
+	public void scale(float factor)
 	{
-		Float cex,cey;
+		float cex,cey;
 		cex = (x1 + x2) / 2.0f;
 		cey = (y1 + y2) / 2.0f;
 		x1 = (x1-cex)*factor+cex;
@@ -148,9 +148,9 @@ public class SVGLine extends SVGObject {
 	}
 
 	@Override
-	public void scale(Float factorx, Float factory)
+	public void scale(float factorx, float factory)
 	{
-		Float cex,cey;
+		float cex,cey;
 		cex = (x1 + x2) / 2.0f;
 		cey = (y1 + y2) / 2.0f;
 		x1 = (x1-cex)*factorx+cex;
@@ -160,7 +160,7 @@ public class SVGLine extends SVGObject {
 	}
 
 	@Override
-	public void scale(Float factor, Float cex, Float cey)
+	public void scale(float factor, float cex, float cey)
 	{
 		x1 = (x1-cex)*factor+cex;
 		y1 = (y1-cey)*factor+cey;
@@ -169,7 +169,7 @@ public class SVGLine extends SVGObject {
 	}
 
 	@Override
-	public void scale(Float factorx, Float factory, Float cex, Float cey)
+	public void scale(float factorx, float factory, float cex, float cey)
 	{
 		x1 = (x1-cex)*factorx+cex;
 		y1 = (y1-cey)*factory+cey;
@@ -178,20 +178,20 @@ public class SVGLine extends SVGObject {
 	}
 
 	@Override
-	public void rotate(Float angle)
+	public void rotate(float angle)
 	{
-		Float cex,cey;
+		float cex,cey;
 		cex = (x1 + x2) / 2.0f;
 		cey = (y1 + y2) / 2.0f;
 
-		Float bx1,by1,bx2,by2;
+		float bx1,by1,bx2,by2;
 		bx1 = x1 - cex;
 		by1 = y1 - cey;
 		bx2 = x2 - cex;
 		by2 = y2 - cey;
 
-		Float sinus = (float) Math.sin(Math.toRadians(angle));
-		Float cosinus = (float) Math.cos(Math.toRadians(angle));
+		float sinus = (float) Math.sin(Math.toRadians(angle));
+		float cosinus = (float) Math.cos(Math.toRadians(angle));
 
 		x1 = bx1 * cosinus - by1 * sinus;
 		y1 = bx1 * sinus + by1 * cosinus;
@@ -205,16 +205,16 @@ public class SVGLine extends SVGObject {
 	}
 
 	@Override
-	public void rotate(Float angle, Float cex, Float cey)
+	public void rotate(float angle, float cex, float cey)
 	{
-		Float bx1,by1,bx2,by2;
+		float bx1,by1,bx2,by2;
 		bx1 = x1 - cex;
 		by1 = y1 - cey;
 		bx2 = x2 - cex;
 		by2 = y2 - cey;
 
-		Float sinus = (float) Math.sin(Math.toRadians(angle));
-		Float cosinus = (float) Math.cos(Math.toRadians(angle));
+		float sinus = (float) Math.sin(Math.toRadians(angle));
+		float cosinus = (float) Math.cos(Math.toRadians(angle));
 
 		x1 = bx1 * cosinus - by1 * sinus;
 		y1 = bx1 * sinus + by1 * cosinus;
@@ -228,7 +228,7 @@ public class SVGLine extends SVGObject {
 	}
 	
 	@Override
-	public void translate(Float tx, Float ty)
+	public void translate(float tx, float ty)
 	{
 		x1 += tx;
 		y1 += ty;

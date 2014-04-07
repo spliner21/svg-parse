@@ -8,7 +8,7 @@ import org.w3c.dom.Element;
  * @version 1.0
  */
 public class SVGText extends SVGObject {
-	Float x = -1.0f,y = -1.0f;
+	float x = -1.0f,y = -1.0f;
 	String text = "";
 
 	/**
@@ -37,7 +37,7 @@ public class SVGText extends SVGObject {
 	 * @param display tag's display argument
 	 */
 	public SVGText(String id, String style, float x, float y, String text, 
-			String fill, String stroke, Float stroke_width, String transform, Float opacity, String display)
+			String fill, String stroke, float stroke_width, String transform, float opacity, String display)
 	{
 		super(id,style,transform,opacity,display,fill,stroke,stroke_width);
 		this.x = x;
@@ -64,7 +64,7 @@ public class SVGText extends SVGObject {
 	 * Text's X getter
 	 * @return text's X coordinate
 	 */
-	public Float getX() {
+	public float getX() {
 		return x;
 	}
 
@@ -72,7 +72,7 @@ public class SVGText extends SVGObject {
 	 * Text's X setter
 	 * @param x new text's X coordinate
 	 */
-	public void setX(Float x) {
+	public void setX(float x) {
 		this.x = x;
 	}
 
@@ -80,7 +80,7 @@ public class SVGText extends SVGObject {
 	 * Text's Y getter
 	 * @return text's Y coordinate
 	 */
-	public Float getY() {
+	public float getY() {
 		return y;
 	}
 
@@ -88,7 +88,7 @@ public class SVGText extends SVGObject {
 	 * Text's Y setter
 	 * @param y new text's Y coordinate
 	 */
-	public void setY(Float y) {
+	public void setY(float y) {
 		this.y = y;
 	}
 
@@ -109,19 +109,19 @@ public class SVGText extends SVGObject {
 	}
 
 	@Override
-	public void scale(Float factor)
+	public void scale(float factor)
 	{
 		transform.scale(factor);
 	}
 
 	@Override
-	public void scale(Float factorx, Float factory)
+	public void scale(float factorx, float factory)
 	{
 		transform.scale(factorx, factory);
 	}
 
 	@Override
-	public void scale(Float factor, Float cex, Float cey)
+	public void scale(float factor, float cex, float cey)
 	{
 		x = (x-cex)*factor+cex;
 		y = (y-cey)*factor+cey;
@@ -129,7 +129,7 @@ public class SVGText extends SVGObject {
 	}
 	
 	@Override
-	public void scale(Float factorx, Float factory, Float cex, Float cey)
+	public void scale(float factorx, float factory, float cex, float cey)
 	{
 		x = (x-cex)*factorx+cex;
 		y = (y-cey)*factory+cey;
@@ -137,22 +137,21 @@ public class SVGText extends SVGObject {
 	}
 
 	@Override
-	public void rotate(Float angle)
+	public void rotate(float angle)
 	{
 		transform.rotate(angle);
 	}
 
 	@Override
-	public void rotate(Float angle, Float cex, Float cey)
+	public void rotate(float angle, float cex, float cey)
 	{
-		x -= cex;
-		y -= cey;
+		float bx = x - cex, by = y - cey;
 
-		Float sinus = (float) Math.sin(Math.toRadians(angle));
-		Float cosinus = (float) Math.cos(Math.toRadians(angle));
+		float sinus = (float) Math.sin(Math.toRadians(angle));
+		float cosinus = (float) Math.cos(Math.toRadians(angle));
 
-		x = x * cosinus - y * sinus;
-		y = x * sinus + y * cosinus;
+		x = bx * cosinus - by * sinus;
+		y = bx * sinus + by * cosinus;
 
 		x += cex;
 		y += cey;
@@ -161,7 +160,7 @@ public class SVGText extends SVGObject {
 	}
 
 	@Override
-	public void translate(Float tx, Float ty)
+	public void translate(float tx, float ty)
 	{
 		x += tx;
 		y += ty;

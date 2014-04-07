@@ -8,8 +8,8 @@ import org.w3c.dom.Element;
  * @version 1.0
  */
 public class SVGEllipse extends SVGObject {
-	Float cx=-1.0f,cy=-1.0f;
-	Float rx=-1.0f,ry=-1.0f;
+	float cx=-1.0f,cy=-1.0f;
+	float rx=-1.0f,ry=-1.0f;
 
 	/**
 	 * Default constructor
@@ -41,7 +41,7 @@ public class SVGEllipse extends SVGObject {
 	 * @param display tag's display parameter
 	 */
 	public SVGEllipse(String id, String style, float cx, float cy, float rx, float ry, 
-			String fill, String stroke, Float stroke_width, String transform, Float opacity, String display)
+			String fill, String stroke, float stroke_width, String transform, float opacity, String display)
 	{
 		super(id,style,transform,opacity,display,fill,stroke,stroke_width);
 		this.cx = cx;
@@ -82,7 +82,7 @@ public class SVGEllipse extends SVGObject {
 	 * CX's getter
 	 * @return object's center X coordinate
 	 */
-	public Float getCX()
+	public float getCX()
 	{
 		return cx;
 	}
@@ -90,7 +90,7 @@ public class SVGEllipse extends SVGObject {
 	 * CY's getter
 	 * @return object's center Y coordinate
 	 */
-	public Float getCY()
+	public float getCY()
 	{
 		return cy;
 	}
@@ -98,7 +98,7 @@ public class SVGEllipse extends SVGObject {
 	 * CX's setter
 	 * @param cx object's center X coordinate
 	 */
-	public void setCX(Float cx)
+	public void setCX(float cx)
 	{
 		this.cx = cx;
 	}
@@ -106,7 +106,7 @@ public class SVGEllipse extends SVGObject {
 	 * CY's setter
 	 * @param cy object's center Y coordinate
 	 */
-	public void setCY(Float cy)
+	public void setCY(float cy)
 	{
 		this.cy = cy;
 	}
@@ -115,7 +115,7 @@ public class SVGEllipse extends SVGObject {
 	 * @param cx object's center X coordinate	 
 	 * @param cy object's center Y coordinate
 	 */
-	public void setCenter(Float cx, Float cy)
+	public void setCenter(float cx, float cy)
 	{
 		this.cx = cx;
 		this.cy = cy;
@@ -126,7 +126,7 @@ public class SVGEllipse extends SVGObject {
 	 * RX's getter
 	 * @return object's X radius
 	 */
-	public Float getXRadius()
+	public float getXRadius()
 	{
 		return rx;
 	}
@@ -135,7 +135,7 @@ public class SVGEllipse extends SVGObject {
 	 * RX's setter
 	 * @param r object's X radius
 	 */
-	public void setXRadius(Float r)
+	public void setXRadius(float r)
 	{
 		rx = r;
 	}
@@ -143,7 +143,7 @@ public class SVGEllipse extends SVGObject {
 	 * RY's getter
 	 * @return object's Y radius
 	 */
-	public Float getYRadius()
+	public float getYRadius()
 	{
 		return ry;
 	}
@@ -151,7 +151,7 @@ public class SVGEllipse extends SVGObject {
 	 * RY's setter
 	 * @param r object's Y radius
 	 */
-	public void setYRadius(Float r)
+	public void setYRadius(float r)
 	{
 		ry = r;
 	}
@@ -159,7 +159,7 @@ public class SVGEllipse extends SVGObject {
 	 * Radius setter (will change both rx's and ry's value to r)
 	 * @param r object's radius
 	 */
-	public void setRadius(Float r)
+	public void setRadius(float r)
 	{
 		this.rx = r;
 		this.ry = r;
@@ -169,28 +169,28 @@ public class SVGEllipse extends SVGObject {
 	 * @param rx object's X radius
 	 * @param ry object's Y radius
 	 */
-	public void setXYRadius(Float rx, Float ry)
+	public void setXYRadius(float rx, float ry)
 	{
 		this.rx = rx;
 		this.ry = ry;
 	}
 
 	@Override
-	public void scale(Float factor)
+	public void scale(float factor)
 	{
 		rx*=Math.abs(factor);
 		ry*=Math.abs(factor);
 	}
 
 	@Override
-	public void scale(Float factorx, Float factory)
+	public void scale(float factorx, float factory)
 	{
 		rx*=Math.abs(factorx);
 		ry*=Math.abs(factory);
 	}
 
 	@Override
-	public void scale(Float factor, Float cex, Float cey)
+	public void scale(float factor, float cex, float cey)
 	{
 		rx *= Math.abs(factor);
 		ry *= Math.abs(factor);
@@ -199,7 +199,7 @@ public class SVGEllipse extends SVGObject {
 	}
 
 	@Override
-	public void scale(Float factorx, Float factory, Float cex, Float cey)
+	public void scale(float factorx, float factory, float cex, float cey)
 	{
 		rx *= Math.abs(factorx);
 		ry *= Math.abs(factory);
@@ -208,19 +208,19 @@ public class SVGEllipse extends SVGObject {
 	}
 
 	@Override
-	public void rotate(Float angle)
+	public void rotate(float angle)
 	{
 		transform.rotate(angle);
 	}
 
 	@Override
-	public void rotate(Float angle, Float cex, Float cey)
+	public void rotate(float angle, float cex, float cey)
 	{
-		Float bcx = cx - cex;
-		Float bcy = cy - cey;
+		float bcx = cx - cex;
+		float bcy = cy - cey;
 
-		Float sinus = (float) Math.sin(Math.toRadians(angle));
-		Float cosinus = (float) Math.cos(Math.toRadians(angle));
+		float sinus = (float) Math.sin(Math.toRadians(angle));
+		float cosinus = (float) Math.cos(Math.toRadians(angle));
 		
 		cx = bcx * cosinus - bcy * sinus;
 		cy = bcx * sinus + bcy * cosinus;
@@ -232,7 +232,7 @@ public class SVGEllipse extends SVGObject {
 	}
 	
 	@Override
-	public void translate(Float tx, Float ty)
+	public void translate(float tx, float ty)
 	{
 		cx += tx;
 		cy += ty;
@@ -240,7 +240,7 @@ public class SVGEllipse extends SVGObject {
 	
 	public boolean isCircle()
 	{
-		if(rx.equals(ry))
+		if(rx == ry)
 			return true;
 		else
 			return false;
@@ -249,7 +249,7 @@ public class SVGEllipse extends SVGObject {
 	@Override
 	public String getCode() {
 		String output;
-		if(!rx.equals(ry))
+		if(rx != ry)
 		{
 			output = "<ellipse";
 			if(id != "")

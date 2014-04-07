@@ -16,7 +16,7 @@ import pl.spliner21.svg_parser.objects.SVGObject;
  */
 public class SVGLinearGradient extends SVGObject {
 	String gradientUnits = "";
-	Float x1 = -1.0f, y1 = -1.0f, x2 = -1.0f, y2 = -1.0f;
+	float x1 = -1.0f, y1 = -1.0f, x2 = -1.0f, y2 = -1.0f;
 	String gradientTransform = "";
 	Vector<SVGGradientStop> stops = null;
 
@@ -51,7 +51,7 @@ public class SVGLinearGradient extends SVGObject {
 	 * @param display tag's display parameter
 	 */
 	public SVGLinearGradient(String id, String style, float x1, float y1, float x2, float y2, String stop1_color, String stop2_color, 
-			String transform, Float opacity, String display)
+			String transform, float opacity, String display)
 	{
 		super(id,style,transform,opacity,display,"","",-1.0f);
 		this.x1 = x1;
@@ -125,43 +125,43 @@ public class SVGLinearGradient extends SVGObject {
 	}
 
 	@Override
-	public void scale(Float factor) {
+	public void scale(float factor) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void scale(Float factorx, Float factory) {
+	public void scale(float factorx, float factory) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void scale(Float factor, Float cex, Float cey) {
+	public void scale(float factor, float cex, float cey) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void scale(Float factorx, Float factory, Float cex, Float cey) {
+	public void scale(float factorx, float factory, float cex, float cey) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void rotate(Float angle) {
+	public void rotate(float angle) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void rotate(Float angle, Float cex, Float cey) {
+	public void rotate(float angle, float cex, float cey) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void translate(Float tx, Float ty) {
+	public void translate(float tx, float ty) {
 		// TODO Auto-generated method stub
 		
 	}

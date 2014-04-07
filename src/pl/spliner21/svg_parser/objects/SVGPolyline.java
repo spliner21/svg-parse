@@ -35,10 +35,12 @@ public class SVGPolyline extends SVGObject {
 	 * @param display tag's display argument
 	 */
 	public SVGPolyline(String id, String style, String pts, 
-			String fill, String stroke, Float stroke_width, String transform, Float opacity, String display)
+			String fill, String stroke, float stroke_width, String transform, float opacity, String display)
 	{
 		super(id,style,transform,opacity,display,fill,stroke,stroke_width);
 
+		pts= pts.replaceAll("\\s+", " ");
+		pts = pts.trim();
 		String[] ptslist = pts.split(" ");
 		points = new Vector<SVGPoint>();
 		for (String s : ptslist) 
@@ -56,6 +58,8 @@ public class SVGPolyline extends SVGObject {
 		
 		String pts = e.getAttribute("points");
 		
+		pts= pts.replaceAll("\\s+", " ");
+		pts = pts.trim();
 		String[] ptslist = pts.split(" ");
 		points = new Vector<SVGPoint>();
 		for (String s : ptslist) 
@@ -110,7 +114,7 @@ public class SVGPolyline extends SVGObject {
 	}
 	
 	@Override
-	public void scale(Float factor)
+	public void scale(float factor)
 	{
 		SVGPoint c = findCenter();
 		for(SVGPoint p: points)
@@ -119,7 +123,7 @@ public class SVGPolyline extends SVGObject {
 
 
 	@Override
-	public void scale(Float factorx, Float factory)
+	public void scale(float factorx, float factory)
 	{
 		SVGPoint c = findCenter();
 		for(SVGPoint p: points)
@@ -127,21 +131,21 @@ public class SVGPolyline extends SVGObject {
 	}
 
 	@Override
-	public void scale(Float factor, Float cex, Float cey)
+	public void scale(float factor, float cex, float cey)
 	{
 		for(SVGPoint p: points)
 			p.scale(factor, cex, cey);
 	}
 	
 	@Override
-	public void scale(Float factorx, Float factory, Float cex, Float cey)
+	public void scale(float factorx, float factory, float cex, float cey)
 	{
 		for(SVGPoint p: points)
 			p.scale(factorx, factory, cex, cey);
 	}
 	
 	@Override
-	public void rotate(Float angle)
+	public void rotate(float angle)
 	{
 		SVGPoint c = findCenter();
 		for(SVGPoint p: points)
@@ -149,14 +153,14 @@ public class SVGPolyline extends SVGObject {
 	}
 	
 	@Override
-	public void rotate(Float angle, Float cex, Float cey)
+	public void rotate(float angle, float cex, float cey)
 	{
 		for(SVGPoint p: points)
 			p.rotate(angle, cex, cey);
 	}
 
 	@Override
-	public void translate(Float tx, Float ty)
+	public void translate(float tx, float ty)
 	{
 		for(SVGPoint p: points)
 			p.translate(tx, ty);

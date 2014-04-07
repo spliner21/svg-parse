@@ -14,9 +14,9 @@ public abstract class SVGObject {
 	protected String id = "";
 	String display = "";
 	protected String style = "";
-	Float opacity = -1.0f;
+	float opacity = -1.0f;
 	String fill="",stroke="";
-	Float stroke_width = -1.0f;
+	float stroke_width = -1.0f;
 
 	SVGTransform transform = null;
 	/**
@@ -29,6 +29,8 @@ public abstract class SVGObject {
 		fill = "#ffffff";
 		stroke = "#0000ff";
 		stroke_width = 1.0f;
+		
+		transform = new SVGTransform("");
 	}
 	
 	/**
@@ -42,8 +44,8 @@ public abstract class SVGObject {
 	 * @param stroke tag's stroke color
 	 * @param stroke_width tag's stroke width
 	 */
-	protected SVGObject(String id, String style, String transform, Float opacity, String display,
-			String fill, String stroke, Float stroke_width)
+	protected SVGObject(String id, String style, String transform, float opacity, String display,
+			String fill, String stroke, float stroke_width)
 	{
 		this.id = id;
 		this.style = style;
@@ -77,6 +79,8 @@ public abstract class SVGObject {
 			stroke = e.getAttribute("stroke");
 		if(e.hasAttribute("stroke-width"))
 			stroke_width = Float.parseFloat(e.getAttribute("stroke-width"));
+		
+		transform = new SVGTransform("");
 	}
 
 	
@@ -153,7 +157,7 @@ public abstract class SVGObject {
 	 * Tag's opacity getter
 	 * @return tag's opacity parameter
 	 */
-	public Float getOpacity()
+	public float getOpacity()
 	{
 		return opacity;
 	}
@@ -161,7 +165,7 @@ public abstract class SVGObject {
 	 * Tag's opacity setter
 	 * @param opacity new tag's opacity parameter
 	 */
-	public void setOpacity(Float opacity)
+	public void setOpacity(float opacity)
 	{
 		this.opacity = opacity;
 	}
@@ -202,7 +206,7 @@ public abstract class SVGObject {
 	 * Tag's stroke width getter
 	 * @return tag's stroke width
 	 */
-	public Float getStrokeWidth()
+	public float getStrokeWidth()
 	{
 		return stroke_width;
 	}
@@ -210,7 +214,7 @@ public abstract class SVGObject {
 	 * Tag's stroke width setter
 	 * @param stroke_width tag's stroke width
 	 */
-	public void setStrokeWidth(Float stroke_width)
+	public void setStrokeWidth(float stroke_width)
 	{
 		this.stroke_width = stroke_width;
 	}
@@ -219,14 +223,14 @@ public abstract class SVGObject {
 	 * Scale by factor
 	 * @param factor scaling X factor (1.0f does nothing => 100% scale)
 	 */
-	public abstract void scale(Float factor);
+	public abstract void scale(float factor);
 	
 	/**
 	 * Scale by factors
 	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
 	 * @param factory scaling Y factor (1.0f does nothing => 100% scale)
 	 */
-	public abstract void scale(Float factorx, Float factory);
+	public abstract void scale(float factorx, float factory);
 	
 	/**
 	 * Scale by factor with scale's center
@@ -234,7 +238,7 @@ public abstract class SVGObject {
 	 * @param cex scaling center X coordinate
 	 * @param cey scaling center Y coordinate
 	 */
-	public abstract void scale(Float factor, Float cex, Float cey);
+	public abstract void scale(float factor, float cex, float cey);
 	
 	/**
 	 * Scale by factors with scale's center
@@ -243,27 +247,27 @@ public abstract class SVGObject {
 	 * @param cex scaling center X coordinate
 	 * @param cey scaling center Y coordinate
 	 */
-	public abstract void scale(Float factorx, Float factory, Float cex, Float cey);
+	public abstract void scale(float factorx, float factory, float cex, float cey);
 
 	/**
 	 * Rotate object by angle around point cx,cy.
 	 * @param angle rotation angle
 	 */
-	public abstract void rotate(Float angle);
+	public abstract void rotate(float angle);
 	/**
 	 * Rotate object by angle around point cx,cy.
 	 * @param angle rotation angle
 	 * @param cx rotation point's X coordinate
 	 * @param cy rotation point's Y coordinate
 	 */
-	public abstract void rotate(Float angle, Float cex, Float cey);
+	public abstract void rotate(float angle, float cex, float cey);
 	
 	/**
 	 * Translate object by distance
 	 * @param tx translation distance in X axis
 	 * @param ty translation distance in Y axis
 	 */
-	public abstract void translate(Float tx, Float ty);
+	public abstract void translate(float tx, float ty);
 	
 	/**
 	 * Method that generates tag's SVG code part for this element.

@@ -8,9 +8,9 @@ import org.w3c.dom.Element;
  * @version 1.0
  */
 public class SVGRectangle extends SVGObject {
-	Float x = -1.0f, y = -1.0f;
-	Float rx = -1.0f, ry = -1.0f;
-	Float width = -1.0f, height = -1.0f;
+	float x = -1.0f, y = -1.0f;
+	float rx = -1.0f, ry = -1.0f;
+	float width = -1.0f, height = -1.0f;
 
 	/**
 	 * Default constructor
@@ -43,8 +43,8 @@ public class SVGRectangle extends SVGObject {
 	 * @param opacity rectangle's opacity (0.0f-1.0f)
 	 * @param display tag's display argument
 	 */
-	public SVGRectangle(String id, String style, Float x, Float y, Float rx, Float ry, Float width, Float height, 
-			String fill, String stroke, Float stroke_width, String transform, Float opacity, String display)
+	public SVGRectangle(String id, String style, float x, float y, float rx, float ry, float width, float height, 
+			String fill, String stroke, float stroke_width, String transform, float opacity, String display)
 	{
 		super(id,style,transform,opacity,display,fill,stroke,stroke_width);
 		this.x = x;
@@ -81,140 +81,147 @@ public class SVGRectangle extends SVGObject {
 	 * Rectangle's X getter
 	 * @return rectangle's X coordinate
 	 */
-	public Float getX() {
+	public float getX() {
 		return x;
 	}
 	/**
 	 * Rectangle's X setter
 	 * @param x new rectangle's X coordinate
 	 */
-	public void setX(Float x) {
+	public void setX(float x) {
 		this.x = x;
 	}
 	/**
 	 * Rectangle's Y getter
 	 * @return rectangle's Y coordinate
 	 */
-	public Float getY() {
+	public float getY() {
 		return y;
 	}
 	/**
 	 * Rectangle's Y setter
 	 * @param y new rectangle's Y coordinate
 	 */
-	public void setY(Float y) {
+	public void setY(float y) {
 		this.y = y;
 	}
 	/**
 	 * Rectangle's RX getter
 	 * @return rectangle's corner X radius
 	 */
-	public Float getRx() {
+	public float getRx() {
 		return rx;
 	}
 	/**
 	 * Rectangle's RX setter
 	 * @param rx new rectangle's corner X radius
 	 */
-	public void setRx(Float rx) {
+	public void setRx(float rx) {
 		this.rx = rx;
 	}
 	/**
 	 * Rectangle's RY getter
 	 * @return rectangle's corner Y radius
 	 */
-	public Float getRy() {
+	public float getRy() {
 		return ry;
 	}
 	/**
 	 * Rectangle's RY setter
 	 * @param ry new rectangle's corner Y radius
 	 */
-	public void setRy(Float ry) {
+	public void setRy(float ry) {
 		this.ry = ry;
 	}
 	/**
 	 * Rectangle's width getter
 	 * @return rectangle's width
 	 */
-	public Float getWidth() {
+	public float getWidth() {
 		return width;
 	}
 	/**
 	 * Rectangle's width setter
 	 * @param width new rectangle's width
 	 */
-	public void setWidth(Float width) {
+	public void setWidth(float width) {
 		this.width = width;
 	}
 	/**
 	 * Rectangle's height getter
 	 * @return rectangle's height
 	 */
-	public Float getHeight() {
+	public float getHeight() {
 		return height;
 	}
 	/**
 	 * Rectangle's height setter
 	 * @param height new rectangle's height
 	 */
-	public void setHeight(Float height) {
+	public void setHeight(float height) {
 		this.height = height;
 	}
 
 	@Override
-	public void scale(Float factor)
+	public void scale(float factor)
 	{
 		x -= width*(factor-1.0f)/2;
 		y -= height*(factor-1.0f)/2;
 		width *= factor;
 		height *= factor;
+		rx *= factor;
+		ry *= factor;
 	}
 
 	@Override
-	public void scale(Float factorx, Float factory)
+	public void scale(float factorx, float factory)
 	{
 		x -= width*(factorx-1.0f)/2;
 		y -= height*(factory-1.0f)/2;
 		width *= factorx;
 		height *= factory;
+		rx *= factorx;
+		ry *= factory;
 	}
 
 	@Override
-	public void scale(Float factor, Float cex, Float cey)
+	public void scale(float factor, float cex, float cey)
 	{
 		x = (x-cex)*factor+cex;
 		y = (y-cey)*factor+cey;
 		width *= factor;
 		height *= factor;
+		rx *= factor;
+		ry *= factor;
 	}
 
 	@Override
-	public void scale(Float factorx, Float factory, Float cex, Float cey)
+	public void scale(float factorx, float factory, float cex, float cey)
 	{
 		x = (x-cex)*factorx+cex;
 		y = (y-cey)*factory+cey;
 		width *= factorx;
 		height *= factory;
+		rx *= factorx;
+		ry *= factory;
 	}
 
 	@Override
-	public void rotate(Float angle)
+	public void rotate(float angle)
 	{
 		transform.rotate(angle);
 	}
 
 	@Override
-	public void rotate(Float angle, Float cex, Float cey)
+	public void rotate(float angle, float cex, float cey)
 	{
-		x -= cex;
-		y -= cey;
+		float bx = x - cex, by = y - cey;
 
-		Float sinus = (float) Math.sin(Math.toRadians(angle));
-		Float cosinus = (float) Math.cos(Math.toRadians(angle));
+		float sinus = (float) Math.sin(Math.toRadians(angle));
+		float cosinus = (float) Math.cos(Math.toRadians(angle));
 
-		x = x * cosinus - y * sinus;
-		y = x * sinus + y * cosinus;
+		x = bx * cosinus - by * sinus;
+		y = bx * sinus + by * cosinus;
 
 		x += cex;
 		y += cey;
@@ -223,7 +230,7 @@ public class SVGRectangle extends SVGObject {
 	}
 	
 	@Override
-	public void translate(Float tx, Float ty)
+	public void translate(float tx, float ty)
 	{
 		x += tx;
 		y += ty;

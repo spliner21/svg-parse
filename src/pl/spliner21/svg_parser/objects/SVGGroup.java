@@ -69,44 +69,44 @@ public class SVGGroup extends SVGObject {
 	}
 	
 	@Override
-	public void scale(Float factor) {
+	public void scale(float factor) {
 		for(SVGObject o: children)
 			o.scale(factor);
 		
 	}
 
 	@Override
-	public void scale(Float factorx, Float factory) {
+	public void scale(float factorx, float factory) {
 		for(SVGObject o: children)
 			o.scale(factorx, factory);
 	}
 
 	@Override
-	public void scale(Float factor, Float cex, Float cey) {
+	public void scale(float factor, float cex, float cey) {
 		for(SVGObject o: children)
 			o.scale(factor, cex, cey);		
 	}
 
 	@Override
-	public void scale(Float factorx, Float factory, Float cex, Float cey) {
+	public void scale(float factorx, float factory, float cex, float cey) {
 		for(SVGObject o: children)
 			o.scale(factorx, factory, cex, cey);
 	}
 
 	@Override
-	public void rotate(Float angle) {
+	public void rotate(float angle) {
 		for(SVGObject o: children)
 			o.rotate(angle);		
 	}
 
 	@Override
-	public void rotate(Float angle, Float cex, Float cey) {
+	public void rotate(float angle, float cex, float cey) {
 		for(SVGObject o: children)
 			o.rotate(angle, cex, cey);	
 	}
 
 	@Override
-	public void translate(Float tx, Float ty) {
+	public void translate(float tx, float ty) {
 		for(SVGObject o: children)
 			o.translate(tx, ty);	
 	}

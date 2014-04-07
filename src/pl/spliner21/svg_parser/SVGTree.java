@@ -25,13 +25,17 @@ public class SVGTree {
 	
 	SVGHead svghead;
 	
+	public SVGHead getSVGObject() {
+		return svghead;
+	}
+
 	/**
 	 * Constructor based on path to SVG file
 	 * @param path - string containing path to SVG file
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	SVGTree(String path)
+	public SVGTree(String path)
 			throws FileNotFoundException, IOException
 	{
 		openSVGFile(path);
@@ -74,6 +78,12 @@ public class SVGTree {
 	String getCode()
 	{
 		return svghead.getCode();
+	}
+	
+	@Override
+	public String toString()
+	{
+		return getCode();
 	}
 	
 }

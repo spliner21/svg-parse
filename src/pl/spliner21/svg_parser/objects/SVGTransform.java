@@ -9,13 +9,13 @@ import java.util.Vector;
  * @version 1.0
  */
 public class SVGTransform {
-	Point2D translate = null;
-	Point2D scale = null;
-	Float rotate = 0.0f;
+	Point2D translate = new Point2D.Float(0.0f,0.0f);
+	Point2D scale = new Point2D.Float(1.0f,1.0f);
+	float rotate = 0.0f;
 	Point2D rotationCenter = null;
-	Float skewX = 0.0f;
-	Float skewY = 0.0f;
-	Vector<Float> matrix = null;
+	float skewX = 0.0f;
+	float skewY = 0.0f;
+	Vector<Float> matrix = new Vector<Float>();
 
 	/**
 	 * Constructor using content of a transform parameter
@@ -82,9 +82,9 @@ public class SVGTransform {
 	 * Scale by factor
 	 * @param factor scaling factor (1.0f does nothing => 100% scale)
 	 */
-	public void scale(Float factor)
+	public void scale(float factor)
 	{
-		scale.setLocation(scale.getX()+factor, scale.getY()+factor);
+		scale.setLocation(scale.getX()*factor, scale.getY()*factor);
 	}
 
 
@@ -93,16 +93,16 @@ public class SVGTransform {
 	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
 	 * @param factory scaling Y factor (1.0f does nothing => 100% scale)
 	 */
-	public void scale(Float factorx, Float factory)
+	public void scale(float factorx, float factory)
 	{
-		scale.setLocation(scale.getX()+factorx, scale.getY()+factory);
+		scale.setLocation(scale.getX()*factorx, scale.getY()*factory);
 	}
 	
 	/**
 	 * Rotate by angle
 	 * @param angle rotation angle (in degrees)
 	 */
-	public void rotate(Float angle)
+	public void rotate(float angle)
 	{
 		rotate += angle;
 	}
@@ -121,7 +121,7 @@ public class SVGTransform {
 	 * @param cex points X coordinate
 	 * @param cey points Y coordinate
 	 */
-	public void rotate(Float angle, Float cex, Float cey)
+	public void rotate(float angle, float cex, float cey)
 	{
 		rotate += angle;
 		rotationCenter = new Point2D.Float(cex, cey); // TODO: it changes old center - if used Twice may occur problem
@@ -132,7 +132,7 @@ public class SVGTransform {
 	 * @param cex points X coordinate
 	 * @param cey points Y coordinate
 	 */
-	public void rotate(Double angle, Float cex, Float cey)
+	public void rotate(Double angle, float cex, float cey)
 	{
 		rotate += angle.floatValue();
 		rotationCenter = new Point2D.Float(cex, cey); // TODO: it changes old center - if used Twice may occur problem
@@ -161,10 +161,10 @@ public class SVGTransform {
 			output += "skewX("+skewX+") ";
 		if(skewY != 0.0f)
 			output += "skewY("+skewY+") ";
-		if(matrix != null)
+		if(matrix != null && matrix.size() != 0)
 		{
 			output += "matrix(";
-			for(Float f:matrix)
+			for(float f:matrix)
 				output += f+" ";
 			output += ") ";
 		}

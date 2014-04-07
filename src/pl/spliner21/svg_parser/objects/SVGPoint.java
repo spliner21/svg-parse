@@ -34,7 +34,7 @@ public class SVGPoint {
 	 * Scale by factor (assume center is in 0,0)
 	 * @param factor scaling factor (1.0f does nothing => 100% scale)
 	 */
-	public void scale(Float factor)
+	public void scale(float factor)
 	{
 		x *= factor;
 		y *= factor;
@@ -46,7 +46,7 @@ public class SVGPoint {
 	 * @param factorx scaling X factor (1.0f does nothing => 100% scale)
 	 * @param factory scaling Y factor (1.0f does nothing => 100% scale)
 	 */
-	public void scale(Float factorx, Float factory)
+	public void scale(float factorx, float factory)
 	{
 		x *= factorx;
 		y *= factory;
@@ -58,7 +58,7 @@ public class SVGPoint {
 	 * @param cex scaling center X coordinate
 	 * @param cey scaling center Y coordinate
 	 */
-	public void scale(Float factor, Float cex, Float cey)
+	public void scale(float factor, float cex, float cey)
 	{
 		x = (x-cex)*factor+cex;
 		y = (y-cey)*factor+cey;
@@ -70,7 +70,7 @@ public class SVGPoint {
 	 * @param cex scaling center X coordinate
 	 * @param cey scaling center Y coordinate
 	 */
-	public void scale(Float factorx, Float factory, Float cex, Float cey)
+	public void scale(float factorx, float factory, float cex, float cey)
 	{
 		x = (x-cex)*factorx+cex;
 		y = (y-cey)*factory+cey;
@@ -81,9 +81,9 @@ public class SVGPoint {
 	 */
 	public void rotate(float angle)
 	{
-		Float sinus = (float) Math.sin(Math.toRadians(angle));
-		Float cosinus = (float) Math.cos(Math.toRadians(angle));
-		Float ox = x, oy = y;
+		float sinus = (float) Math.sin(Math.toRadians(angle));
+		float cosinus = (float) Math.cos(Math.toRadians(angle));
+		float ox = x, oy = y;
 		
 		x = ox * cosinus - oy * sinus;
 		y = ox * sinus + oy * cosinus;
@@ -96,9 +96,9 @@ public class SVGPoint {
 	 */
 	public void rotate(float angle, float cx, float cy)
 	{
-		Float ox = x - cx, oy = y - cy;
-		Float sinus = (float) Math.sin(Math.toRadians(angle));
-		Float cosinus = (float) Math.cos(Math.toRadians(angle));
+		float ox = x - cx, oy = y - cy;
+		float sinus = (float) Math.sin(Math.toRadians(angle));
+		float cosinus = (float) Math.cos(Math.toRadians(angle));
 
 		x = ox * cosinus - oy * sinus;
 		y = ox * sinus + oy * cosinus;
@@ -107,7 +107,7 @@ public class SVGPoint {
 		y += cy;
 	}
 	
-	public void translate(Float tx, Float ty)
+	public void translate(float tx, float ty)
 	{
 		x += tx;
 		y += ty;
