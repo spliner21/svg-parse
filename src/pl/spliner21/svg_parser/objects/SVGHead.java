@@ -11,7 +11,7 @@ import pl.spliner21.svg_parser.gradients.SVGRadialGradient;
 
 /** 
  * class representing main (<svg>) tag in SVG file
- * @author Tomasz Szo³tysek
+ * @author Tomasz Szoï¿½tysek
  * @version 1.0
  */
 public class SVGHead extends SVGObject {
@@ -81,9 +81,9 @@ public class SVGHead extends SVGObject {
 		if(e.hasAttribute("version"))
 			version = e.getAttribute("version");
 		if(e.hasAttribute("width"))
-			width = Float.parseFloat(e.getAttribute("width"));
+			width = Float.parseFloat(e.getAttribute("width").replace("px", ""));
 		if(e.hasAttribute("height"))
-			height = Float.parseFloat(e.getAttribute("height"));
+			height = Float.parseFloat(e.getAttribute("height").replace("px", ""));
 		if(e.hasAttribute("x"))
 			x = e.getAttribute("x");
 		if(e.hasAttribute("y"))
@@ -131,6 +131,9 @@ public class SVGHead extends SVGObject {
 
 	@Override
 	public void scale(float factor) {
+		width *= factor;
+		height *= factor;
+		viewBox = "0 0 "+width+" "+height;
 		for(SVGObject o: children)
 			o.scale(factor);
 		
@@ -138,18 +141,27 @@ public class SVGHead extends SVGObject {
 
 	@Override
 	public void scale(float factorx, float factory) {
+		width *= factorx;
+		height *= factory;
+		viewBox = "0 0 "+width+" "+height;
 		for(SVGObject o: children)
 			o.scale(factorx, factory);
 	}
 
 	@Override
 	public void scale(float factor, float cex, float cey) {
+		width *= factor;
+		height *= factor;
+		viewBox = "0 0 "+width+" "+height;
 		for(SVGObject o: children)
 			o.scale(factor, cex, cey);		
 	}
 
 	@Override
 	public void scale(float factorx, float factory, float cex, float cey) {
+		width *= factorx;
+		height *= factory;
+		viewBox = "0 0 "+width+" "+height;
 		for(SVGObject o: children)
 			o.scale(factorx, factory, cex, cey);
 	}
