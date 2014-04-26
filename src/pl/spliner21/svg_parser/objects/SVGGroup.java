@@ -21,16 +21,17 @@ public class SVGGroup extends SVGObject {
 	/**
 	 * Default constructor
 	 */
-	SVGGroup()
+	public SVGGroup()
 	{
 		super();
+		children = new Vector<SVGObject>();
 	}
 	
 	/**
 	 * Constructor by xml's DOM tag element
 	 * @param e xml's DOM tag element
 	 */
-	SVGGroup(Element e)
+	public SVGGroup(Element e)
 	{
 		super(e);
 		
@@ -40,6 +41,7 @@ public class SVGGroup extends SVGObject {
 			NodeList childNodes = e.getChildNodes();
 			for (int i = 0; i < childNodes.getLength(); i++)
 			{
+				// long time = System.nanoTime();
 				Node tmp = childNodes.item(i);
 				//System.out.println(tmp.getNodeName());
 				if(tmp.getNodeName() == "g")
@@ -64,6 +66,7 @@ public class SVGGroup extends SVGObject {
 					children.add(new SVGLinearGradient((Element)tmp));
 				else if(tmp.getNodeName() == "radialGradient")
 					children.add(new SVGRadialGradient((Element)tmp));
+				// System.out.println("Time elapsed to add node "+tmp.getNodeName()+" to g: "+(System.nanoTime() - time)/1000000000.0f+"s.");
 			}
 		}
 	}
@@ -131,6 +134,61 @@ public class SVGGroup extends SVGObject {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * Search in a tree for an object of certain type
+	 * @param c class of object we are looking for
+	 * @return Object of certain type or null if failed
+	 */
+	public SVGObject getObjectByType(Class<?> c)
+	{
+		SVGObject result;
+		for(SVGObject o: children)
+		{
+			if(o.getClass().equals(c))
+				return o;
+			else if(o.getClass() == SVGGroup.class)
+			{
+				result = ((SVGGroup)o).getObjectByType(c);
+				if(result != null)
+					return result;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Method for adding object to SVG DOM Tree Group
+	 * @param o object to be added (only not null object are added
+	 */
+	public void addObject(SVGObject o) {
+		if(o != null)
+			children.add(o);
+	}
+
+	/**
+	 * Search in a tree for an object with certain ID and delete it
+	 * @param ID Required object's ID
+	 * @return true if succeeded, else false
+	 */
+	public boolean deleteObjectByID(String ID)
+	{
+		boolean res = false;
+		SVGObject o = null;
+		for(int i = 0; i < children.size(); ++i)
+		{
+			o = children.elementAt(i);
+			if(o.getID().equals(ID))
+				children.remove(o);
+			else if(o.getClass() == SVGGroup.class)
+			{
+				res = ((SVGGroup)o).deleteObjectByID(ID);
+				if(res)
+					return res;					
+			}
+		}
+		return res;
 	}
 	
 	@Override

@@ -274,4 +274,9 @@ public abstract class SVGObject {
 	 * @return String, that contains generated piece of code for this tag and it's children (if any).
 	 */
 	public abstract String getCode();
+	
+	@Override
+	public String toString() {
+		return getCode();
+	}
 }
