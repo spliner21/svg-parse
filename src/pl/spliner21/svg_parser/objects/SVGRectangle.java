@@ -8,9 +8,9 @@ import org.w3c.dom.Element;
  * @version 1.0
  */
 public class SVGRectangle extends SVGObject {
-	float x = -1.0f, y = -1.0f;
-	float rx = -1.0f, ry = -1.0f;
-	float width = -1.0f, height = -1.0f;
+	private float x = -1.0f, y = -1.0f;
+	private float rx = -1.0f, ry = -1.0f;
+	private float width = -1.0f, height = -1.0f;
 
 	/**
 	 * Default constructor
@@ -236,12 +236,8 @@ public class SVGRectangle extends SVGObject {
 		y += ty;
 	}
 	
-	/*
-	 * Method which returns generated tags code
-	 * author: Tomasz Szo³tysek
-	 */
 	@Override
-	public String getCode() {
+	public String toString() {
 		String output;
 		output = "<rect";
 		if(id != "")

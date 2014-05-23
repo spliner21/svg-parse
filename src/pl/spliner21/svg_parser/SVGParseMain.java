@@ -108,7 +108,7 @@ public class SVGParseMain extends JFrame {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				System.out.print(debugTree.getCode());
+				System.out.print(debugTree.toString());
 			}
 		});
 	}

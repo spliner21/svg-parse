@@ -35,8 +35,9 @@ public class SVGPathTest {
 	public void testAdvancedScalling() {
 		testPath.scale(2.0f,0.0f,0.0f);
 		assertEquals("M 0.0 0.0 L 20.0 20.0 l 10.0 20.0 Q 6.0 6.0 30.0 30.0 s 6.0 6.0 10.0 -8.0 A 6.0 6.0 45.0 0.0 0.0 0.0 0.0 ", testPath.getStringD());
+		
 		testPath.scale(2.0f, 4.0f,10.0f,10.0f);
-		assertEquals("M -10.0 -30.0 L 30.0 50.0 l 20.0 80.0 Q 2.0 -6.0 50.0 90.0 s 12.0 24.0 20.0 -32.0 A 12.0 24.0 45.0 0.0 0.0 -10.0 -30.0 ", testPath.getStringD());
+		assertEquals("M -10.0 -30.0 L 30.0 50.0 l 10.0 50.0 Q 2.0 -6.0 50.0 90.0 s 12.0 24.0 10.0 -62.0 A 12.0 24.0 45.0 0.0 0.0 -10.0 -30.0 ", testPath.getStringD());
 	}
 
 	@Test

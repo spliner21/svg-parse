@@ -1,5 +1,7 @@
 package pl.spliner21.svg_parser.objects;
 
+import javax.annotation.Generated;
+
 import org.w3c.dom.Element;
 
 /** 
@@ -8,7 +10,7 @@ import org.w3c.dom.Element;
  * @version 1.0
  */
 public class SVGLine extends SVGObject {
-	float x1,y1,x2,y2;
+	private float x1,y1,x2,y2;
 
 	/**
 	 * Default constructor
@@ -237,7 +239,7 @@ public class SVGLine extends SVGObject {
 	}
 	
 	@Override
-	public String getCode() {
+	public String toString() {
 		String output;
 		output = "<line";
 		if(id != "")

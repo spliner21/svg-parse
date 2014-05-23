@@ -15,10 +15,10 @@ import pl.spliner21.svg_parser.objects.SVGObject;
  * @version 1.0
  */
 public class SVGLinearGradient extends SVGObject {
-	String gradientUnits = "";
-	float x1 = -1.0f, y1 = -1.0f, x2 = -1.0f, y2 = -1.0f;
-	String gradientTransform = "";
-	Vector<SVGGradientStop> stops = null;
+	private String gradientUnits = "";
+	private float x1 = -1.0f, y1 = -1.0f, x2 = -1.0f, y2 = -1.0f;
+	private String gradientTransform = "";
+	private Vector<SVGGradientStop> stops = null;
 
 	/**
 	 * Default constructor
@@ -97,7 +97,7 @@ public class SVGLinearGradient extends SVGObject {
 	}
 	
 	@Override
-	public String getCode() {
+	public String toString() {
 		String output;
 		output = "<linearGradient";
 		if(id != "")
@@ -116,7 +116,7 @@ public class SVGLinearGradient extends SVGObject {
 			output+= " gradientTransform=\""+gradientTransform+"\"";
 		output += ">";
 		for(SVGGradientStop stop : stops)
-			output += "\n"+stop.getCode();
+			output += "\n"+stop.toString();
 		
 		
 		output+= "\n</linearGradient>";

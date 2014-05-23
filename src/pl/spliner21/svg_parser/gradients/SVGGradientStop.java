@@ -4,12 +4,12 @@ import org.w3c.dom.Element;
 
 /** 
  * Class representing <stop> tag in SVG's gradients
- * @author Tomasz Szo³tysek
+ * @author Tomasz Szoï¿½tysek
  * @version 1.0
  */
 public class SVGGradientStop {
-	float offset = 0.0f;
-	String style = "";
+	private float offset = 0.0f;
+	private String style = "";
 	
 	/**
 	 * Default constructor
@@ -44,7 +44,7 @@ public class SVGGradientStop {
 	 * Method that generates tag's SVG code part for this element.
 	 * @return String, that contains generated piece of code for this tag.
 	 */
-	public String getCode() {
+	public String toString() {
 		String output;
 		output = "<stop offset=\""+offset+"\" style=\""+style+"\" />";
 		return output;

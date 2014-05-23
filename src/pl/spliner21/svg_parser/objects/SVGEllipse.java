@@ -8,8 +8,8 @@ import org.w3c.dom.Element;
  * @version 1.0
  */
 public class SVGEllipse extends SVGObject {
-	float cx=-1.0f,cy=-1.0f;
-	float rx=-1.0f,ry=-1.0f;
+	private float cx=-1.0f,cy=-1.0f;
+	private float rx=-1.0f,ry=-1.0f;
 
 	/**
 	 * Default constructor
@@ -247,7 +247,7 @@ public class SVGEllipse extends SVGObject {
 	}
 	
 	@Override
-	public String getCode() {
+	public String toString() {
 		String output;
 		if(rx != ry)
 		{

@@ -12,11 +12,11 @@ import org.w3c.dom.Element;
  */
 public abstract class SVGObject {
 	protected String id = "";
-	String display = "";
+	protected String display = "";
 	protected String style = "";
-	float opacity = -1.0f;
-	String fill="",stroke="";
-	float stroke_width = -1.0f;
+	protected float opacity = -1.0f;
+	protected String fill="",stroke="";
+	protected float stroke_width = -1.0f;
 
 	SVGTransform transform = null;
 	/**
@@ -142,8 +142,18 @@ public abstract class SVGObject {
 	 */
 	public String getTransform()
 	{
-		return transform.getCode();
+		return transform.toString();
 	}
+	
+	/**
+	 * Tag's transform getter
+	 * @return tag's transform
+	 */
+	public SVGTransform getTransformObject()
+	{
+		return transform;
+	}
+	
 	/**
 	 * Tag's transform setter
 	 * @param transform new tag's transform
@@ -269,14 +279,4 @@ public abstract class SVGObject {
 	 */
 	public abstract void translate(float tx, float ty);
 	
-	/**
-	 * Method that generates tag's SVG code part for this element.
-	 * @return String, that contains generated piece of code for this tag and it's children (if any).
-	 */
-	public abstract String getCode();
-	
-	@Override
-	public String toString() {
-		return getCode();
-	}
 }

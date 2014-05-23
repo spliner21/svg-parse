@@ -10,8 +10,8 @@ import java.util.Vector;
  */
 public class SVGPathData {
 	
-	char type;
-	Vector<Float> ptsList;
+	private char type;
+	private Vector<Float> ptsList;
 	
 	/**
 	 * Default constructor
@@ -297,6 +297,200 @@ public class SVGPathData {
 		return ret;
 	}
 	
+	/**
+	 * Scale by factor with scale's center
+	 * @param angle rotation angle
+	 * @param sina sinus of rotation angle
+	 * @param cosa cosinus of rotation angle
+	 * @param cex scaling center X coordinate
+	 * @param cey scaling center Y coordinate
+	 * @param lx last absolute point's X coordinate
+	 * @param ly last absolute point's Y coordinate
+	 */
+	public Point2D rotate(float angle, float sina, float cosa, float cex, float cey, float lx, float ly)
+	{
+		Point2D ret = new Point2D.Float();
+		float tx = lx,ty = ly;
+		float lax, lay; // lx and ly after rotation.
+		float ox, oy;
+		Vector<Float> tmp; 
+		switch(type)
+		{
+		case 'A':
+			ret.setLocation(ptsList.elementAt(ptsList.size()-2),ptsList.elementAt(ptsList.size()-1));
+			for(int i=0; i < ptsList.size(); i+=7)
+			{
+				ptsList.set(i+2, ptsList.elementAt(i+2)+angle);
+				ox = ptsList.elementAt(i+5) - cex;
+				oy = ptsList.elementAt(i+6) - cey;
+				ptsList.set(i+5, ox * cosa - oy * sina + cex);
+				ptsList.set(i+6, ox * sina + oy * cosa + cey);
+			}
+			break;
+		case 'H':
+			ret.setLocation(ptsList.elementAt(ptsList.size()-1),ly);
+			type = 'L';
+			tmp = new Vector<Float>(ptsList); 
+			ptsList.clear();
+			for(int i=0; i < tmp.size(); ++i)
+			{
+				ox = tmp.elementAt(i) - cex;
+				oy = ly - cey;
+				ptsList.add(ox * cosa - oy * sina + cex);
+				ptsList.add(ox * sina + oy * cosa + cey);
+			}
+			break;
+		case 'h':
+			type = 'l';
+			tmp = new Vector<Float>(ptsList); 
+			ptsList.clear();
+			for(int i=0; i < tmp.size(); ++i)
+			{
+				ox = tx - cex;
+				oy = ly - cey;
+				lax = ox * cosa - oy * sina + cex;
+				lay = ox * sina + oy * cosa + cey;
+				
+				tx += tmp.elementAt(i);
+				ox = tx - cex;
+				ptsList.add(ox * cosa - oy * sina + cex - lax);
+				ptsList.add(ox * sina + oy * cosa + cey - lay);
+			}
+			ret.setLocation(tx,ly);
+			break;
+		case 'V':
+			ret.setLocation(lx,ptsList.elementAt(ptsList.size()-1));
+			type = 'L';
+			tmp = new Vector<Float>(ptsList); 
+			ptsList.clear();
+			for(int i=0; i < tmp.size(); ++i)
+			{
+				ox = lx - cex;
+				oy = tmp.elementAt(i) - cey;
+				ptsList.add(ox * cosa - oy * sina + cex);
+				ptsList.add(ox * sina + oy * cosa + cey);
+			}
+			break;
+		case 'v':
+			type = 'l';
+			tmp = new Vector<Float>(ptsList); 
+			ptsList.clear();
+			for(int i=0; i < tmp.size(); ++i)
+			{
+				ox = lx - cex;
+				oy = ty - cey;
+				lax = ox * cosa - oy * sina + cex;
+				lay = ox * sina + oy * cosa + cey;
+				
+				ty += tmp.elementAt(i);
+				oy = ty - cey;
+				ptsList.add(ox * cosa - oy * sina + cex - lax);
+				ptsList.add(ox * sina + oy * cosa + cey - lay);
+			}
+			ret.setLocation(lx,ty);
+			break;
+		case 'q':
+		case 's':
+			for(int i=0; i < ptsList.size(); i+=4)
+			{
+				ox = tx - cex;
+				oy = ty - cey;
+				lax = ox * cosa - oy * sina + cex;
+				lay = ox * sina + oy * cosa + cey;
+				
+				tx = lx + ptsList.elementAt(i+2);
+				ty = ly + ptsList.elementAt(i+3);
+				
+				ox = ptsList.elementAt(i) + lx - cex;
+				oy = ptsList.elementAt(i+1) + ly - cey;
+				ptsList.set(i, ox * cosa - oy * sina + cex - lax);
+				ptsList.set(i+1, ox * sina + oy * cosa + cey - lay);
+				
+				ox = ptsList.elementAt(i+2) + lx - cex;
+				oy = ptsList.elementAt(i+3) + ly - cey;
+				ptsList.set(i+2, ox * cosa - oy * sina + cex - lax);
+				ptsList.set(i+3, ox * sina + oy * cosa + cey - lay);
+			}
+			ret.setLocation(tx,ty);
+			break;
+		case 'c':
+			for(int i=0; i < ptsList.size(); i+=6)
+			{
+				ox = tx - cex;
+				oy = ty - cey;
+				lax = ox * cosa - oy * sina + cex;
+				lay = ox * sina + oy * cosa + cey;
+				
+				tx = lx + ptsList.elementAt(i+4);
+				ty = ly + ptsList.elementAt(i+5);
+				
+				ox = ptsList.elementAt(i) + lx - cex;
+				oy = ptsList.elementAt(i+1) + ly - cey;
+				ptsList.set(i, ox * cosa - oy * sina + cex - lax);
+				ptsList.set(i+1, ox * sina + oy * cosa + cey - lay);
+				
+				ox = ptsList.elementAt(i+2) + lx - cex;
+				oy = ptsList.elementAt(i+3) + ly - cey;
+				ptsList.set(i+2, ox * cosa - oy * sina + cex - lax);
+				ptsList.set(i+3, ox * sina + oy * cosa + cey - lay);
+				
+				ox = ptsList.elementAt(i+4) + lx - cex;
+				oy = ptsList.elementAt(i+5) + ly - cey;
+				ptsList.set(i+4, ox * cosa - oy * sina + cex - lax);
+				ptsList.set(i+5, ox * sina + oy * cosa + cey - lay);
+			}
+			ret.setLocation(tx,ty);
+			break;
+		case 'M':
+		case 'L':
+		case 'T':
+		case 'C':
+		case 'Q':
+		case 'S':
+			ret.setLocation(ptsList.elementAt(ptsList.size()-2),ptsList.elementAt(ptsList.size()-1));
+			for(int i=0; i < ptsList.size(); i+=2)
+			{
+				ox = ptsList.elementAt(i) - cex;
+				oy = ptsList.elementAt(i+1) - cey;
+				ptsList.set(i, ox * cosa - oy * sina + cex);
+				ptsList.set(i+1, ox * sina + oy * cosa + cey);
+			}
+			break;
+		case 'm':
+		case 'l':
+			ox = lx - cex;
+			oy = ly - cey;
+			ret.setLocation(ptsList.elementAt(ptsList.size()-2)+lx,ptsList.elementAt(ptsList.size()-1)+ly);
+			for(int i=0; i < ptsList.size(); i+=2)
+			{
+				lax = ox * cosa - oy * sina + cex;
+				lay = ox * sina + oy * cosa + cey;
+				ox += ptsList.elementAt(i);
+				oy += ptsList.elementAt(i+1);
+				ptsList.set(i, ox * cosa - oy * sina + cex - lax);
+				ptsList.set(i+1, ox * sina + oy * cosa + cey - lay);
+			}
+			break;
+		case 't':
+			ret.setLocation(ptsList.elementAt(ptsList.size()-2)+lx,ptsList.elementAt(ptsList.size()-1)+ly);
+			ox = tx - cex;
+			oy = ty - cey;
+			for(int i=0; i < ptsList.size(); i+=2)
+			{
+				lax = ox * cosa - oy * sina + cex;
+				lay = ox * sina + oy * cosa + cey;
+				ox = ptsList.elementAt(i) + lx - cex;
+				oy = ptsList.elementAt(i+1) + ly - cey;
+				ptsList.set(i, ox * cosa - oy * sina + cex - lax);
+				ptsList.set(i+1, ox * sina + oy * cosa + cey - lay);
+			}
+			break;
+		default:
+			break;
+		}
+		return ret;
+	}
+	
 
 	/**
 	 * Translate data element by distance in X and Y
@@ -356,11 +550,8 @@ public class SVGPathData {
 	}
 	
 	
-	/**
-	 * Method that generates <path> tag's d-parameter code fragment
-	 * @return generated SVG file's code part for element
-	 */
-	String getCode(){
+	@Override
+	public String toString(){
 		String r = Character.toString(type);
 		for(float f: ptsList)
 		{

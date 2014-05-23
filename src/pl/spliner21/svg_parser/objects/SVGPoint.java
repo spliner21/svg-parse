@@ -113,7 +113,8 @@ public class SVGPoint {
 		y += ty;
 	}
 	
-	public String getCode()
+	@Override
+	public String toString()
 	{
 		return x+","+y;
 	}

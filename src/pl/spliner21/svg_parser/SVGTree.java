@@ -20,9 +20,7 @@ import pl.spliner21.svg_parser.objects.SVGHead;
  * @author spliner21
  * @version 1.0
  */
-public class SVGTree {
-	Document doc = null;
-	
+public class SVGTree {	
 	SVGHead svghead;
 	
 	public SVGHead getSVGObject() {
@@ -50,6 +48,7 @@ public class SVGTree {
 	void openSVGFile(String path) 
 		throws FileNotFoundException, IOException
 	{
+		Document doc = null;
 		File fXmlFile = new File(path);
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder;
@@ -71,19 +70,10 @@ public class SVGTree {
 		
 	}
 	
-	/**
-	 * Method that generates SVG file's content from library's DOM structure
-	 * @return String containing SVG file's content
-	 */
-	String getCode()
-	{
-		return svghead.getCode();
-	}
-	
 	@Override
 	public String toString()
 	{
-		return getCode();
+		return svghead.toString();
 	}
 	
 }

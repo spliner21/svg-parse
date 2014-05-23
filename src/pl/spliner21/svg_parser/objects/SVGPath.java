@@ -11,7 +11,8 @@ import org.w3c.dom.Element;
  * @version 1.0
  */
 public class SVGPath extends SVGObject {
-	Vector<SVGPathData> d;
+	
+	private Vector<SVGPathData> d;
 
 	/**
 	 * Default constructor
@@ -141,7 +142,7 @@ public class SVGPath extends SVGObject {
 	public String getStringD() {
 		String output = "";
 		for(SVGPathData p: d)
-			output += p.getCode()+ " ";
+			output += p.toString()+ " ";
 		return output;
 	}
 
@@ -225,7 +226,15 @@ public class SVGPath extends SVGObject {
 	@Override
 	public void rotate(float angle, float cex, float cey)
 	{
-		transform.rotate(angle,cex,cey);
+		Point2D last = new Point2D.Float();
+		last.setLocation(Float.MIN_VALUE, Float.MIN_VALUE);
+		float sinus = (float) Math.sin(Math.toRadians(angle));
+		float cosinus = (float) Math.cos(Math.toRadians(angle));
+		
+		for(SVGPathData p: d)
+		{
+			last = p.rotate(angle, sinus, cosinus, cex, cey, (float)last.getX(), (float)last.getY());
+		}
 	}
 
 	@Override
@@ -241,14 +250,14 @@ public class SVGPath extends SVGObject {
 	 * Method which returns generated tags code
 	 */
 	@Override
-	public String getCode() {
+	public String toString() {
 		String output;
 		output = "<path";
 		if(id != "")
 			output += " id=\""+id+"\"";
 		output += " d=\"";
 		for(SVGPathData p: d)
-			output += p.getCode()+ " ";
+			output += p.toString()+ " ";
 		output = output.trim();
 		output+= "\"";
 		if(opacity >= 0.0f)

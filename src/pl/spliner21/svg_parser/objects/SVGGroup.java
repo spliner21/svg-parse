@@ -16,7 +16,7 @@ import pl.spliner21.svg_parser.gradients.SVGRadialGradient;
  */
 public class SVGGroup extends SVGObject {
 	
-	Vector<SVGObject> children = null;
+	private Vector<SVGObject> children = null;
 
 	/**
 	 * Default constructor
@@ -192,7 +192,7 @@ public class SVGGroup extends SVGObject {
 	}
 	
 	@Override
-	public String getCode() {
+	public String toString() {
 		String output;
 		output = "<g";
 		if(id != "")
@@ -208,7 +208,7 @@ public class SVGGroup extends SVGObject {
 		output+= ">";
 		
 		for(SVGObject e: children)
-			output+= "\t\n"+e.getCode();
+			output+= "\t\n"+e.toString();
 		output+= "\n</g>";
 		
 		return output;

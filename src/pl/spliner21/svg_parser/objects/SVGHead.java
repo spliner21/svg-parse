@@ -15,14 +15,14 @@ import pl.spliner21.svg_parser.gradients.SVGRadialGradient;
  * @version 1.0
  */
 public class SVGHead extends SVGObject {
-	String xmlns = "http://www.w3.org/2000/svg";
-	String baseProfile = "";
-	String version = "";
-	float width,height;
-	String x="",y="";
-	String viewBox="";
-	String enable_background="";
-	String xml_space="";
+	private String xmlns = "http://www.w3.org/2000/svg";
+	private String baseProfile = "";
+	private String version = "";
+	private float width,height;
+	private String x="",y="";
+	private String viewBox="";
+	private String enable_background="";
+	private String xml_space="";
 	
 	
 	Vector<SVGObject> children = null;
@@ -173,7 +173,7 @@ public class SVGHead extends SVGObject {
 	@Override
 	public void rotate(float angle) {
 		for(SVGObject o: children)
-			o.rotate(angle,width/4,height/4);		
+			o.rotate(angle,width/2,height/2);		
 	}
 
 	@Override
@@ -267,7 +267,7 @@ public class SVGHead extends SVGObject {
 	}
 	
 	@Override
-	public String getCode() {
+	public String toString() {
 		String output;
 		output = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
 "<!-- Generator: SVGParser Java Library :: author: Tomasz Szoltysek (http://spliner.net/)  -->\n" +
@@ -295,15 +295,10 @@ public class SVGHead extends SVGObject {
 		output+= ">";
 		
 		for(SVGObject e: children)
-			output+= "\t\n"+e.getCode();
+			output+= "\t\n"+e.toString();
 		
 		output+= "\n</svg>";
 		
 		return output;
-	}
-	
-	@Override
-	public String toString() {
-		return getCode();
 	}
 }

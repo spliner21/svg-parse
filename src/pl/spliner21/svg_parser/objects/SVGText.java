@@ -8,8 +8,8 @@ import org.w3c.dom.Element;
  * @version 1.0
  */
 public class SVGText extends SVGObject {
-	float x = -1.0f,y = -1.0f;
-	String text = "";
+	private float x = -1.0f,y = -1.0f;
+	private String text = "";
 
 	/**
 	 * Default constructor
@@ -166,12 +166,8 @@ public class SVGText extends SVGObject {
 		y += ty;
 	}
 	
-	/*
-	 * Method which returns generated tags code
-	 * author: Tomasz Szo³tysek
-	 */
 	@Override
-	public String getCode() {
+	public String toString() {
 		String output;
 		output = "<text";
 		if(id != "")

@@ -9,13 +9,13 @@ import java.util.Vector;
  * @version 1.0
  */
 public class SVGTransform {
-	Point2D translate = new Point2D.Float(0.0f,0.0f);
-	Point2D scale = new Point2D.Float(1.0f,1.0f);
-	float rotate = 0.0f;
-	Point2D rotationCenter = null;
-	float skewX = 0.0f;
-	float skewY = 0.0f;
-	Vector<Float> matrix = new Vector<Float>();
+	private Point2D translate = new Point2D.Float(0.0f,0.0f);
+	private Point2D scale = new Point2D.Float(1.0f,1.0f);
+	private float rotate = 0.0f;
+	private Point2D rotationCenter = null;
+	private float skewX = 0.0f;
+	private float skewY = 0.0f;
+	private Vector<Float> matrix = new Vector<Float>();
 
 	/**
 	 * Constructor using content of a transform parameter
@@ -137,12 +137,9 @@ public class SVGTransform {
 		rotate += angle.floatValue();
 		rotationCenter = new Point2D.Float(cex, cey); // TODO: it changes old center - if used Twice may occur problem
 	}
-	
-	/**
-	 * Generates content of a transform parameter in SVG-acceptable convention
-	 * @return transform parameter content
-	 */
-	public String getCode()
+
+	@Override
+	public String toString()
 	{
 		String output = "";
 
@@ -170,11 +167,5 @@ public class SVGTransform {
 		}
 		
 		return output;
-	}
-	
-	@Override
-	public String toString()
-	{
-		return getCode();
 	}
 }

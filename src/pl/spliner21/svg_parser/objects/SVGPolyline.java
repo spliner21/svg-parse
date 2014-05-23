@@ -9,7 +9,7 @@ import org.w3c.dom.Element;
  * @version 1.0
  */
 public class SVGPolyline extends SVGObject {
-	Vector<SVGPoint> points;
+	private Vector<SVGPoint> points;
 	
 	/**
 	 * Default constructor
@@ -166,19 +166,15 @@ public class SVGPolyline extends SVGObject {
 			p.translate(tx, ty);
 	}
 	
-	/*
-	 * Method which returns generated tags code
-	 * author: Tomasz Szo³tysek
-	 */
 	@Override
-	public String getCode() {
+	public String toString() {
 		String output;
 		output = "<polyline";
 		if(id != "")
 			output += " id=\""+id+"\"";
 		output += " points=\"";
 		for(SVGPoint p: points)
-			output += p.x+","+p.y+" ";	// w ostatnim nie powinno byæ spacji tylko "
+			output += p.x+","+p.y+" ";
 		output+= "\"";
 		if(opacity >= 0.0f)
 			output+= " opacity=\""+opacity+"\"";
