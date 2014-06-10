@@ -1,7 +1,5 @@
 package pl.spliner21.svg_parser.objects;
 
-import javax.annotation.Generated;
-
 import org.w3c.dom.Element;
 
 /** 

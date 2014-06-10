@@ -7,13 +7,14 @@ import java.util.Vector;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import pl.spliner21.svg_parser.objects.SVGPoint;
 import pl.spliner21.svg_parser.objects.SVGPolyline;
 
+@RunWith(ExtendedRunner.class) 
 public class SVGPolylineTest {
 	SVGPolyline testPolyline;
-	
 	
 	@Before
 	public void setUp() throws Exception {
@@ -26,6 +27,7 @@ public class SVGPolylineTest {
 
 	@Test
 	public void testConstruct() {
+		System.out.println("run!");
 		Vector<SVGPoint> pts = testPolyline.getPoints();
 		assertEquals("0.0,0.0", pts.elementAt(0).toString());
 		assertEquals("10.0,10.0", pts.elementAt(1).toString());
