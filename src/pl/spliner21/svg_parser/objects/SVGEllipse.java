@@ -216,6 +216,15 @@ public class SVGEllipse extends SVGObject {
 	@Override
 	public void rotate(float angle, float cex, float cey)
 	{
+		angle %= 360.0f;
+		if(angle == 0.0f)
+			return;
+		if(angle % 90.0f != 0)
+		{
+			transform.rotate(angle, cex, cey);
+			return;
+		}
+	
 		float bcx = cx - cex;
 		float bcy = cy - cey;
 
@@ -228,7 +237,13 @@ public class SVGEllipse extends SVGObject {
 		cx += cex;
 		cy += cey;
 		
-		transform.rotate(angle);
+
+		if((angle == 90.0f) || (angle == 270.0f))
+		{		
+			float tmp = rx;
+			rx = ry;
+			ry = tmp;
+		}
 	}
 	
 	@Override

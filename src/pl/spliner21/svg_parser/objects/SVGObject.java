@@ -267,8 +267,8 @@ public abstract class SVGObject {
 	/**
 	 * Rotate object by angle around point cx,cy.
 	 * @param angle rotation angle
-	 * @param cx rotation point's X coordinate
-	 * @param cy rotation point's Y coordinate
+	 * @param cex rotation point's X coordinate
+	 * @param cey rotation point's Y coordinate
 	 */
 	public abstract void rotate(float angle, float cex, float cey);
 	

@@ -51,7 +51,6 @@ public class SVGPerformanceTest {
 	}
 
 	@Test
-	@Repeat(25)
 	public void test() throws FileNotFoundException, IOException {
 		
 		System.out.println("Total Java Heap Size for this VM: "+Runtime.getRuntime().totalMemory());
@@ -121,8 +120,6 @@ public class SVGPerformanceTest {
 			writer.println(testTree.toString());
 			System.out.println("SVG-Parse rotated image saved.");
 			writer.close();
-
-			testTree = null;
 			
 			/* 
 			 * SVG Parser rotated image + Batik JPG generation test 

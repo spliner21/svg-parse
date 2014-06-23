@@ -215,6 +215,15 @@ public class SVGRectangle extends SVGObject {
 	@Override
 	public void rotate(float angle, float cex, float cey)
 	{
+		angle %= 360.0f;
+		if(angle == 0.0f)
+			return;
+		if(angle % 90.0f != 0)
+		{
+			transform.rotate(angle, cex, cey);
+			return;
+		}
+	
 		float bx = x - cex, by = y - cey;
 
 		float sinus = (float) Math.sin(Math.toRadians(angle));
@@ -226,7 +235,28 @@ public class SVGRectangle extends SVGObject {
 		x += cex;
 		y += cey;
 
-		transform.rotate(angle);
+		if(angle == 90.0f)
+		{		
+			float tmp = width;
+			width = height;
+			height = tmp;
+			
+			x -= width;
+		}
+		else if(angle == 180.0f)
+		{		
+			x -= width;
+			y -= height;
+		}
+		else if(angle == 270.0f)
+		{		
+			float tmp = width;
+			width = height;
+			height = tmp;
+			
+			y -= height;
+		}
+		
 	}
 	
 	@Override

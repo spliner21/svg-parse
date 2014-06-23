@@ -145,18 +145,7 @@ public class SVGText extends SVGObject {
 	@Override
 	public void rotate(float angle, float cex, float cey)
 	{
-		float bx = x - cex, by = y - cey;
-
-		float sinus = (float) Math.sin(Math.toRadians(angle));
-		float cosinus = (float) Math.cos(Math.toRadians(angle));
-
-		x = bx * cosinus - by * sinus;
-		y = bx * sinus + by * cosinus;
-
-		x += cex;
-		y += cey;
-
-		transform.rotate(angle);
+		transform.rotate(angle,cex,cey);
 	}
 
 	@Override
